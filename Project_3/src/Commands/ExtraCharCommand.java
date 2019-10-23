@@ -14,7 +14,7 @@ import Abstraction.ICommand;
 public class ExtraCharCommand implements ICommand{
 
     @Override
-    public void execute() {
+    public void execute(String text) {
         System.out.println("ExtraChar");
     }
     

@@ -14,7 +14,7 @@ import Abstraction.ICommand;
 public class MutaulSurrenderCommand implements ICommand{
 
     @Override
-    public void execute() {
+    public void execute(String text) {
          System.out.println("Mutaul surrender");
     }
     

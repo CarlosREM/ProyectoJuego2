@@ -16,7 +16,6 @@ public class Invoker {
     public void execute(String text){
         String[] tokens = text.split(" -");
         ICommand c = new CommandManager().getCommand(tokens[0]);
-        c.execute();
-
+        c.execute(text);
     }
 }
