@@ -5,6 +5,9 @@
  */
 package commandgame;
 
+import ADT.Invoker;
+import Abstraction.ICommand;
+
 /**
  *
  * @author Marco Gamboa
@@ -15,7 +18,8 @@ public class CommandGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Invoker i = new Invoker();
+        i.execute("atacar -esto es el texto");
     }
     
 }
