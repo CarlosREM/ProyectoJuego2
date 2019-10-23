@@ -14,7 +14,7 @@ import Abstraction.ICommand;
 public class PassCommand implements ICommand{
 
     @Override
-    public void execute(String text) {
+    public void execute(String[] tokens) {
         System.out.println("pass");
     }
     
