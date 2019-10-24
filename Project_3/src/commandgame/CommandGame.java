@@ -9,6 +9,7 @@ import ADT.Invoker;
 import Abstraction.ICommand;
 import SocketsImpl.Player;
 import View.ActionWindow;
+import View.Login;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,10 +24,8 @@ public class CommandGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ActionWindow window = new ActionWindow();
-        
+        Login window = new Login();
         window.setVisible(true);
-
     }
     
 }
