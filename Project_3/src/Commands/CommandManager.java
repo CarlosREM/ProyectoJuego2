@@ -18,17 +18,17 @@ public class CommandManager {
 
     public ICommand getCommand(String c){
         switch(c){
-            case "atacar":
+            case "Attack":
                 return new AttactCommand();   
-            case "chat":
+            case "Chat":
                 return new ChatCommand();
-            case "pasar":
+            case "Pass":
                 return new PassCommand();                
-            case "comodin":
+            case "AttackPlus":
                 return new ExtraCharCommand();
-            case "empate":
+            case "Draw":
                 return new MutaulSurrenderCommand();
-            case "rendirse":
+            case "Giveup":
                 return new SurrenderCommand();
             default:
                 return null;
