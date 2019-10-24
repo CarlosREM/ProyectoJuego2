@@ -7,6 +7,11 @@ package commandgame;
 
 import ADT.Invoker;
 import Abstraction.ICommand;
+import SocketsImpl.Player;
+import View.ActionWindow;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,8 +23,10 @@ public class CommandGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Invoker i = new Invoker();
-        i.execute("atacar -esto es el texto");
+        ActionWindow window = new ActionWindow();
+        
+        window.setVisible(true);
+
     }
     
 }
