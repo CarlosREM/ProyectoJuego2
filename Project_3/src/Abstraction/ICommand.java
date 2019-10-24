@@ -10,5 +10,5 @@ package Abstraction;
  * @author Marco Gamboa
  */
 public interface ICommand {
-    public void execute(String[] tokens);
+    public void execute(String[] text);
 }
