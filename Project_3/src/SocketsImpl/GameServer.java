@@ -14,6 +14,8 @@ import commsapi.ContentServer.SubscriberHandler;
 import commsapi.Message.AMessage;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,14 +32,34 @@ public class GameServer extends AContentServer{
     @Override
     public void processSubMessage(AMessage message, SubscriberHandler handler) {
         if(message instanceof RequestMessage){
-            RequestMessage m = (RequestMessage) message;
-            switch(m.getRequestId()){
-                case 0: //Asked for available players
-                    broadcastTopics(handler);
-                    break;
-                case 99:   //set subscriberHandler id
-                    handler.setId(m.getRequestString());
-                    break;
+            try {
+                RequestMessage m = (RequestMessage) message;
+                switch(m.getRequestId()){
+                    case 0: //Asked for available players
+                        broadcastTopics(handler);
+                        break;
+                        
+                    case 1: //Initiate Duel
+                        String topic = m.getRequestString();
+                        SubscriberHandler oponent = this.subscribers.stream().filter(sub -> sub.getId().equals(topic)).findAny().orElse(null);
+                        
+                        this.registerSubscription(topic, handler);
+                        this.registerSubscription(handler.getId(), oponent);
+                        
+                        RequestMessage m2 = new RequestMessage();
+                        m2.setRequestId(777);
+                        m2.setRequestString("Duel Start! " + handler.getId() + " vs " + topic);
+                        oponent.sendMessage(m2);
+                        handler.sendMessage(m2);
+                       
+                        break;
+                        
+                    case 99:   //set subscriberHandler id
+                        handler.setId(m.getRequestString());
+                        break;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

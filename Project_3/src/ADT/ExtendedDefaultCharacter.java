@@ -32,7 +32,7 @@ public class ExtendedDefaultCharacter extends DefaultCharacter {
     }
     
     
-    public class ExtendedDefaultCharacterBuilder extends DefaultCharacterBuilder{
+    public static class ExtendedDefaultCharacterBuilder extends DefaultCharacterBuilder{
         private Elements.Types builderType;
         public ExtendedDefaultCharacterBuilder setType(Elements.Types type){
             builderType = type;

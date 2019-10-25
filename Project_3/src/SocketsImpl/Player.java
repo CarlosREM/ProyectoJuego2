@@ -41,6 +41,14 @@ public class Player {
         this.client = client;
     }
     
+    public List<ExtendedDefaultCharacter> getWarriors(){
+        return warriors;
+    }
+    
+    public void setWarriors(List<ExtendedDefaultCharacter> warriors){
+        this.warriors = warriors;
+    }
+    
     public void askForTopics(){
          subscriber.askForTopics();
     }
@@ -50,9 +58,7 @@ public class Player {
         pw.fillPlayers(topics);
         pw.setVisible(true);
     }
-    public List<ExtendedDefaultCharacter> getWarriors(){
-        return warriors;
-    }
+    
     /*
     *Esto hay que implementarlo
     */
@@ -67,8 +73,9 @@ public class Player {
     public void pass() {
    
     }    
-    public void setWarriors(List<ExtendedDefaultCharacter> warriors){
-        this.warriors = warriors;
+    
+    public void askForDuel(String opponent){
+        this.subscriber.subscribe(opponent);
     }
 
     public ActionWindow getClient() {

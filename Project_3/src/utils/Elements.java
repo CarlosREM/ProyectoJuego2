@@ -25,9 +25,9 @@ public class Elements {
     }
 
     private void fillPercentages() {
-        for (int p : percentages) {
+        for (int i = 0; i < percentages.length; i++) {
             int random = (r.nextInt(80 + 1) + 20);
-            p = random;
+            percentages[i] = random;
         }
     }
 

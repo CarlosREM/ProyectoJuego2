@@ -88,10 +88,21 @@ public class PlayerSubscriber extends ASubscriber{
             }
               
         }
-         if(message instanceof TopicsMessage){
-             TopicsMessage m = (TopicsMessage) message;
-             this.player.showTopics(m.getTopics());
-         }           
+        if(message instanceof TopicsMessage){
+            TopicsMessage m = (TopicsMessage) message;
+            this.player.showTopics(m.getTopics());
+        }     
+         
+        if(message instanceof RequestMessage){
+            RequestMessage m = (RequestMessage) message;
+            
+            switch(m.getRequestId()){
+                case 777:
+                    System.out.println(m.getRequestString());
+                    
+                    break;
+            }
+        }
     }
     
 }
