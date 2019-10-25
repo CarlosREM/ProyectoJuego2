@@ -109,8 +109,8 @@ public class GameServer extends AContentServer{
             handler.sendMessage(m);
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-    }
+        } 
+   }
     
     public static void main(String[] args) throws InterruptedException {
         try {

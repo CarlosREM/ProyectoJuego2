@@ -16,8 +16,8 @@ public class DefaultCommand implements ICommand{
 
     @Override
     public void execute(String[] text,Player player) {
-        player.getClient().putResultText("Unknow command "+text[0]+", valid commands:\n"
-                + "Chat\nAttack\nPass\nAttackPlus\nDraw\nGiveup");
+        player.getClient().putResultText("Unknow command "+text[0]+", valid commands: "
+                + "Chat, Attack, Pass, AttackPlus, Draw, Giveup, Select.");
     }
     
 }

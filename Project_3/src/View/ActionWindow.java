@@ -298,9 +298,8 @@ public class ActionWindow extends javax.swing.JFrame {
         jScrollPane3.setViewportView(txaResults);
 
         txaCommands.setBackground(new java.awt.Color(0, 0, 0));
-        txaCommands.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txaCommands.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txaCommands.setForeground(new java.awt.Color(0, 153, 51));
-        txaCommands.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);

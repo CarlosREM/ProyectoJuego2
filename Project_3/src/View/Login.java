@@ -10,6 +10,8 @@ import ADT.ExtendedDefaultCharacter;
 import SocketsImpl.Player;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,8 +19,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,6 +31,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
+import utils.Elements;
 
 /**
  *
@@ -37,7 +42,7 @@ public class Login extends javax.swing.JFrame {
     List<JButton> btnChars;
     HashMap<String, ExtendedDefaultCharacter> selectedChars;
     HashMap<String, ExtendedDefaultCharacter> Chars;
-
+    
     /**
      * Creates new form Login
      */
@@ -53,14 +58,16 @@ public class Login extends javax.swing.JFrame {
 
     public void setCharacters() {
         List<ExtendedDefaultCharacter> chars;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 7; i++) {
             JButton button = new JButton();
             button.setName("CHARACTER#" + i);
+            button.setLayout(new GridBagLayout());
             button.setBorder(new EtchedBorder());
-            button.setPreferredSize(new Dimension(140, 210));
-            JLabel lbl = new JLabel("CHARACTER#" + i);
+            JLabel lbl = new JLabel(button.getName());
             lbl.setForeground(Color.white);
-            button.add(lbl);
+            button.add(lbl);          
+            button.setLayout(new GridLayout());
+            button.setPreferredSize(new Dimension(140, 210));
             button.setActionCommand("CHARACTER#" + i);
             button.setBackground(Color.black);
             ImageIcon imageIcon = new ImageIcon("death" + i + ".png");
@@ -82,6 +89,7 @@ public class Login extends javax.swing.JFrame {
         CharPane.repaint();
     }
 
+    
     private void selectChar(String name) {
         TitledBorder border = new TitledBorder("SELECTED");
         border.setTitleColor(Color.WHITE);
@@ -92,7 +100,7 @@ public class Login extends javax.swing.JFrame {
                     button.setBorder(new EtchedBorder());
                     selectedChars.remove(name);
                 } else {
-                    if(selectedChars.size()<=5){
+                    if(selectedChars.size()<4){
                         button.setBorder(border);
                         selectedChars.put(name, Chars.get(name));
                     }
