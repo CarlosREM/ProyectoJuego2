@@ -12,7 +12,9 @@ import SocketsImpl.Player;
  * @author Marco Gamboa
  */
 public class PlayersWindow extends javax.swing.JFrame {
-    private Player player;
+    private ActionWindow actionWindow;
+    
+    
     /**
      * Creates new form PlayersWindow
      */
@@ -20,8 +22,8 @@ public class PlayersWindow extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setActionWindos(ActionWindow player) {
+        this.actionWindow = player;
     }
     
     /**
@@ -104,11 +106,7 @@ public class PlayersWindow extends javax.swing.JFrame {
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         String idRival = (String) cbxOpponents.getSelectedItem();
-        
-        ActionWindow aw = new ActionWindow();
-        aw.setPlayer(player);
-        aw.setIdRival(idRival);
-        aw.setVisible(true);
+        actionWindow.setIdRival(idRival);
         this.setVisible(false);
     }//GEN-LAST:event_btnPlayActionPerformed
 
@@ -149,7 +147,7 @@ public class PlayersWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlay;
-    private javax.swing.JComboBox<String> cbxOpponents;
+    public javax.swing.JComboBox<String> cbxOpponents;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

@@ -116,8 +116,6 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txfHost = new javax.swing.JTextField();
         btnPlay = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txfPort = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         CharPane = new javax.swing.JPanel();
 
@@ -158,25 +156,10 @@ public class Login extends javax.swing.JFrame {
 
         btnPlay.setBackground(new java.awt.Color(0, 0, 0));
         btnPlay.setForeground(new java.awt.Color(0, 153, 0));
-        btnPlay.setText("SELECT OPPONENT");
+        btnPlay.setText("START");
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 204, 51));
-        jLabel3.setText("PORT:");
-
-        txfPort.setBackground(new java.awt.Color(0, 0, 0));
-        txfPort.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txfPort.setForeground(new java.awt.Color(0, 153, 0));
-        txfPort.setText("8000");
-        txfPort.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfPortActionPerformed(evt);
             }
         });
 
@@ -202,13 +185,8 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txfNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txfPort))
-                            .addComponent(btnPlay))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPlay)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,9 +195,7 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txfNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(txfPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -246,11 +222,10 @@ public class Login extends javax.swing.JFrame {
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         // TODO add your handling code here:
-        PlayersWindow pw = new PlayersWindow();
+        ActionWindow aw = new ActionWindow();
         try {
-            int port = Integer.valueOf(txfPort.getText());
-            pw.setPlayer(new Player(txfNickname.getText(),txfHost.getText(),port,new ArrayList<>(Chars.values())));
-            pw.setVisible(true);
+            aw.setPlayer(new Player(txfNickname.getText(),txfHost.getText(),new ArrayList<>(Chars.values()),aw));
+            aw.setVisible(true);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex,"ERROR",JOptionPane.ERROR_MESSAGE);
         }
@@ -264,10 +239,6 @@ public class Login extends javax.swing.JFrame {
     private void txfHostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfHostActionPerformed
-
-    private void txfPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfPortActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfPortActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,11 +280,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnPlay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txfHost;
     private javax.swing.JTextField txfNickname;
-    private javax.swing.JTextField txfPort;
     // End of variables declaration//GEN-END:variables
 }
