@@ -6,6 +6,8 @@
 package SocketsImpl;
 
 import ADT.ExtendedDefaultCharacter;
+import View.ActionWindow;
+import commsapi.Utils.PropertiesUtil;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,17 +20,24 @@ public class Player {
     private PlayerSubscriber subscriber;
     
     private List<ExtendedDefaultCharacter> warriors;
+    private ActionWindow client;
     
-    public Player(String id, List<ExtendedDefaultCharacter> warriors) throws IOException{
+    
+    
+    public Player(String id, List<ExtendedDefaultCharacter> warriors, ActionWindow client) throws IOException{
         publisher = new PlayerPublisher(id, this);
         subscriber = new PlayerSubscriber(id, this);
         this.warriors = warriors;
+        this.client = client;
     }
     
-    public Player(String id, String host, int port, List<ExtendedDefaultCharacter> warriors) throws IOException{
-        publisher = new PlayerPublisher(id, host, port, this);
-        subscriber = new PlayerSubscriber(id, host, port, this);
+    public Player(String id, String host, List<ExtendedDefaultCharacter> warriors, ActionWindow client) throws IOException{
+        int defaultPubPort = Integer.parseInt(PropertiesUtil.getInstance().getProperty("defaultPubPort"));
+        int defaultSubPort = Integer.parseInt(PropertiesUtil.getInstance().getProperty("defaultSubPort"));
+        publisher = new PlayerPublisher(id, host, defaultPubPort, this);
+        subscriber = new PlayerSubscriber(id, host, defaultSubPort, this);
         this.warriors = warriors;
+        this.client = client;
     }
     
     public List<ExtendedDefaultCharacter> getWarriors(){
