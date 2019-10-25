@@ -51,7 +51,7 @@ public class ExtendedDefaultWeapon extends DefaultWeapon{
       character.takeDamage(elements.getPercentages()[pos]);
     } 
     
-    public class ExtendedDefaultWeaponBuilder extends DefaultWeaponBuilder{
+    public static class ExtendedDefaultWeaponBuilder extends DefaultWeaponBuilder{
         @Override
         public ExtendedDefaultWeapon build(){
               DefaultWeapon temp = (DefaultWeapon) super.build();

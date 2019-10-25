@@ -1,0 +1,106 @@
+{
+  "@class" : "Json.JSONCharacterHolder",
+  "characters" : [ {
+    "@class" : "ADT.ExtendedDefaultCharacter",
+    "name" : "Average Joe",
+    "appearances" : {
+      "1" : {
+        "@class" : "ADT.ExtendedCharacterAppearance",
+        "looks" : [ "/resources/images/spr_paladin.png", "/resources/images/spr_paladin.png" ]
+      }
+    },
+    "currentHealthPoints" : 100,
+    "maxHealthPoints" : 100,
+    "hitsPerUnit" : 5,
+    "level" : 1,
+    "tiles" : 1,
+    "unlockLevel" : 1,
+    "cost" : 1,
+    "weapons" : [ {
+        "@class" : "ADT.ExtendedDefaultWeapon",
+        "name" : "Melee",
+        "range" : 1,
+        "damage" : 1,
+        "level" : 1,
+        "areaOfEffect" : 1,
+        "hitPerUnit" : 1,
+        "appearances" : { },
+        "unlockLevel" : 1,
+        "elements" : {
+          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
+        },
+        "available" : true
+      } ],
+    "coordinateX" : 0,
+    "coordinateY" : 0,
+    "type" : "Aire"
+  }, {
+    "@class" : "ADT.ExtendedDefaultCharacter",
+    "name" : "Brad Sanders",
+    "appearances" : {
+      "1" : {
+        "@class" : "ADT.ExtendedCharacterAppearance",
+        "looks" : [ "/resources/images/spr_mago.png", "/resources/images/spr_mago.png" ]
+      }
+    },
+    "currentHealthPoints" : 100,
+    "maxHealthPoints" : 100,
+    "hitsPerUnit" : 5,
+    "level" : 1,
+    "tiles" : 1,
+    "unlockLevel" : 1,
+    "cost" : 1,
+    "weapons" : [ {
+        "@class" : "ADT.ExtendedDefaultWeapon",
+        "name" : "Melee",
+        "range" : 1,
+        "damage" : 1,
+        "level" : 1,
+        "areaOfEffect" : 1,
+        "hitPerUnit" : 1,
+        "appearances" : { },
+        "unlockLevel" : 1,
+        "elements" : {
+          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
+        },
+        "available" : true
+      } ],
+    "coordinateX" : 0,
+    "coordinateY" : 0,
+    "type" : "Aire"
+  }, {
+    "@class" : "ADT.ExtendedDefaultCharacter",
+    "name" : "Steve Johns",
+    "appearances" : {
+      "1" : {
+        "@class" : "ADT.ExtendedCharacterAppearance",
+        "looks" : [ "/resources/images/spr_espadachin.png", "/resources/images/spr_espadachin.png" ]
+      }
+    },
+    "currentHealthPoints" : 100,
+    "maxHealthPoints" : 100,
+    "hitsPerUnit" : 5,
+    "level" : 1,
+    "tiles" : 1,
+    "unlockLevel" : 6,
+    "cost" : 25,
+    "weapons" : [ {
+        "@class" : "ADT.ExtendedDefaultWeapon",
+        "name" : "Melee",
+        "range" : 1,
+        "damage" : 1,
+        "level" : 1,
+        "areaOfEffect" : 1,
+        "hitPerUnit" : 1,
+        "appearances" : { },
+        "unlockLevel" : 1,
+        "elements" : {
+          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
+        },
+        "available" : true
+      } ],
+    "coordinateX" : 0,
+    "coordinateY" : 0,
+    "type" : "Aire"
+  } ]
+}
