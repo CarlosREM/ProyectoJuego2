@@ -55,7 +55,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel2" min="-2" pref="89" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txfServer" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="txfHost" min="-2" pref="134" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel1" min="-2" pref="89" max="-2" attributes="0"/>
@@ -65,12 +65,12 @@
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Component id="jLabel3" min="-2" pref="56" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txfRival" max="32767" attributes="0"/>
+                                  <Component id="txfPort" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="btnPlay" min="-2" pref="134" max="-2" attributes="0"/>
+                              <Component id="btnPlay" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -86,12 +86,12 @@
                       <Component id="txfNickname" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfRival" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfPort" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfServer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfHost" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnPlay" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -147,7 +147,7 @@
             <Property name="text" type="java.lang.String" value="HOST:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfServer">
+        <Component class="javax.swing.JTextField" name="txfHost">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -161,7 +161,7 @@
             <Property name="text" type="java.lang.String" value="192.168.1.1"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfServerActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfHostActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnPlay">
@@ -172,7 +172,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Play"/>
+            <Property name="text" type="java.lang.String" value="SELECT OPPONENT"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlayActionPerformed"/>
@@ -192,7 +192,7 @@
             <Property name="text" type="java.lang.String" value="PORT:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfRival">
+        <Component class="javax.swing.JTextField" name="txfPort">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -206,7 +206,7 @@
             <Property name="text" type="java.lang.String" value="8000"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfRivalActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfPortActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">

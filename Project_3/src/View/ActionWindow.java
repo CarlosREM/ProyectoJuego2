@@ -17,11 +17,16 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,14 +38,16 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
+import javax.swing.text.Utilities;
 
 /**
  *
  * @author Marco Gamboa
  */
 public class ActionWindow extends javax.swing.JFrame {
-
+    private String idRival;
     private Player player;
     private HashMap<String, ExtendedDefaultCharacter> lstCharacters;
     private List<JButton> btnCharacters;
@@ -53,12 +60,24 @@ public class ActionWindow extends javax.swing.JFrame {
         initComponents();
         lstCharacters = new HashMap<>();
         btnCharacters = new ArrayList<>();
-        txaCommands.setText(">>");
         txaScores.setText(" RANKING\n 1. diemora56 [135/90]\n 2. helosama666 [100/50]\n 3. \n 4.\n 5. \n 6.");
         txaOwnInfo.setText(" MYSTATUS\n Wins:135\n Loses:90 \n Attacks:1935 \n Succes:1000 \n Failed:935 \n Giveup:5");
         txaRivalInfo.setText(" AGAINST\n Wins:80\n Loses:15 \n Attacks:885 \n Succes:200 \n Failed:300 \n Giveup:2");
+        txaCommands.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                processLine();
+     
+            }
+        }});
     }
 
+    
+    private void processLine(){
+
+   
+    }
     public void setPlayer(Player pPlayer) {
         this.player = pPlayer;
 
@@ -101,6 +120,10 @@ public class ActionWindow extends javax.swing.JFrame {
         TeamPane.repaint();
     }
 
+    public void setIdRival(String idRival) {
+        this.idRival = idRival;
+    }
+    
     public void setWeapons(ArrayList<AWeapon> weapons) {
         String text = "";
         for (AWeapon weapon : weapons) {
@@ -156,6 +179,8 @@ public class ActionWindow extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaCommands = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txaResults = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         txaOwnInfo = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -290,22 +315,33 @@ public class ActionWindow extends javax.swing.JFrame {
         txaCommands.setRows(5);
         jScrollPane2.setViewportView(txaCommands);
 
+        txaResults.setBackground(new java.awt.Color(0, 0, 0));
+        txaResults.setColumns(20);
+        txaResults.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txaResults.setForeground(new java.awt.Color(0, 153, 0));
+        txaResults.setRows(5);
+        jScrollPane3.setViewportView(txaResults);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
         );
 
         txaOwnInfo.setEditable(false);
         txaOwnInfo.setBackground(new java.awt.Color(0, 0, 0));
         txaOwnInfo.setColumns(20);
+        txaOwnInfo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txaOwnInfo.setForeground(new java.awt.Color(51, 255, 0));
         txaOwnInfo.setRows(5);
         jScrollPane5.setViewportView(txaOwnInfo);
@@ -313,6 +349,7 @@ public class ActionWindow extends javax.swing.JFrame {
         txaScores.setEditable(false);
         txaScores.setBackground(new java.awt.Color(0, 0, 0));
         txaScores.setColumns(20);
+        txaScores.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txaScores.setForeground(new java.awt.Color(51, 255, 0));
         txaScores.setRows(5);
         jScrollPane7.setViewportView(txaScores);
@@ -320,6 +357,7 @@ public class ActionWindow extends javax.swing.JFrame {
         txaRivalInfo.setEditable(false);
         txaRivalInfo.setBackground(new java.awt.Color(0, 0, 0));
         txaRivalInfo.setColumns(20);
+        txaRivalInfo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txaRivalInfo.setForeground(new java.awt.Color(51, 255, 0));
         txaRivalInfo.setRows(5);
         jScrollPane8.setViewportView(txaRivalInfo);
@@ -424,6 +462,7 @@ public class ActionWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblTeamPaneHealth;
     private javax.swing.JTextArea txaCommands;
     private javax.swing.JTextArea txaOwnInfo;
+    private javax.swing.JTextArea txaResults;
     private javax.swing.JTextArea txaRivalInfo;
     private javax.swing.JTextArea txaScores;
     private javax.swing.JTextArea txaWeapons;
