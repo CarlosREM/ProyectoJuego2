@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -113,10 +114,8 @@ public class Login extends javax.swing.JFrame {
         txfNickname = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txfServer = new javax.swing.JTextField();
+        txfHost = new javax.swing.JTextField();
         btnPlay = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txfRival = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         CharPane = new javax.swing.JPanel();
 
@@ -145,37 +144,22 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 204, 51));
         jLabel2.setText("HOST:");
 
-        txfServer.setBackground(new java.awt.Color(0, 0, 0));
-        txfServer.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txfServer.setForeground(new java.awt.Color(0, 153, 0));
-        txfServer.setText("192.168.1.1");
-        txfServer.addActionListener(new java.awt.event.ActionListener() {
+        txfHost.setBackground(new java.awt.Color(0, 0, 0));
+        txfHost.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txfHost.setForeground(new java.awt.Color(0, 153, 0));
+        txfHost.setText("192.168.1.1");
+        txfHost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfServerActionPerformed(evt);
+                txfHostActionPerformed(evt);
             }
         });
 
         btnPlay.setBackground(new java.awt.Color(0, 0, 0));
         btnPlay.setForeground(new java.awt.Color(0, 153, 0));
-        btnPlay.setText("Play");
+        btnPlay.setText("START");
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 204, 51));
-        jLabel3.setText("PORT:");
-
-        txfRival.setBackground(new java.awt.Color(0, 0, 0));
-        txfRival.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txfRival.setForeground(new java.awt.Color(0, 153, 0));
-        txfRival.setText("8000");
-        txfRival.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfRivalActionPerformed(evt);
             }
         });
 
@@ -196,18 +180,13 @@ public class Login extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txfServer, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txfHost, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txfNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txfRival))
-                            .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPlay)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -216,13 +195,11 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txfNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(txfRival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txfServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfHost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPlay))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,27 +224,21 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         ActionWindow aw = new ActionWindow();
         try {
-            aw.setPlayer(new Player(txfNickname.getText(),new ArrayList<>(Chars.values())));
-            
+            aw.setPlayer(new Player(txfNickname.getText(),txfHost.getText(),new ArrayList<>(Chars.values()),aw));
             aw.setVisible(true);
-            this.dispose();
         } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex,"ERROR",JOptionPane.ERROR_MESSAGE);
         }
-        
+        this.dispose();
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void txfNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNicknameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfNicknameActionPerformed
 
-    private void txfServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfServerActionPerformed
+    private void txfHostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txfServerActionPerformed
-
-    private void txfRivalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfRivalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfRivalActionPerformed
+    }//GEN-LAST:event_txfHostActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,11 +280,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnPlay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txfHost;
     private javax.swing.JTextField txfNickname;
-    private javax.swing.JTextField txfRival;
-    private javax.swing.JTextField txfServer;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package SocketsImpl;
 
 import SocketsImpl.Messages.ConMessage;
 import SocketsImpl.Messages.RequestMessage;
+import SocketsImpl.Messages.TopicsMessage;
 import commsapi.Message.AMessage;
 import commsapi.Subscriber.ASubscriber;
 import java.io.IOException;
@@ -83,10 +84,14 @@ public class PlayerSubscriber extends ASubscriber{
                 RequestMessage m2 = new RequestMessage();
                 m2.setRequestId(99);
                 m2.setRequestString(this.getId());
-                sendMessage(m);
+                sendMessage(m2);
             }
-                
+              
         }
+         if(message instanceof TopicsMessage){
+             TopicsMessage m = (TopicsMessage) message;
+             this.player.showTopics(m.getTopics());
+         }           
     }
     
 }
