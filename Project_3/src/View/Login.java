@@ -8,8 +8,10 @@ package View;
 import ADT.DefaultCharacterAppearance;
 import ADT.ExtendedDefaultCharacter;
 import SocketsImpl.Player;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -27,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JToolTip;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -42,7 +45,7 @@ public class Login extends javax.swing.JFrame {
     List<JButton> btnChars;
     HashMap<String, ExtendedDefaultCharacter> selectedChars;
     HashMap<String, ExtendedDefaultCharacter> Chars;
-    
+
     /**
      * Creates new form Login
      */
@@ -58,14 +61,26 @@ public class Login extends javax.swing.JFrame {
 
     public void setCharacters() {
         List<ExtendedDefaultCharacter> chars;
-        for (int i = 0; i < 7; i++) {
-            JButton button = new JButton();
+        String type = "ICE";
+        for (int i = 0; i < 4; i++) {
+            JButton button = new JButton() {
+                public JToolTip createToolTip() {
+                    JToolTip tip = super.createToolTip();
+                    tip.setOpaque(true);
+                    tip.setForeground(Color.black);
+                    tip.revalidate();
+                    tip.repaint();
+                    tip.setFont(new Font("Arial", Font.BOLD, 14));
+                    return tip;
+                }
+            };
             button.setName("CHARACTER#" + i);
-            button.setLayout(new GridBagLayout());
+            button.setToolTipText("[" + type + "]");
             button.setBorder(new EtchedBorder());
             JLabel lbl = new JLabel(button.getName());
+            lbl.setFont(new Font("Arial", Font.BOLD, 12));
             lbl.setForeground(Color.white);
-            button.add(lbl);          
+            button.add(lbl);
             button.setLayout(new GridLayout());
             button.setPreferredSize(new Dimension(140, 210));
             button.setActionCommand("CHARACTER#" + i);
@@ -89,7 +104,6 @@ public class Login extends javax.swing.JFrame {
         CharPane.repaint();
     }
 
-    
     private void selectChar(String name) {
         TitledBorder border = new TitledBorder("SELECTED");
         border.setTitleColor(Color.WHITE);
@@ -100,7 +114,7 @@ public class Login extends javax.swing.JFrame {
                     button.setBorder(new EtchedBorder());
                     selectedChars.remove(name);
                 } else {
-                    if(selectedChars.size()<4){
+                    if (selectedChars.size() < 4) {
                         button.setBorder(border);
                         selectedChars.put(name, Chars.get(name));
                     }
@@ -230,14 +244,18 @@ public class Login extends javax.swing.JFrame {
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         // TODO add your handling code here:
-        ActionWindow aw = new ActionWindow();
-        try {
-            aw.setPlayer(new Player(txfNickname.getText(),txfHost.getText(),new ArrayList<>(Chars.values()),aw));
-            aw.setVisible(true);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex,"ERROR",JOptionPane.ERROR_MESSAGE);
+        if (selectedChars.size() < 4) {
+            JOptionPane.showMessageDialog(null, "Not enough characters", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            ActionWindow aw = new ActionWindow();
+            try {
+                aw.setPlayer(new Player(txfNickname.getText(), txfHost.getText(), new ArrayList<>(selectedChars.values()), aw));
+                aw.setVisible(true);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, ex, "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            this.dispose();
         }
-        this.dispose();
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void txfNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNicknameActionPerformed

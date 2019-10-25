@@ -12,17 +12,19 @@
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/GameServer.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/Player.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/ChatCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/Messages/RequestMessage.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/SurrenderCommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/Messages/TopicsMessage.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/MutaulSurrenderCommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ADT/ExtendedDefaultWeapon.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/View/Login.java</file>
-            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/commandgame/CommandGame.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/View/PlayersWindow.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Abstraction/ICommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ADT/ExtendedDefaultCharacter.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/View/ActionWindow.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/DefaultCommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/PlayerSubscriber.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/SelectCommand.java</file>
         </group>
     </open-files>
 </project-private>
