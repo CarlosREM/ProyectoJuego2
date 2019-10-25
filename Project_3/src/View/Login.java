@@ -5,9 +5,12 @@
  */
 package View;
 
+import ADT.CharacterPrototypeFactory;
 import ADT.DefaultCharacterAppearance;
 import ADT.ExtendedDefaultCharacter;
+import ResourcesImplementations.ExtendedPrototypeController;
 import SocketsImpl.Player;
+import abstraction.ACharacter;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -44,7 +47,7 @@ public class Login extends javax.swing.JFrame {
 
     List<JButton> btnChars;
     HashMap<String, ExtendedDefaultCharacter> selectedChars;
-    HashMap<String, ExtendedDefaultCharacter> Chars;
+    HashMap<String, ExtendedDefaultCharacter> chars;
 
     /**
      * Creates new form Login
@@ -53,16 +56,19 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         btnChars = new ArrayList<>();
         selectedChars = new HashMap();
-        Chars = new HashMap();
+        chars = new HashMap();
         this.setResizable(false);
         setCharacters();
+        
 
     }
 
     public void setCharacters() {
-        List<ExtendedDefaultCharacter> chars;
-        String type = "ICE";
-        for (int i = 0; i < 4; i++) {
+        ExtendedPrototypeController.loadDefaultPrototypes();
+        List<ACharacter> tempList = CharacterPrototypeFactory.getAllCharacters();
+        
+        for (int i = 0; i < tempList.size(); i++) {
+            ExtendedDefaultCharacter temp =(ExtendedDefaultCharacter) tempList.get(i);
             JButton button = new JButton() {
                 public JToolTip createToolTip() {
                     JToolTip tip = super.createToolTip();
@@ -74,8 +80,8 @@ public class Login extends javax.swing.JFrame {
                     return tip;
                 }
             };
-            button.setName("CHARACTER#" + i);
-            button.setToolTipText("[" + type + "]");
+            button.setName(temp.getName());
+            button.setToolTipText("[" + temp.getType().toString()+ "]");
             button.setBorder(new EtchedBorder());
             JLabel lbl = new JLabel(button.getName());
             lbl.setFont(new Font("Arial", Font.BOLD, 12));
@@ -83,9 +89,9 @@ public class Login extends javax.swing.JFrame {
             button.add(lbl);
             button.setLayout(new GridLayout());
             button.setPreferredSize(new Dimension(140, 210));
-            button.setActionCommand("CHARACTER#" + i);
+            button.setActionCommand(temp.getName());
             button.setBackground(Color.black);
-            ImageIcon imageIcon = new ImageIcon("death" + i + ".png");
+            ImageIcon imageIcon = new ImageIcon(temp.getAppearance(0).getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT")));
             Image image = imageIcon.getImage();
             Image newimg = image.getScaledInstance(140, 210, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way             
             button.setIcon(new ImageIcon(newimg));
@@ -116,7 +122,7 @@ public class Login extends javax.swing.JFrame {
                 } else {
                     if (selectedChars.size() < 4) {
                         button.setBorder(border);
-                        selectedChars.put(name, Chars.get(name));
+                        selectedChars.put(name, chars.get(name));
                     }
                 }
             }

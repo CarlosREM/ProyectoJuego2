@@ -5,8 +5,8 @@
     "name" : "Average Joe",
     "appearances" : {
       "1" : {
-        "@class" : "ADT.ExtendedCharacterAppearance",
-        "looks" : [ "/resources/images/spr_paladin.png", "/resources/images/spr_paladin.png" ]
+        "@class" : "ADT.DefaultCharacterAppearance",
+        "looks" : [ "/resources/images/spr_paladin.png", "/resources/images/spr_paladin.png","/resources/images/spr_paladin.png","/resources/images/spr_paladin.png","/resources/images/spr_paladin.png","/resources/images/spr_paladin.png" ]
       }
     },
     "currentHealthPoints" : 100,
@@ -39,8 +39,8 @@
     "name" : "Brad Sanders",
     "appearances" : {
       "1" : {
-        "@class" : "ADT.ExtendedCharacterAppearance",
-        "looks" : [ "/resources/images/spr_mago.png", "/resources/images/spr_mago.png" ]
+        "@class" : "ADT.DefaultCharacterAppearance",
+        "looks" : [ "/resources/images/spr_mago.png","/resources/images/spr_mago.png","/resources/images/spr_mago.png","/resources/images/spr_mago.png","/resources/images/spr_mago.png", "/resources/images/spr_mago.png" ]
       }
     },
     "currentHealthPoints" : 100,
@@ -73,8 +73,8 @@
     "name" : "Steve Johns",
     "appearances" : {
       "1" : {
-        "@class" : "ADT.ExtendedCharacterAppearance",
-        "looks" : [ "/resources/images/spr_espadachin.png", "/resources/images/spr_espadachin.png" ]
+        "@class" : "ADT.DefaultCharacterAppearance",
+        "looks" : [ "/resources/images/spr_espadachin.png","/resources/images/spr_espadachin.png","/resources/images/spr_espadachin.png","/resources/images/spr_espadachin.png","/resources/images/spr_espadachin.png", "/resources/images/spr_espadachin.png" ]
       }
     },
     "currentHealthPoints" : 100,
