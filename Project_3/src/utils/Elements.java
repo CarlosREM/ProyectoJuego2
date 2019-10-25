@@ -40,16 +40,16 @@ public class Elements {
     }
 
     public static enum Types {
-        Fuego,
-        Aire,
-        Agua,
-        Magia_Blanca,
-        Magia_Negra,
-        Electricidad,
-        Hielo,
-        Acid,
-        Espiritualidad,
-        Hierro
+        FIRE,
+        AIR,
+        WATER,
+        WHITE_MAGIC,
+        BLACK_MAGIC,
+        ELECTRIC,
+        ICE,
+        ACID,
+        SPIRITUAL,
+        IRON
     }
 
 }
