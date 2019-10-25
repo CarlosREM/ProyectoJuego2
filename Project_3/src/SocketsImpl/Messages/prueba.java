@@ -11,6 +11,7 @@ import ADT.ExtendedDefaultWeapon;
 import Controllers.DefaultPrototypeController;
 import Json.JSONCharacterHolder;
 import Json.JSONWeaponHolder;
+import ResourcesImplementations.ExtendedPrototypeController;
 import abstraction.ACharacter;
 import abstraction.AWeapon;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,17 +30,13 @@ import utils.Elements;
 public class prueba {
     public static void main(String[] args){
         
-        ExtendedDefaultWeapon c =  new ExtendedDefaultWeapon.ExtendedDefaultWeaponBuilder().build();
+        ExtendedPrototypeController.loadDefaultPrototypes();
+        List<ACharacter> cs = CharacterPrototypeFactory.getAllCharacters();
         
-        ObjectMapper mapper = new ObjectMapper();
-        List<AWeapon> cs = new ArrayList();
-        cs.add(c);
-        JSONWeaponHolder newHolder = new JSONWeaponHolder(cs);
+        
                 
-        try {
-            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(newHolder));
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(prueba.class.getName()).log(Level.SEVERE, null, ex);
+        for(ACharacter c : cs){
+            System.out.println(c.getName());
         }
                                    
     } 

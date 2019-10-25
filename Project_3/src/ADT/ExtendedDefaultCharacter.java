@@ -18,6 +18,9 @@ import utils.Elements;
 public class ExtendedDefaultCharacter extends DefaultCharacter {
     private Elements.Types type;
 
+    public ExtendedDefaultCharacter(){
+        
+    }
     public ExtendedDefaultCharacter(Elements.Types type, String name, TreeMap<Integer, AAppearance> appearance, int currentHealthPoints, int maxHealthPoints, int hitsPerUnit, int level, int tiles, int unlockLevel, int cost, ArrayList<AWeapon> weapons, int coordinateX, int coordinateY) {
         super(name, appearance, currentHealthPoints, maxHealthPoints, hitsPerUnit, level, tiles, unlockLevel, cost, weapons, coordinateX, coordinateY);
         this.type = type;

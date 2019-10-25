@@ -19,6 +19,9 @@ public class ExtendedDefaultWeapon extends DefaultWeapon{
     private Elements elements;
     private boolean available;
 
+    public ExtendedDefaultWeapon(){
+        
+    }
     public ExtendedDefaultWeapon(String name, int range, int damage, int level, int areaOfEffect, int hitPerUnit, TreeMap<Integer, AAppearance> appearances, int unlockLevel) {
         super(name, range, damage, level, areaOfEffect, hitPerUnit, appearances, unlockLevel);
         elements = new Elements(); 
