@@ -2,7 +2,7 @@
   "@class" : "Json.JSONCharacterHolder",
   "characters" : [ {
     "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "Average Joe",
+    "name" : "Average Joee",
     "appearances" : {
       "1" : {
         "@class" : "ADT.DefaultCharacterAppearance",
@@ -33,14 +33,15 @@
       } ],
     "coordinateX" : 0,
     "coordinateY" : 0,
-    "type" : "Aire"
+    "type" : "AIR"
   }, {
     "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "Brad Sanders",
+    "name" : "Brad Sanderse",
     "appearances" : {
       "1" : {
         "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resources/images/spr_mago.png","/resources/images/spr_mago.png","/resources/images/spr_mago.png","/resources/images/spr_mago.png","/resources/images/spr_mago.png", "/resources/images/spr_mago.png" ]
+        "looks" : [ "/resourcesImp/images/spr_mago.png", "/resourcesImp/images/spr_mago.png", "/resourcesImp/images/spr_mago.png", "/resourcesImp/images/spr_mago.png", "/resourcesImp/images/spr_mago.png", "/resourcesImp/images/spr_mago.png" ]
+
       }
     },
     "currentHealthPoints" : 100,
@@ -67,14 +68,14 @@
       } ],
     "coordinateX" : 0,
     "coordinateY" : 0,
-    "type" : "Aire"
+    "type" : "AIR"
   }, {
     "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "Steve Johns",
+    "name" : "Steve Johnse",
     "appearances" : {
       "1" : {
         "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resources/images/spr_espadachin.png","/resources/images/spr_espadachin.png","/resources/images/spr_espadachin.png","/resources/images/spr_espadachin.png","/resources/images/spr_espadachin.png", "/resources/images/spr_espadachin.png" ]
+        "looks" : [ "/resourcesImp/images/spr_espadachin.png", "/resourcesImp/images/spr_espadachin.png", "/resourcesImp/images/spr_espadachin.png", "/resourcesImp/images/spr_espadachin.png", "/resourcesImp/images/spr_espadachin.png", "/resourcesImp/images/spr_espadachin.png" ]
       }
     },
     "currentHealthPoints" : 100,
@@ -101,6 +102,6 @@
       } ],
     "coordinateX" : 0,
     "coordinateY" : 0,
-    "type" : "Aire"
+    "type" : "AIR"
   } ]
 }

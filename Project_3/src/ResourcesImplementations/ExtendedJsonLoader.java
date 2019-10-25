@@ -28,7 +28,7 @@ public class ExtendedJsonLoader {
     private static ObjectMapper mapper = new ObjectMapper();
     
     public List<ACharacter> loadExtendedCharacters(){    
-        InputStream defaultFile = getClass().getResourceAsStream("/resources/ExtendedCharacters.json");
+        InputStream defaultFile = getClass().getResourceAsStream("/resourcesImp/ExtendedCharacters.json");
         String json = null;
 
         try(Scanner scanner = new Scanner(defaultFile, StandardCharsets.UTF_8.name())){
@@ -49,7 +49,7 @@ public class ExtendedJsonLoader {
     }
     
     public List<AWeapon> loadExtendedWeapons(){
-        InputStream defaultFile = getClass().getResourceAsStream("/resources/ExtendedWeapons.json");
+        InputStream defaultFile = getClass().getResourceAsStream("/resourcesImp/ExtendedWeapons.json");
         String json = null;
 
         try(Scanner scanner = new Scanner(defaultFile, StandardCharsets.UTF_8.name())){
