@@ -112,4 +112,13 @@ public class GameServer extends AContentServer{
         }
     }
     
+    public static void main(String[] args) throws InterruptedException {
+        try {
+            GameServer server = new GameServer();
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
 }
