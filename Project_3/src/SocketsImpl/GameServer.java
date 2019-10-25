@@ -6,6 +6,8 @@
 package SocketsImpl;
 
 import SocketsImpl.Messages.ConMessage;
+import SocketsImpl.Messages.RequestMessage;
+import SocketsImpl.Messages.TopicsMessage;
 import commsapi.ContentServer.AContentServer;
 import commsapi.ContentServer.PublisherHandler;
 import commsapi.ContentServer.SubscriberHandler;
@@ -26,8 +28,18 @@ public class GameServer extends AContentServer{
     }
 
     @Override
-    public void processSubMessage(AMessage arg0, SubscriberHandler arg1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void processSubMessage(AMessage message, SubscriberHandler handler) {
+        if(message instanceof RequestMessage){
+            RequestMessage m = (RequestMessage) message;
+            switch(m.getRequestId()){
+                case 0: //Asked for available players
+                    broadcastTopics(handler);
+                    break;
+                case 99:   //set subscriberHandler id
+                    handler.setId(m.getRequestString());
+                    break;
+            }
+        }
     }
 
     @Override
@@ -36,8 +48,18 @@ public class GameServer extends AContentServer{
     }
 
     @Override
-    public void broadcastTopics(SubscriberHandler arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void broadcastTopics(SubscriberHandler handler) {
+        TopicsMessage m = new TopicsMessage();
+        for(String key : this.subscriptions.keySet()){
+            if(this.subscriptions.get(key).isEmpty() && !key.equals(handler.getId()))
+                m.getTopics().add(key);
+        }
+        
+        try {
+            handler.sendMessage(m);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -53,8 +75,17 @@ public class GameServer extends AContentServer{
     }
 
     @Override
-    public void acceptSubConnection(SubscriberHandler arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void acceptSubConnection(SubscriberHandler handler) {
+        ConMessage m = new ConMessage(true);
+        String newId = java.time.LocalDateTime.now().toString();
+        handler.setId(newId);
+        m.setConnMessage("Conection Successful as Subscriber");
+        
+        try {
+            handler.sendMessage(m);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

@@ -75,10 +75,17 @@ public class PlayerSubscriber extends ASubscriber{
     public void receivedMessage(AMessage message) {
         System.out.println("message recieved on subscriber " + message.serialize());
         
-        if(message instanceof ConMessage){
+        if(message instanceof ConMessage){ //Connection Established
             ConMessage m = (ConMessage) message;
             this.setConnected(m.isAcceptedConnection());
             System.out.println(m.getConnMessage());
+            if(this.isConnected()){
+                RequestMessage m2 = new RequestMessage();
+                m2.setRequestId(99);
+                m2.setRequestString(this.getId());
+                sendMessage(m);
+            }
+                
         }
     }
     
