@@ -53,9 +53,32 @@ public class Player {
     public List<ExtendedDefaultCharacter> getWarriors(){
         return warriors;
     }
+    /*
+    *Esto hay que implementarlo
+    */
+    public void surrender(){
+        
+    }
+  
+    public void mutualSurrender(){
+        
+    }
     
+    public void pass() {
+   
+    }    
     public void setWarriors(List<ExtendedDefaultCharacter> warriors){
         this.warriors = warriors;
     }
+
+    public ActionWindow getClient() {
+        return client;
+    }
+
+    public void setClient(ActionWindow client) {
+        this.client = client;
+    }
+
+
         
 }

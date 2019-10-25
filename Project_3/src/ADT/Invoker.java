@@ -7,15 +7,16 @@ package ADT;
 
 import Abstraction.ICommand;
 import Commands.CommandManager;
+import SocketsImpl.Player;
 
 /**
  *
  * @author Marco Gamboa
  */
 public class Invoker {
-    public void execute(String text){
+    public void execute(String text,Player player){
         String[] tokens = text.split(" -");
         ICommand c = new CommandManager().getCommand(tokens[0]);
-        c.execute(tokens);
+        c.execute(tokens,player);
     }
 }

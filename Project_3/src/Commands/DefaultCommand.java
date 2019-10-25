@@ -12,11 +12,12 @@ import SocketsImpl.Player;
  *
  * @author Marco Gamboa
  */
-public class AttactCommand implements ICommand{
+public class DefaultCommand implements ICommand{
 
     @Override
     public void execute(String[] text,Player player) {
-        System.out.println("atacar");
+        player.getClient().putResultText("Unknow command +"+text[0]+", valid commands:\n"
+                + "Chat\nAttack\nPass\nAttackPlus\nDraw\nGiveup");
     }
     
 }

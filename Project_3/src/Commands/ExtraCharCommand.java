@@ -6,6 +6,7 @@
 package Commands;
 
 import Abstraction.ICommand;
+import SocketsImpl.Player;
 
 /**
  *
@@ -14,7 +15,7 @@ import Abstraction.ICommand;
 public class ExtraCharCommand implements ICommand{
 
     @Override
-    public void execute(String[] tokens) {
+    public void execute(String[] text,Player player) {
         System.out.println("ExtraChar");
     }
     

@@ -6,6 +6,7 @@
 package Commands;
 
 import Abstraction.ICommand;
+import SocketsImpl.Player;
 
 /**
  *
@@ -14,8 +15,8 @@ import Abstraction.ICommand;
 public class PassCommand implements ICommand{
 
     @Override
-    public void execute(String[] tokens) {
-        System.out.println("pass");
+    public void execute(String[] text,Player player) {
+        player.pass();
     }
     
 }

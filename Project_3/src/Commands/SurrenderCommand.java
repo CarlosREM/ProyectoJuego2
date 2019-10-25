@@ -6,6 +6,7 @@
 package Commands;
 
 import Abstraction.ICommand;
+import SocketsImpl.Player;
 
 /**
  *
@@ -14,8 +15,9 @@ import Abstraction.ICommand;
 public class SurrenderCommand implements ICommand{
 
     @Override
-    public void execute(String[] tokens) {
-        System.out.println("surrnder");
-    }
+    public void execute(String[] text,Player player) {
+        player.surrender();
+        player.getClient().putResultText("You lose");
+    } 
     
 }

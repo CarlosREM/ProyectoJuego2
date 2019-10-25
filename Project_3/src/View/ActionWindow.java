@@ -8,6 +8,7 @@ package View;
 import ADT.DefaultCharacterAppearance;
 import ADT.ExtendedDefaultCharacter;
 import ADT.ExtendedDefaultWeapon;
+import ADT.Invoker;
 import SocketsImpl.Player;
 import abstraction.AWeapon;
 import java.awt.BorderLayout;
@@ -67,12 +68,16 @@ public class ActionWindow extends javax.swing.JFrame {
         @Override
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                txaResults.append(txaCommands.getText());
+                txaResults.append(">>"+txaCommands.getText()+"\n");
+                Invoker i = new Invoker();
+                i.execute(txaCommands.getText(), player);
                 txaCommands.setText("");
             }
         }});
     }
-
+    public String getIdRival(){
+        return idRival;
+    }
     public void setPlayer(Player pPlayer) {
         this.player = pPlayer;
 
@@ -131,8 +136,11 @@ public class ActionWindow extends javax.swing.JFrame {
         txaWeapons.setText(text);
 
     }
-
-    private void selectChar(String name) {
+    public void putResultText(String text){
+        this.txaResults.append(text+"\n");
+    }
+    
+    public void selectChar(String name) {
         TitledBorder border = new TitledBorder("SELECTED");
         border.setTitleColor(Color.WHITE);
         for (JButton button : btnCharacters) {
@@ -170,10 +178,9 @@ public class ActionWindow extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lblOwnChar = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txaCommands = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txaResults = new javax.swing.JTextArea();
+        txaCommands = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         txaOwnInfo = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -282,33 +289,34 @@ public class ActionWindow extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(0, 0, 0));
         jPanel7.setForeground(new java.awt.Color(0, 0, 0));
 
-        txaCommands.setBackground(new java.awt.Color(0, 0, 0));
-        txaCommands.setColumns(20);
-        txaCommands.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txaCommands.setForeground(new java.awt.Color(0, 153, 0));
-        txaCommands.setRows(5);
-        jScrollPane2.setViewportView(txaCommands);
-
         txaResults.setEditable(false);
         txaResults.setBackground(new java.awt.Color(0, 0, 0));
         txaResults.setColumns(20);
-        txaResults.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txaResults.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         txaResults.setForeground(new java.awt.Color(0, 153, 0));
         txaResults.setRows(5);
         jScrollPane3.setViewportView(txaResults);
+
+        txaCommands.setBackground(new java.awt.Color(0, 0, 0));
+        txaCommands.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txaCommands.setForeground(new java.awt.Color(0, 153, 51));
+        txaCommands.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
-            .addComponent(jScrollPane2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addComponent(txaCommands)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(9, 9, 9)
+                .addComponent(txaCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -462,7 +470,6 @@ public class ActionWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -472,7 +479,7 @@ public class ActionWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblRivalChar;
     private javax.swing.JLabel lblTeamPaneCharName;
     private javax.swing.JLabel lblTeamPaneHealth;
-    private javax.swing.JTextArea txaCommands;
+    private javax.swing.JTextField txaCommands;
     private javax.swing.JTextArea txaOwnInfo;
     private javax.swing.JTextArea txaResults;
     private javax.swing.JTextArea txaRivalInfo;

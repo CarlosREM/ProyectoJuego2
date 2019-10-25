@@ -5,10 +5,12 @@
  */
 package Abstraction;
 
+import SocketsImpl.Player;
+
 /**
  *
  * @author Marco Gamboa
  */
 public interface ICommand {
-    public void execute(String[] text);
+    public void execute(String[] text,Player player);
 }

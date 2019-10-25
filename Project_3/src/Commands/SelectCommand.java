@@ -12,11 +12,15 @@ import SocketsImpl.Player;
  *
  * @author Marco Gamboa
  */
-public class AttactCommand implements ICommand{
+public class SelectCommand implements ICommand {
 
     @Override
-    public void execute(String[] text,Player player) {
-        System.out.println("atacar");
+    public void execute(String[] text, Player player) {
+        try{
+            player.getClient().selectChar(text[1]);
+        } catch (IndexOutOfBoundsException e) {
+            player.getClient().putResultText("Error in command");
+        }
     }
-    
+
 }

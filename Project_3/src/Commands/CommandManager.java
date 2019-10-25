@@ -30,8 +30,10 @@ public class CommandManager {
                 return new MutaulSurrenderCommand();
             case "Giveup":
                 return new SurrenderCommand();
+            case "Select":
+                return new SelectCommand();                
             default:
-                return null;
+                return new DefaultCommand();
         }
     }
     
