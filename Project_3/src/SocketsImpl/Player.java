@@ -29,7 +29,7 @@ public class Player {
         publisher = new PlayerPublisher(id, this);
         subscriber = new PlayerSubscriber(id, this);
         this.warriors = warriors;
-        this.client = client;
+        this.client = client; 
     }
     
     public Player(String id, String host, List<ExtendedDefaultCharacter> warriors, ActionWindow client) throws IOException{
