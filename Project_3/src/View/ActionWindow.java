@@ -415,9 +415,7 @@ public class ActionWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
-        PlayersWindow pw = new PlayersWindow();
-        pw.setActionWindos(this);
-        pw.setVisible(true);
+        player.askForTopics();
     }//GEN-LAST:event_btnSelectActionPerformed
 
     /**

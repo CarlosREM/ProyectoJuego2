@@ -21,6 +21,7 @@ public class TopicsMessage extends AMessage{
     
     public TopicsMessage(){
         super("Publishers");
+        topics = new ArrayList<>();
     }
 
     public List<String> getTopics() {

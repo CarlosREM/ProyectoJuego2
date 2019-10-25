@@ -7,6 +7,7 @@ package SocketsImpl;
 
 import ADT.ExtendedDefaultCharacter;
 import View.ActionWindow;
+import View.PlayersWindow;
 import commsapi.Utils.PropertiesUtil;
 import java.io.IOException;
 import java.util.List;
@@ -40,6 +41,15 @@ public class Player {
         this.client = client;
     }
     
+    public void askForTopics(){
+         subscriber.askForTopics();
+    }
+    public void showTopics(List<String> topics){
+        PlayersWindow pw = new PlayersWindow();
+        pw.setActionWindos(client);
+        pw.fillPlayers(topics);
+        pw.setVisible(true);
+    }
     public List<ExtendedDefaultCharacter> getWarriors(){
         return warriors;
     }

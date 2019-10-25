@@ -6,6 +6,8 @@
 package View;
 
 import SocketsImpl.Player;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -25,7 +27,9 @@ public class PlayersWindow extends javax.swing.JFrame {
     public void setActionWindos(ActionWindow player) {
         this.actionWindow = player;
     }
-    
+    public void fillPlayers(List<String> topics){
+        this.cbxOpponents.setModel(new DefaultComboBoxModel(topics.toArray()));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
