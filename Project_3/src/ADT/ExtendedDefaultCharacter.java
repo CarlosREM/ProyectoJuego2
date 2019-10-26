@@ -7,6 +7,7 @@ package ADT;
 
 import abstraction.AAppearance;
 import abstraction.AWeapon;
+import abstraction.IPrototype;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import utils.Elements;
@@ -19,7 +20,7 @@ public class ExtendedDefaultCharacter extends DefaultCharacter {
     private Elements.Types type;
 
     public ExtendedDefaultCharacter(){
-        
+        super();
     }
     public ExtendedDefaultCharacter(Elements.Types type, String name, TreeMap<Integer, AAppearance> appearance, int currentHealthPoints, int maxHealthPoints, int hitsPerUnit, int level, int tiles, int unlockLevel, int cost, ArrayList<AWeapon> weapons, int coordinateX, int coordinateY) {
         super(name, appearance, currentHealthPoints, maxHealthPoints, hitsPerUnit, level, tiles, unlockLevel, cost, weapons, coordinateX, coordinateY);
@@ -32,6 +33,23 @@ public class ExtendedDefaultCharacter extends DefaultCharacter {
 
     public void setType(Elements.Types type) {
         this.type = type;
+    }
+    
+    @Override
+    public IPrototype deepClone() {
+        ArrayList<AWeapon> newWeapons = new ArrayList<>();
+        TreeMap<Integer,AAppearance> newAppearances = new TreeMap<>();
+        
+        for(AWeapon weapon:getWeapons()){
+            newWeapons.add((AWeapon) weapon.deepClone());
+        }
+        for(Integer i : getAppearances().keySet()){
+            newAppearances.put(i, (AAppearance) getAppearances().get(i).deepClone());
+        }
+        
+        return new ExtendedDefaultCharacter( getType(), getName(),newAppearances,getCurrentHealthPoints(),getMaxHealthPoints(),
+                                    getHitsPerUnit(),getLevel(),getTiles(),getUnlockLevel(),getCost(),
+                                    newWeapons, getCoordinateX(),getCoordinateY());
     }
     
     

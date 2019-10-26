@@ -1,5 +1,5 @@
 {
-  "@class" : "Json.JSONWeaponHolder",
+  "@class" : "resourcesImp.JSONExtendedWeaponHolder",
   "weapons" : [
   {
     "@class" : "ADT.ExtendedDefaultWeapon",

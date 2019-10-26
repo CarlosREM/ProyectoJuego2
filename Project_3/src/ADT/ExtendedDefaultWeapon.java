@@ -8,6 +8,7 @@ package ADT;
 
 import abstraction.AAppearance;
 import abstraction.ACharacter;
+import abstraction.IPrototype;
 import java.util.TreeMap;
 import utils.Elements;
 
@@ -20,7 +21,7 @@ public class ExtendedDefaultWeapon extends DefaultWeapon{
     private boolean available;
 
     public ExtendedDefaultWeapon(){
-        
+        super();
     }
     public ExtendedDefaultWeapon(String name, int range, int damage, int level, int areaOfEffect, int hitPerUnit, TreeMap<Integer, AAppearance> appearances, int unlockLevel) {
         super(name, range, damage, level, areaOfEffect, hitPerUnit, appearances, unlockLevel);
@@ -53,6 +54,16 @@ public class ExtendedDefaultWeapon extends DefaultWeapon{
       int pos = eCharacter.getType().ordinal();
       character.takeDamage(elements.getPercentages()[pos]);
     } 
+    
+    @Override
+    public IPrototype deepClone() {
+        TreeMap<Integer,AAppearance> newAppearances = new TreeMap<>();
+        
+        for(Integer i : getAppearances().keySet()){
+            newAppearances.put(i, (AAppearance) getAppearances().get(i).deepClone());
+        }
+        return new ExtendedDefaultWeapon(getName(),getRange(),getDamage(),getLevel(),getAreaOfEffect(),getHitPerUnit(),newAppearances, getUnlockLevel());
+    }
     
     public static class ExtendedDefaultWeaponBuilder extends DefaultWeaponBuilder{
         @Override

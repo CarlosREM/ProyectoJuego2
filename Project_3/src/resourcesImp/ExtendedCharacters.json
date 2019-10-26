@@ -1,12 +1,12 @@
 {
-  "@class" : "Json.JSONCharacterHolder",
+  "@class" : "resourcesImp.JSONExtendedCharacterHolder",
   "characters" : [ {
     "@class" : "ADT.ExtendedDefaultCharacter",
     "name" : "Average Joee",
     "appearances" : {
       "1" : {
         "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resources/images/spr_paladin.png", "/resources/images/spr_paladin.png","/resources/images/spr_paladin.png","/resources/images/spr_paladin.png","/resources/images/spr_paladin.png","/resources/images/spr_paladin.png" ]
+        "looks" : [ "/resourcesImp/images/spr_paladin.png", "/resourcesImp/images/spr_paladin.png","/resourcesImp/images/spr_paladin.png","/resourcesImp/images/spr_paladin.png","/resourcesImp/images/spr_paladin.png","/resourcesImp/images/spr_paladin.png" ]
       }
     },
     "currentHealthPoints" : 100,

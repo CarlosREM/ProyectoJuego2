@@ -6,6 +6,8 @@
 package ResourcesImplementations;
 
 import ADT.CharacterPrototypeFactory;
+import ADT.ExtendedDefaultCharacter;
+import ADT.ExtendedDefaultWeapon;
 import ADT.WeaponPrototypeFactory;
 import Controllers.DefaultPrototypeController;
 import Json.JsonLoader;
@@ -21,12 +23,13 @@ public class ExtendedPrototypeController {
     
     public static void loadDefaultPrototypes(){
         ExtendedJsonLoader loader = new ExtendedJsonLoader();
-        ArrayList<ACharacter> characters = (ArrayList<ACharacter>) loader.loadExtendedCharacters();
-        ArrayList<AWeapon> weapons = (ArrayList<AWeapon>) loader.loadExtendedWeapons();
-        for (ACharacter c:characters){
+        ArrayList<ExtendedDefaultCharacter> characters = (ArrayList<ExtendedDefaultCharacter>) loader.loadExtendedCharacters();
+        ArrayList<ExtendedDefaultWeapon> weapons = (ArrayList<ExtendedDefaultWeapon>) loader.loadExtendedWeapons();
+        for (ExtendedDefaultCharacter c:characters){
+           
             CharacterPrototypeFactory.addPrototype(c.getName(), c);
         }
-        for (AWeapon w:weapons){
+        for (ExtendedDefaultWeapon w:weapons){
             WeaponPrototypeFactory.addPrototype(w.getName(), w);
         }        
     }

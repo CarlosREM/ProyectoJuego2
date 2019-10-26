@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -68,6 +69,7 @@ public class Login extends javax.swing.JFrame {
         List<ACharacter> tempList = CharacterPrototypeFactory.getAllCharacters();
         
         for (int i = 0; i < tempList.size(); i++) {
+            
             ExtendedDefaultCharacter temp =(ExtendedDefaultCharacter) tempList.get(i);
             JButton button = new JButton() {
                 public JToolTip createToolTip() {
@@ -91,8 +93,13 @@ public class Login extends javax.swing.JFrame {
             button.setPreferredSize(new Dimension(140, 210));
             button.setActionCommand(temp.getName());
             button.setBackground(Color.black);
-            ImageIcon imageIcon = new ImageIcon(temp.getAppearance(0).getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT")));
-            Image image = imageIcon.getImage();
+            
+            Image image = null;
+            try {
+                image = ImageIO.read(getClass().getResourceAsStream(temp.getAppearance(temp.getLevel()).getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT"))));
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Image newimg = image.getScaledInstance(140, 210, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way             
             button.setIcon(new ImageIcon(newimg));
             ActionListener actionListener = new ActionListener() {

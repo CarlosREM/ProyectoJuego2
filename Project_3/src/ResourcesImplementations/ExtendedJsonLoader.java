@@ -5,6 +5,8 @@
  */
 package ResourcesImplementations;
 
+import ADT.ExtendedDefaultCharacter;
+import ADT.ExtendedDefaultWeapon;
 import Json.JSONCharacterHolder;
 import Json.JSONWeaponHolder;
 import Json.JsonLoader;
@@ -19,6 +21,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import resourcesImp.JSONExtendedCharacterHolder;
+import resourcesImp.JSONExtendedWeaponHolder;
 
 /**
  *
@@ -27,7 +31,7 @@ import java.util.logging.Logger;
 public class ExtendedJsonLoader {
     private static ObjectMapper mapper = new ObjectMapper();
     
-    public List<ACharacter> loadExtendedCharacters(){    
+    public List<ExtendedDefaultCharacter> loadExtendedCharacters(){    
         InputStream defaultFile = getClass().getResourceAsStream("/resourcesImp/ExtendedCharacters.json");
         String json = null;
 
@@ -39,7 +43,7 @@ public class ExtendedJsonLoader {
         }
         
         try {
-            JSONCharacterHolder newHolder = mapper.readValue(json, new TypeReference<JSONCharacterHolder>(){});
+            JSONExtendedCharacterHolder newHolder = mapper.readValue(json, new TypeReference<JSONExtendedCharacterHolder>(){});
             return newHolder.getCharacters();
             
         } catch (IOException ex) {
@@ -48,7 +52,7 @@ public class ExtendedJsonLoader {
         }
     }
     
-    public List<AWeapon> loadExtendedWeapons(){
+    public List<ExtendedDefaultWeapon> loadExtendedWeapons(){
         InputStream defaultFile = getClass().getResourceAsStream("/resourcesImp/ExtendedWeapons.json");
         String json = null;
 
@@ -56,7 +60,7 @@ public class ExtendedJsonLoader {
             json = scanner.useDelimiter("\\A").next();
         }
         try {
-            JSONWeaponHolder newHolder = mapper.readValue(json, new TypeReference<JSONWeaponHolder>(){});
+            JSONExtendedWeaponHolder newHolder = mapper.readValue(json, new TypeReference<JSONExtendedWeaponHolder>(){});
             return newHolder.getWeapons();
         } catch (IOException ex) {
             Logger.getLogger(JsonLoader.class.getName()).log(Level.SEVERE, null, ex);
