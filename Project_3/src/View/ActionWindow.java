@@ -99,7 +99,8 @@ public class ActionWindow extends javax.swing.JFrame {
             btnCharacters.add(button);
             button.setActionCommand(button.getName());
             ImageIcon imageIcon = new ImageIcon(player.getWarriors().get(i).
-                    getAppearance(0).getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT")));
+                    getAppearance(player.getWarriors().get(i).getLevel())
+                    .getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT")));
             Image image = imageIcon.getImage();
             Image newimg = image.getScaledInstance(100, 200, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             button.setIcon(new ImageIcon(newimg));
@@ -147,7 +148,7 @@ public class ActionWindow extends javax.swing.JFrame {
             button.setBorder(new EtchedBorder());
             if (button.getName().equals(name)) {
                 button.setBorder(border);
-                ImageIcon imageIcon = new ImageIcon(lstCharacters.get(name).getAppearance(0).
+                ImageIcon imageIcon = new ImageIcon(lstCharacters.get(name).getAppearance(1).
                         getLook(DefaultCharacterAppearance.codes.valueOf("ATTACK")));
                 Image image = imageIcon.getImage();
                 Image newimg = image.getScaledInstance(lblOwnChar.getWidth(), lblOwnChar.getHeight(), java.awt.Image.SCALE_SMOOTH);
@@ -156,6 +157,10 @@ public class ActionWindow extends javax.swing.JFrame {
                 lblOwnChar.repaint();
             }
         }
+    }
+    
+    public Player getPlayer(){
+        return this.player;
     }
 
     /**

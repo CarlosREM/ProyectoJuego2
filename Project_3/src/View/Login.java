@@ -10,7 +10,12 @@ import ADT.DefaultCharacterAppearance;
 import ADT.ExtendedDefaultCharacter;
 import ResourcesImplementations.ExtendedPrototypeController;
 import SocketsImpl.Player;
+import abstraction.AAppearance;
 import abstraction.ACharacter;
+import com.google.gson.GsonBuilder;
+import commsapi.Message.AMessage;
+import commsapi.Message.JsonManagement.AMessageManager;
+import commsapi.Message.JsonManagement.InterfaceAdapter;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -59,8 +64,9 @@ public class Login extends javax.swing.JFrame {
         selectedChars = new HashMap();
         chars = new HashMap();
         this.setResizable(false);
-        setCharacters();
+       
         
+        setCharacters();
 
     }
 
@@ -71,6 +77,7 @@ public class Login extends javax.swing.JFrame {
         for (int i = 0; i < tempList.size(); i++) {
             
             ExtendedDefaultCharacter temp =(ExtendedDefaultCharacter) tempList.get(i);
+            chars.put(temp.getName(), temp);
             JButton button = new JButton() {
                 public JToolTip createToolTip() {
                     JToolTip tip = super.createToolTip();

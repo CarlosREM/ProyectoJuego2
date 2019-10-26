@@ -103,5 +103,39 @@
     "coordinateX" : 0,
     "coordinateY" : 0,
     "type" : "AIR"
+  }, {
+    "@class" : "ADT.ExtendedDefaultCharacter",
+    "name" : "Steve e",
+    "appearances" : {
+      "1" : {
+        "@class" : "ADT.DefaultCharacterAppearance",
+        "looks" : [ "/resourcesImp/images/spr_arquero.png", "/resourcesImp/images/spr_arquero.png", "/resourcesImp/images/spr_arquero.png", "/resourcesImp/images/spr_arquero.png", "/resourcesImp/images/spr_arquero.png", "/resourcesImp/images/spr_arquero.png" ]
+      }
+    },
+    "currentHealthPoints" : 100,
+    "maxHealthPoints" : 100,
+    "hitsPerUnit" : 5,
+    "level" : 1,
+    "tiles" : 1,
+    "unlockLevel" : 6,
+    "cost" : 25,
+    "weapons" : [ {
+        "@class" : "ADT.ExtendedDefaultWeapon",
+        "name" : "Melee",
+        "range" : 1,
+        "damage" : 1,
+        "level" : 1,
+        "areaOfEffect" : 1,
+        "hitPerUnit" : 1,
+        "appearances" : { },
+        "unlockLevel" : 1,
+        "elements" : {
+          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
+        },
+        "available" : true
+      } ],
+    "coordinateX" : 0,
+    "coordinateY" : 0,
+    "type" : "AIR"
   } ]
 }
