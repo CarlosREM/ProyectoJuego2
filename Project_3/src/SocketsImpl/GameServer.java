@@ -6,6 +6,7 @@
 package SocketsImpl;
 
 import SocketsImpl.Messages.ConMessage;
+import SocketsImpl.Messages.DuelStateMessage;
 import SocketsImpl.Messages.RequestMessage;
 import SocketsImpl.Messages.TopicsMessage;
 import commsapi.ContentServer.AContentServer;
@@ -65,8 +66,14 @@ public class GameServer extends AContentServer{
     }
 
     @Override
-    public void processPubMessage(AMessage arg0, PublisherHandler arg1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void processPubMessage(AMessage message, PublisherHandler handler) {
+        if(message instanceof DuelStateMessage){
+            try {
+                this.broadcastMessageSub(message, handler.getTopic());
+            } catch (IOException ex) {
+                Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override

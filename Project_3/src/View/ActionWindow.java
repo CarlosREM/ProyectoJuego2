@@ -100,6 +100,7 @@ public class ActionWindow extends javax.swing.JFrame {
             lstCharacters.put(player.getWarriors().get(i).getName(), player.getWarriors().get(i));
             btnCharacters.add(button);    
             button.setActionCommand(button.getName());
+
             ImageIcon imageIcon = new ImageIcon("src"+player.getWarriors().get(i).
                     getAppearance(player.getWarriors().get(i).getLevel()).
                     getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT")));
@@ -160,6 +161,10 @@ public class ActionWindow extends javax.swing.JFrame {
                 lblOwnChar.repaint();
             }
         }
+    }
+    
+    public Player getPlayer(){
+        return this.player;
     }
 
     /**

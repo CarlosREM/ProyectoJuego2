@@ -6,6 +6,7 @@
 package SocketsImpl;
 
 import ADT.ExtendedDefaultCharacter;
+import SocketsImpl.Messages.DuelStateMessage;
 import View.ActionWindow;
 import View.PlayersWindow;
 import commsapi.Utils.PropertiesUtil;
@@ -86,6 +87,11 @@ public class Player {
         this.client = client;
     }
 
-
+    public void publishState(boolean initialState){
+        DuelStateMessage m = new DuelStateMessage(this.publisher.getTopic());
+        m.setStart(initialState);
+        m.setWarriors(this.getWarriors());
+        this.publisher.publish(m);
+    }
         
 }

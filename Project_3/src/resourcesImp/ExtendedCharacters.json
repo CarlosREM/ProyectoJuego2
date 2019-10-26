@@ -213,6 +213,7 @@
       "1" : {
         "@class" : "ADT.DefaultCharacterAppearance",
         "looks" : [ "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus2.jpg", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png" ]
+
       }
     },
     "currentHealthPoints" : 100,
