@@ -80,26 +80,29 @@ public class ActionWindow extends javax.swing.JFrame {
     }
     public void setPlayer(Player pPlayer) {
         this.player = pPlayer;
-
+        
         ImageIcon imageIcons = new ImageIcon("fight1.jpg");
         Image images = imageIcons.getImage();
         Image newimgs = images.getScaledInstance(lblRivalChar.getWidth(), lblRivalChar.getHeight(), java.awt.Image.SCALE_SMOOTH);
         lblRivalChar.setIcon(new ImageIcon(newimgs));
-
         for (int i = 0; i < player.getWarriors().size(); i++) {
-            JButton button = new JButton(player.getWarriors().get(i).getName());
+            System.out.println(player.getWarriors().get(i).
+                    getAppearance(1).getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT")));
+            JButton button = new JButton(player.getWarriors().get(i).getName()); 
             button.setName(player.getWarriors().get(i).getName());
             button.setBorder(new EtchedBorder());
             button.setPreferredSize(new Dimension(100, 200));
             button.setForeground(Color.GREEN);
             JLabel lbl = new JLabel(player.getWarriors().get(i).getName());
             lbl.setForeground(Color.white);
+            button.setBackground(Color.black);
             button.add(lbl);
             lstCharacters.put(player.getWarriors().get(i).getName(), player.getWarriors().get(i));
-            btnCharacters.add(button);
+            btnCharacters.add(button);    
             button.setActionCommand(button.getName());
-            ImageIcon imageIcon = new ImageIcon(player.getWarriors().get(i).
-                    getAppearance(0).getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT")));
+            ImageIcon imageIcon = new ImageIcon("src"+player.getWarriors().get(i).
+                    getAppearance(player.getWarriors().get(i).getLevel()).
+                    getLook(DefaultCharacterAppearance.codes.valueOf("DEFAULT")));
             Image image = imageIcon.getImage();
             Image newimg = image.getScaledInstance(100, 200, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             button.setIcon(new ImageIcon(newimg));
@@ -111,7 +114,7 @@ public class ActionWindow extends javax.swing.JFrame {
                 }
             };
             button.addActionListener(actionListener);
-
+             
             TeamPane.add(button);
             setWeapons(player.getWarriors().get(i).getWeapons());
         }
@@ -147,7 +150,8 @@ public class ActionWindow extends javax.swing.JFrame {
             button.setBorder(new EtchedBorder());
             if (button.getName().equals(name)) {
                 button.setBorder(border);
-                ImageIcon imageIcon = new ImageIcon(lstCharacters.get(name).getAppearance(0).
+                ImageIcon imageIcon = new ImageIcon("src"+lstCharacters.get(name).
+                        getAppearance(lstCharacters.get(name).getLevel()).
                         getLook(DefaultCharacterAppearance.codes.valueOf("ATTACK")));
                 Image image = imageIcon.getImage();
                 Image newimg = image.getScaledInstance(lblOwnChar.getWidth(), lblOwnChar.getHeight(), java.awt.Image.SCALE_SMOOTH);
@@ -276,14 +280,14 @@ public class ActionWindow extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblOwnChar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblOwnChar, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblOwnChar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 56, Short.MAX_VALUE))
+                .addComponent(lblOwnChar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 33, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(0, 0, 0));
@@ -353,14 +357,14 @@ public class ActionWindow extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(lblRivalChar, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblRivalChar, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(lblRivalChar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 48, Short.MAX_VALUE))
+                .addComponent(lblRivalChar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 33, Short.MAX_VALUE))
         );
 
         btnSelect.setBackground(new java.awt.Color(0, 0, 0));

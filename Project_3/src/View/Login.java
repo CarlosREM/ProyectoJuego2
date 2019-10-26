@@ -49,6 +49,7 @@ public class Login extends javax.swing.JFrame {
     List<JButton> btnChars;
     HashMap<String, ExtendedDefaultCharacter> selectedChars;
     HashMap<String, ExtendedDefaultCharacter> chars;
+    static Font customFont = new Font("Arial", Font.BOLD, 12);
 
     /**
      * Creates new form Login
@@ -71,6 +72,7 @@ public class Login extends javax.swing.JFrame {
         for (int i = 0; i < tempList.size(); i++) {
             
             ExtendedDefaultCharacter temp =(ExtendedDefaultCharacter) tempList.get(i);
+            chars.put(temp.getName(), temp);
             JButton button = new JButton() {
                 public JToolTip createToolTip() {
                     JToolTip tip = super.createToolTip();
@@ -86,7 +88,7 @@ public class Login extends javax.swing.JFrame {
             button.setToolTipText("[" + temp.getType().toString()+ "]");
             button.setBorder(new EtchedBorder());
             JLabel lbl = new JLabel(button.getName());
-            lbl.setFont(new Font("Arial", Font.BOLD, 12));
+            lbl.setFont(customFont);
             lbl.setForeground(Color.white);
             button.add(lbl);
             button.setLayout(new GridLayout());
@@ -112,9 +114,11 @@ public class Login extends javax.swing.JFrame {
 
             CharPane.add(button);
             btnChars.add(button);
+            
         }
         CharPane.revalidate();
         CharPane.repaint();
+        
     }
 
     private void selectChar(String name) {
@@ -182,7 +186,7 @@ public class Login extends javax.swing.JFrame {
         txfHost.setBackground(new java.awt.Color(0, 0, 0));
         txfHost.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         txfHost.setForeground(new java.awt.Color(0, 153, 0));
-        txfHost.setText("192.168.1.1");
+        txfHost.setText("192.168.100.121");
         txfHost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfHostActionPerformed(evt);
