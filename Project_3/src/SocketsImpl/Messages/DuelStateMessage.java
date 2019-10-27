@@ -13,6 +13,7 @@ import commsapi.Message.AMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+import utils.Elements;
 
 /**
  *
@@ -44,6 +45,7 @@ public class DuelStateMessage extends AMessage{
         for(ExtendedDefaultCharacter c: warriors){
             WarriorCoreInfo w = new WarriorCoreInfo();
             w.setName(c.getName());
+            w.setType(c.getType());
             TreeMap<Integer,DefaultCharacterAppearance> appearances = new TreeMap();
             for(Integer i : c.getAppearances().keySet()){
                 appearances.put(i, (DefaultCharacterAppearance) c.getAppearance(i));
@@ -64,6 +66,7 @@ public class DuelStateMessage extends AMessage{
         public TreeMap<Integer,DefaultCharacterAppearance> appearances;
         public int currentHealthPoints = 0;
         public ArrayList<ExtendedDefaultWeapon> weapons;
+        public Elements.Types type;
         public WarriorCoreInfo(){
             
         }
@@ -74,6 +77,14 @@ public class DuelStateMessage extends AMessage{
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public Elements.Types getType() {
+            return type;
+        }
+
+        public void setType(Elements.Types type) {
+            this.type = type;
         }
 
         public TreeMap<Integer, DefaultCharacterAppearance> getAppearances() {

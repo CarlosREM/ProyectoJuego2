@@ -110,7 +110,6 @@ public class PlayersWindow extends javax.swing.JFrame {
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         String idRival = (String) cbxOpponents.getSelectedItem();
-        actionWindow.setIdRival(idRival);
         this.actionWindow.getPlayer().askForDuel(idRival);
         this.setVisible(false);
     }//GEN-LAST:event_btnPlayActionPerformed

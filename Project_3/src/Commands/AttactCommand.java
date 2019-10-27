@@ -16,7 +16,11 @@ public class AttactCommand implements ICommand{
 
     @Override
     public void execute(String[] text,Player player) {
-        System.out.println("atacar");
+        try{
+        player.attack(text[1], text[2], text[3]);
+        } catch (IndexOutOfBoundsException e) {
+            player.getClient().putResultText("Error in command");
+        }
     }
     
 }

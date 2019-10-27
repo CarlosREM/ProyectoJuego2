@@ -16,7 +16,11 @@ public class ChatCommand implements ICommand{
 
     @Override
     public void execute(String[] text,Player player) {
-        System.out.println("chat");
+        try{
+            player.sendChat(text[1]);
+        } catch (IndexOutOfBoundsException e) {
+            player.getClient().putResultText("Error in command");
+        }
     }
     
 }

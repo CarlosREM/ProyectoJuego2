@@ -16,7 +16,7 @@ public class MutaulSurrenderCommand implements ICommand{
 
     @Override
     public void execute(String[] text,Player player) {
-         player.getClient().putResultText("Asking for "+player.getClient().getIdRival()+"...");
+         player.getClient().putResultText("Asking for draw...");
          player.mutualSurrender();
     }
     

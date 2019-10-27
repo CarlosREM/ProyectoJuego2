@@ -3,15 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/SocketsImpl/PlayerPublisher.java</file>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/View/Login.java</file>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/View/ActionWindow.java</file>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/SocketsImpl/Player.java</file>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/SocketsImpl/Messages/DuelStateMessage.java</file>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/SocketsImpl/PlayerSubscriber.java</file>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/View/PlayersWindow.java</file>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/SocketsImpl/Messages/prueba.java</file>
-            <file>file:/I:/Admin/Escritorio/ProyectoJuego2/Project_3/src/SocketsImpl/GameServer.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/PassCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/ExtraCharCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/CommandManager.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/resourcesImp/ExtendedCharacters.json</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/AttactCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/utils/Elements.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/GameServer.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/Player.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/ChatCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/SurrenderCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/Messages/TopicsMessage.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/View/PlayersWindow.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Abstraction/ICommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/DefaultCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ResourcesImplementations/ExtendedJsonLoader.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/resourcesImp/ExtendedWeapons.json</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/SelectCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ResourcesImplementations/ExtendedPrototypeController.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ADT/Invoker.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/Messages/RequestMessage.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/MutaulSurrenderCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ADT/ExtendedDefaultWeapon.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/View/Login.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ADT/ExtendedDefaultCharacter.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/View/ActionWindow.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/PlayerSubscriber.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,7 +5,9 @@
  */
 package SocketsImpl;
 
+import SocketsImpl.Messages.AttackMessage;
 import SocketsImpl.Messages.ConMessage;
+import SocketsImpl.Messages.DuelStateMessage;
 import SocketsImpl.Messages.RequestMessage;
 import SocketsImpl.Messages.TopicsMessage;
 import commsapi.Message.AMessage;
@@ -18,30 +20,30 @@ import java.util.logging.Logger;
  *
  * @author Diego Murillo
  */
-public class PlayerSubscriber extends ASubscriber{
+public class PlayerSubscriber extends ASubscriber {
+
     Player player;
-    
-    public PlayerSubscriber(String id, Player player) throws IOException{
+
+    public PlayerSubscriber(String id, Player player) throws IOException {
         super();
         this.player = player;
         this.setId(id);
     }
-    
-    public PlayerSubscriber(String id, String host, int port, Player player) throws IOException{
+
+    public PlayerSubscriber(String id, String host, int port, Player player) throws IOException {
         super(host, port);
         this.player = player;
         this.setId(id);
     }
-    
+
     @Override
     public void subscribe(String topic) {
         RequestMessage m = new RequestMessage();
         m.setRequestId(1);
         m.setRequestString(topic);
-        
-        
+
         sendMessage(m);
-        
+
         this.addSubscription(topic);
     }
 
@@ -51,15 +53,15 @@ public class PlayerSubscriber extends ASubscriber{
         RequestMessage m = new RequestMessage();
         m.setRequestId(2);
         m.setRequestString(topic);
-   
-        sendMessage(m);     
+
+        sendMessage(m);
     }
 
     @Override
     public void askForTopics() {
         RequestMessage m = new RequestMessage();
         m.setRequestId(0);
-        
+
         sendMessage(m);
     }
 
@@ -75,34 +77,44 @@ public class PlayerSubscriber extends ASubscriber{
     @Override
     public void receivedMessage(AMessage message) {
         System.out.println("message recieved on subscriber " + message.serialize());
-        
-        if(message instanceof ConMessage){ //Connection Established
+
+        if (message instanceof ConMessage) { //Connection Established
             ConMessage m = (ConMessage) message;
             this.setConnected(m.isAcceptedConnection());
             System.out.println(m.getConnMessage());
-            if(this.isConnected()){
+            if (this.isConnected()) {
                 RequestMessage m2 = new RequestMessage();
                 m2.setRequestId(99);
                 m2.setRequestString(this.getId());
                 sendMessage(m2);
             }
-              
+
         }
-        if(message instanceof TopicsMessage){
+        if (message instanceof TopicsMessage) {
             TopicsMessage m = (TopicsMessage) message;
             this.player.showTopics(m.getTopics());
-        }     
-         
-        if(message instanceof RequestMessage){
+        }
+        if (message instanceof DuelStateMessage) {
+            DuelStateMessage m = (DuelStateMessage) message;
+            this.player.setRivalState(m);
+        }
+        if (message instanceof RequestMessage) {
             RequestMessage m = (RequestMessage) message;
-            
-            switch(m.getRequestId()){
+
+            switch (m.getRequestId()) {
                 case 777:
                     System.out.println(m.getRequestString());
                     this.player.publishState(true);
                     break;
+                case 50:
+                    this.player.reciveChat(m.getRequestString());
+                    break;
             }
         }
+        if (message instanceof AttackMessage) {
+            AttackMessage am = (AttackMessage) message;
+            this.player.takeAttack(am);
+        }
     }
-    
+
 }
