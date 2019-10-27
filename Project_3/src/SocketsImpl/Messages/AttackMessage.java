@@ -15,15 +15,15 @@ import commsapi.Message.AMessage;
 public class AttackMessage extends AMessage{
     private int RequestId;
     private String RequestString;
-    private int weapon;
+    private String weapon;
     private String attacked;
-    private ExtendedDefaultCharacter attacker;
+    private DuelStateMessage.WarriorCoreInfo attacker;
 
-    public int getWeapon() {
+    public String getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(int weapon) {
+    public void setWeapon(String weapon) {
         this.weapon = weapon;
     }
 
@@ -35,11 +35,11 @@ public class AttackMessage extends AMessage{
         this.attacked = attacked;
     }
 
-    public ExtendedDefaultCharacter getAttacker() {
+    public DuelStateMessage.WarriorCoreInfo getAttacker() {
         return attacker;
     }
 
-    public void setAttacker(ExtendedDefaultCharacter attacker) {
+    public void setAttacker(DuelStateMessage.WarriorCoreInfo attacker) {
         this.attacker = attacker;
     }
     

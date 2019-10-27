@@ -29,6 +29,7 @@ public class PlayerPublisher extends APublisher{
     
     @Override
     public void publish(AMessage message) {
+        
         try {
             this.intermediate.sendMessage(message);
         } catch (IOException ex) {

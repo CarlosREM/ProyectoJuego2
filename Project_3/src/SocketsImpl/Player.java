@@ -47,10 +47,21 @@ public class Player {
         this.client = client;
     }
 
+    public void restoreDefaults(){
+        for(ExtendedDefaultCharacter c: warriors){
+            c.setCurrentHealthPoints(100);
+            for(AWeapon w:c.getWeapons()){
+                ExtendedDefaultWeapon ew = (ExtendedDefaultWeapon) w;
+                ew.setAvailable(true);
+            }
+        }
+        this.client.setPlayer(this);
+        client.setEnableCmd(true);
+    }
     public List<ExtendedDefaultCharacter> getWarriors() {
         return warriors;
     }
-
+    
     public void setWarriors(List<ExtendedDefaultCharacter> warriors) {
         this.warriors = warriors;
     }
@@ -79,31 +90,40 @@ public class Player {
 
     public void attack(String own, String weapon, String riv) {
         AttackMessage am = new AttackMessage();
+        DuelStateMessage dm = new DuelStateMessage(own);
+        dm.setWarriors(warriors);
+        
         am.setAttacked(riv);
         ExtendedDefaultWeapon ew;
-        for (ExtendedDefaultCharacter c : warriors) {
-            if (c.getName().equals(own)) {
-                am.setAttacker(c);
-                for (int i = 0; i < c.getWeapons().size(); i++) {
-                    if (c.getWeapons().get(i).getName().equals(weapon)) {
-                        am.setWeapon(i);
-                        ew = (ExtendedDefaultWeapon) c.getWeapons().get(i);
+        
+        for (DuelStateMessage.WarriorCoreInfo warrior:dm.getWarriors()) {
+            if (warrior.getName().equals(own)) {
+                am.setAttacker(warrior);
+                for (int i = 0; i < warrior.getWeapons().size(); i++) {
+                    if (warrior.getWeapons().get(i).getName().equals(weapon)) {
+                        am.setWeapon(weapon);
+                        ew = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
                         if (ew.isAvailable()) {
                             this.publisher.publish(am);
                             ew.setAvailable(false);
                         } else {
                             this.client.putResultText("Error: " + weapon + " is not available");
                         }
-
+                    break;
                     }
                 }
             }
         }
+        client.putResultText(am.getAttacker().getName()+" is attacking...");
+        client.setEnableCmd(false);
+        
     }
-
     public void takeAttack(AttackMessage am) {
         ExtendedDefaultCharacter ec = null;
         ExtendedDefaultWeapon ew;
+        String info = "Attacked by\n"+am.getAttacker().getName()+"\n";
+        info+="["+am.getAttacker().getType().toString()+"]";
+        int actualAttack=0;
         for (ExtendedDefaultCharacter c : this.getWarriors()) {
             if (c.getName().equals(am.getAttacked())) {
                 ec = c;
@@ -111,28 +131,68 @@ public class Player {
         }
         for (AWeapon w : am.getAttacker().getWeapons()) {
             ew = (ExtendedDefaultWeapon) w;
-            if (w.getName().equals(am.getWeapon())) {
-                w.use(ec);
+            if (ew.getName().equals(am.getWeapon())) {
+                ew.use(ec);
+                info+="weapon: "+am.getWeapon()+"\n";
+                info+="damage: "+ew.getActualAttack()+"%\n";
+                actualAttack =ew.getActualAttack();
             }
         }
-
-        client.takeAttack("", am.getAttacker().getAppearance(1).
-                getLook(DefaultCharacterAppearance.codes.valueOf("ATTACK")));
+        info+="\nAffected\n"+am.getAttacked();
+        client.takeAttack(info, am.getAttacker().getAppearances().
+                get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
 
         this.publishState(true);
-
+      
+        RequestMessage rm = new RequestMessage();
+        String info2 ="You attacked with\n"+am.getAttacker().getName()+
+                     "\n["+am.getAttacker().getType().toString()+"]\nweapon:"+
+                      am.getWeapon()+"\ndamage: "+actualAttack+"%";
+        info2+="\nAffected\n"+am.getAttacked();                           
+        rm.setRequestId(52);
+        rm.setRequestString(info2);
+        rm.setTopic(am.getAttacker().getAppearances().
+                get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
+        this.publisher.publish(rm);
+        client.putResultText(am.getAttacked()+" was attacked...");
+        client.setEnableCmd(true);
     }
-
+    public String getTopic(){
+        return this.publisher.getTopic();
+    }
     public void surrender() {
-
+        this.client.setEnableSearchPlayers(true);
+        RequestMessage rm = new RequestMessage();
+        rm.setRequestId(51);
+        rm.setRequestString("Winner!");
+        this.client.putRivalData("AGAINST");
+        this.publisher.publish(rm);
+        for(int i=0;i<this.subscriber.getSubscriptions().size();i++){
+            this.subscriber.unsubscribe(this.subscriber.getSubscriptions().get(i));
+        }      
+        client.setEnableCmd(false);
     }
-
+    public void win(String text){
+        for(int i=0;i<this.subscriber.getSubscriptions().size();i++){
+            this.subscriber.unsubscribe(this.subscriber.getSubscriptions().get(i));
+        }
+        this.client.putRivalData("AGAINST");
+        this.client.setEnableSearchPlayers(true); 
+       this.client.putResultText(text);
+       client.setEnableCmd(false);
+       
+    }
     public void mutualSurrender() {
 
     }
 
     public void pass() {
-
+        RequestMessage rm = new RequestMessage();
+        rm.setRequestId(60);
+        rm.setRequestString(publisher.getTopic());
+        publisher.publish(rm);
+        client.setEnableCmd(false);
+        client.putResultText("You pass!");
     }
 
     public void askForDuel(String opponent) {
@@ -155,6 +215,7 @@ public class Player {
     }
 
     public void setRivalState(DuelStateMessage dsm) {
+        this.client.setEnableSearchPlayers(false);
         String strMessage = "";
         strMessage += "AGAINST" + "\n" + dsm.getTopic() + "\n\n";
         for (DuelStateMessage.WarriorCoreInfo e : dsm.getWarriors()) {

@@ -17,7 +17,7 @@ public class SurrenderCommand implements ICommand{
     @Override
     public void execute(String[] text,Player player) {
         player.surrender();
-        player.getClient().putResultText("You lose");
+        player.getClient().putResultText("Loser!");
     } 
     
 }

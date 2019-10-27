@@ -109,6 +109,16 @@ public class PlayerSubscriber extends ASubscriber {
                 case 50:
                     this.player.reciveChat(m.getRequestString());
                     break;
+                case 51:
+                    this.player.win(m.getRequestString());
+                    break; 
+                case 52:
+                    this.player.getClient().attack(m.getRequestString(),m.getTopic());
+                    break; 
+                case 60:
+                    this.player.getClient().putResultText(m.getRequestString()+" pass!");
+                    this.player.getClient().setEnableCmd(true);
+                    break;                     
             }
         }
         if (message instanceof AttackMessage) {

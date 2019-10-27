@@ -10,7 +10,6 @@ import SocketsImpl.Messages.ConMessage;
 import SocketsImpl.Messages.DuelStateMessage;
 import SocketsImpl.Messages.RequestMessage;
 import SocketsImpl.Messages.TopicsMessage;
-import abstraction.AAppearance;
 import commsapi.ContentServer.AContentServer;
 import commsapi.ContentServer.PublisherHandler;
 import commsapi.ContentServer.SubscriberHandler;
@@ -56,7 +55,13 @@ public class GameServer extends AContentServer {
                         handler.sendMessage(m2);
 
                         break;
-
+                    case 2://unsubscribe
+                        String topic2 = m.getRequestString();
+                        SubscriberHandler oponent2 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic2)).findAny().orElse(null);
+ 
+                        this.removeSubscription(topic2, handler);
+                        this.removeSubscription(handler.getId(), oponent2);
+                        break;
                     case 99:   //set subscriberHandler id
                         handler.setId(m.getRequestString());
                         break;
@@ -79,7 +84,7 @@ public class GameServer extends AContentServer {
         if (message instanceof RequestMessage) {
             RequestMessage rm = (RequestMessage) message;
             switch (rm.getRequestId()) {
-                case 50: {
+                case 50: {//send a chat message
                     try {
                         rm.setRequestString("#"+handler.getTopic()+" says: "
                                                 +rm.getRequestString());
@@ -87,8 +92,32 @@ public class GameServer extends AContentServer {
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    break;
                 }
-
+                case 51: {//surrender
+                    try {
+                        this.broadcastMessageSub(rm, handler.getTopic());
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                }
+                case 52: {//attack result
+                    try {
+                        this.broadcastMessageSub(rm, handler.getTopic());
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                }                  
+                case 60: {//pass
+                    try {
+                        this.broadcastMessageSub(rm, handler.getTopic());
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                }  
             }
         }
         if(message instanceof AttackMessage){

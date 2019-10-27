@@ -19,6 +19,7 @@ import utils.Elements;
 public class ExtendedDefaultWeapon extends DefaultWeapon{
     private Elements elements;
     private boolean available;
+    private int actualAttack;
 
     public ExtendedDefaultWeapon(){
         super();
@@ -27,10 +28,13 @@ public class ExtendedDefaultWeapon extends DefaultWeapon{
         super(name, range, damage, level, areaOfEffect, hitPerUnit, appearances, unlockLevel);
         elements = new Elements(); 
         available= true;
+        actualAttack = 0;
     }
 
 
-
+    public int getActualAttack(){
+        return this.actualAttack;
+    }
     public Elements getElements() {
         return elements;
     }
@@ -53,6 +57,7 @@ public class ExtendedDefaultWeapon extends DefaultWeapon{
       ExtendedDefaultCharacter eCharacter = (ExtendedDefaultCharacter) character;
       int pos = eCharacter.getType().ordinal();
       character.takeDamage(elements.getPercentages()[pos]);
+      actualAttack= elements.getPercentages()[pos];
     } 
     
     @Override

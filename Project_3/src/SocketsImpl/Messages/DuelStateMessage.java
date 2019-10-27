@@ -59,6 +59,7 @@ public class DuelStateMessage extends AMessage{
             w.setCurrentHealthPoints(c.getCurrentHealthPoints());
             this.warriors.add(w);
         }
+        
     }
     
     public class WarriorCoreInfo{
