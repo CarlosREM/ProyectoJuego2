@@ -9,6 +9,7 @@ import ADT.DefaultCharacterAppearance;
 import ADT.ExtendedDefaultCharacter;
 import ADT.ExtendedDefaultWeapon;
 import SocketsImpl.Messages.AttackMessage;
+import SocketsImpl.Messages.AttackPlusMessage;
 import SocketsImpl.Messages.DuelStateMessage;
 import SocketsImpl.Messages.RequestMessage;
 import View.ActionWindow;
@@ -126,8 +127,10 @@ public class Player {
             ew1.setAvailable(false);
             ew2.setAvailable(false);
 
-            publisher.publish(am1);
-            publisher.publish(am2);
+            AttackPlusMessage apm = new AttackPlusMessage();
+            apm.setAttackMsg1(am1);
+            apm.setAttackMsg2(am2);
+            publish(apm);
 
             client.setEnableCmd(false);
             client.putResultText(own1 + " and "+ own2 + " are attacking...");
@@ -165,12 +168,14 @@ public class Player {
                 }
             }
         }
-        if (ew1.isAvailable() && ew2.isAvailable()) {
+        if (ew1.isAvailable() && ew2.isAvailable() && (!weapon1.equals(weapon2))) {
             ew1.setAvailable(false);
             ew2.setAvailable(false);
-
-            publisher.publish(am1);
-            publisher.publish(am2);
+            
+            AttackPlusMessage apm = new AttackPlusMessage();
+            apm.setAttackMsg1(am1);
+            apm.setAttackMsg2(am2);
+            publish(apm);
 
             client.setEnableCmd(false);
             client.putResultText(am1.getAttacker().getName()+" is attacking...");

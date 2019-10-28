@@ -6,6 +6,7 @@
 package SocketsImpl;
 
 import SocketsImpl.Messages.AttackMessage;
+import SocketsImpl.Messages.AttackPlusMessage;
 import SocketsImpl.Messages.ConMessage;
 import SocketsImpl.Messages.DuelStateMessage;
 import SocketsImpl.Messages.RequestMessage;
@@ -24,13 +25,14 @@ import java.util.logging.Logger;
  * @author Diego Murillo
  */
 public class GameServer extends AContentServer {
-    private boolean availableAttackPlus = false;
-    
+
+    public boolean availableAttackPlus = true;
+
     public GameServer() throws IOException {
         super();
         System.out.println("SERVER running");
         System.out.println(InetAddress.getLocalHost());
-        
+
     }
 
     @Override
@@ -60,7 +62,7 @@ public class GameServer extends AContentServer {
                     case 2://unsubscribe
                         String topic2 = m.getRequestString();
                         SubscriberHandler oponent2 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic2)).findAny().orElse(null);
- 
+
                         this.removeSubscription(topic2, handler);
                         this.removeSubscription(handler.getId(), oponent2);
                         break;
@@ -88,8 +90,8 @@ public class GameServer extends AContentServer {
             switch (rm.getRequestId()) {
                 case 50: {//send a chat message
                     try {
-                        rm.setRequestString("#"+handler.getTopic()+" says: "
-                                                +rm.getRequestString());
+                        rm.setRequestString("#" + handler.getTopic() + " says: "
+                                + rm.getRequestString());
                         this.broadcastMessageSub(rm, handler.getTopic());
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,18 +113,26 @@ public class GameServer extends AContentServer {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                }                  
+                }
                 case 60: {//pass
+
                     try {
                         this.broadcastMessageSub(rm, handler.getTopic());
+                        this.availableAttackPlus = true;
+                        RequestMessage rm2 = new RequestMessage();
+                        rm2.setRequestId(10);
+                        rm2.setRequestString("true");
+                        for (PublisherHandler p : publishers) {
+                            p.sendMessage(rm2);
+                        }
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                }  
+                }
             }
         }
-        if(message instanceof AttackMessage){
+        if (message instanceof AttackMessage) {
             AttackMessage am = (AttackMessage) message;
             try {
                 this.broadcastMessageSub(am, handler.getTopic());
@@ -130,8 +140,24 @@ public class GameServer extends AContentServer {
                 Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
+        if (message instanceof AttackPlusMessage) {
+            AttackPlusMessage apm = (AttackPlusMessage) message;
+            try {
+                this.broadcastMessageSub(apm.getAttackMsg1(), handler.getTopic());
+                this.broadcastMessageSub(apm.getAttackMsg2(), handler.getTopic());
+                this.availableAttackPlus = false;
+                RequestMessage rm = new RequestMessage();
+                rm.setRequestId(10);
+                rm.setRequestString("false");
+                for (PublisherHandler p : publishers) {
+                    p.sendMessage(rm);
+                }
 
+            } catch (IOException ex) {
+                Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     @Override
     public void broadcastTopics(SubscriberHandler handler) {
@@ -202,7 +228,6 @@ public class GameServer extends AContentServer {
     public static void main(String[] args) throws InterruptedException {
         try {
             GameServer server = new GameServer();
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }

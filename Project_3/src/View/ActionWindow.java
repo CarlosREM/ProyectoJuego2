@@ -66,6 +66,7 @@ public class ActionWindow extends javax.swing.JFrame {
         initComponents();
         lstCharacters = new HashMap<>();
         btnCharacters = new ArrayList<>();
+        this.lblAttackPlus.setVisible(false);
         txaScores.setText(" RANKING\n 1. \n 2. \n 3. \n 4.\n 5. \n 6.");
         txaCommands.addKeyListener(new KeyAdapter() {
             @Override
@@ -78,6 +79,7 @@ public class ActionWindow extends javax.swing.JFrame {
                 }
             }
         });
+        
       
         
         
@@ -239,6 +241,7 @@ public class ActionWindow extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txaResults = new javax.swing.JTextArea();
         txaCommands = new javax.swing.JTextField();
+        lblAttackPlus = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         txaOwnInfo = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -391,20 +394,29 @@ public class ActionWindow extends javax.swing.JFrame {
         txaCommands.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txaCommands.setForeground(new java.awt.Color(0, 153, 51));
 
+        lblAttackPlus.setBackground(new java.awt.Color(0, 0, 0));
+        lblAttackPlus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblAttackPlus.setForeground(new java.awt.Color(0, 204, 51));
+        lblAttackPlus.setText("AttackPlus Is Available!!");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addComponent(txaCommands)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(txaCommands, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAttackPlus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addComponent(txaCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txaCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAttackPlus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -588,6 +600,7 @@ public class ActionWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    public javax.swing.JLabel lblAttackPlus;
     private javax.swing.JLabel lblOwnChar;
     private javax.swing.JLabel lblRivalChar;
     private javax.swing.JLabel lblTeamPaneCharName;

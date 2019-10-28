@@ -17,14 +17,20 @@ public class AttackPlusCommand implements ICommand {
 
     @Override
     public void execute(String[] text, Player player) {
-        try {
-            if (text.length == 6) {
-                player.attackExtraChar(text[1], text[2], text[3], text[4], text[5]);
-            } else {
-                player.attackExtraWeapon(text[1], text[2], text[3], text[4]);
+        if (player.getClient().lblAttackPlus.isVisible()) {
+
+            try {
+                if (text.length == 6) {
+                    player.attackExtraChar(text[1], text[2], text[3], text[4], text[5]);
+                } else {
+                    player.attackExtraWeapon(text[1], text[2], text[3], text[4]);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                player.getClient().putResultText("ERROR: in command");
             }
-        } catch (IndexOutOfBoundsException e) {
-            player.getClient().putResultText("ERROR: in command");
+        } else {
+            player.getClient().putResultText("AttackPlus is not available");
+
         }
     }
 
