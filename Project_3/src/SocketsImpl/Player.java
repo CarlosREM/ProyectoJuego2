@@ -15,6 +15,7 @@ import View.ActionWindow;
 import View.PlayersWindow;
 import abstraction.ACharacter;
 import abstraction.AWeapon;
+import commsapi.Message.AMessage;
 import commsapi.Utils.PropertiesUtil;
 import java.io.IOException;
 import java.util.List;
@@ -47,10 +48,10 @@ public class Player {
         this.client = client;
     }
 
-    public void restoreDefaults(){
-        for(ExtendedDefaultCharacter c: warriors){
+    public void restoreDefaults() {
+        for (ExtendedDefaultCharacter c : warriors) {
             c.setCurrentHealthPoints(100);
-            for(AWeapon w:c.getWeapons()){
+            for (AWeapon w : c.getWeapons()) {
                 ExtendedDefaultWeapon ew = (ExtendedDefaultWeapon) w;
                 ew.setAvailable(true);
             }
@@ -58,10 +59,11 @@ public class Player {
         this.client.setPlayer(this);
         client.setEnableCmd(true);
     }
+
     public List<ExtendedDefaultCharacter> getWarriors() {
         return warriors;
     }
-    
+
     public void setWarriors(List<ExtendedDefaultCharacter> warriors) {
         this.warriors = warriors;
     }
@@ -88,42 +90,135 @@ public class Player {
         pw.setVisible(true);
     }
 
-    public void attack(String own, String weapon, String riv) {
-        AttackMessage am = new AttackMessage();
-        DuelStateMessage dm = new DuelStateMessage(own);
+    public void attackExtraChar(String own1, String weapon1, String own2, String weapon2, String riv) {
+        DuelStateMessage dm = new DuelStateMessage(riv);
+        AttackMessage am1 = new AttackMessage();
+        AttackMessage am2 = new AttackMessage();
         dm.setWarriors(warriors);
-        
-        am.setAttacked(riv);
-        ExtendedDefaultWeapon ew;
-        
-        for (DuelStateMessage.WarriorCoreInfo warrior:dm.getWarriors()) {
-            if (warrior.getName().equals(own)) {
-                am.setAttacker(warrior);
+
+        am1.setAttacked(riv);
+        am1.setWeapon(weapon1);
+
+        am2.setAttacked(riv);
+        am2.setWeapon(weapon2);
+
+        ExtendedDefaultWeapon ew1 = null;
+        ExtendedDefaultWeapon ew2 = null;
+        for (DuelStateMessage.WarriorCoreInfo warrior : dm.getWarriors()) {
+            if (warrior.getName().equals(own1)) {
+                am1.setAttacker(warrior);
                 for (int i = 0; i < warrior.getWeapons().size(); i++) {
-                    if (warrior.getWeapons().get(i).getName().equals(weapon)) {
-                        am.setWeapon(weapon);
-                        ew = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
-                        if (ew.isAvailable()) {
-                            this.publisher.publish(am);
-                            ew.setAvailable(false);
-                        } else {
-                            this.client.putResultText("Error: " + weapon + " is not available");
-                        }
-                    break;
+                    if (warrior.getWeapons().get(i).getName().equals(weapon1)) {
+                        ew1 = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
+                    }
+                }
+            }
+            if (warrior.getName().equals(own2)) {
+                am2.setAttacker(warrior);
+                for (int i = 0; i < warrior.getWeapons().size(); i++) {
+                    if (warrior.getWeapons().get(i).getName().equals(weapon2)) {
+                        ew2 = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
                     }
                 }
             }
         }
-        client.putResultText(am.getAttacker().getName()+" is attacking...");
-        client.setEnableCmd(false);
-        
+        if (ew1.isAvailable() && ew2.isAvailable()) {
+            ew1.setAvailable(false);
+            ew2.setAvailable(false);
+
+            publisher.publish(am1);
+            publisher.publish(am2);
+
+            client.setEnableCmd(false);
+            client.putResultText(own1 + " and "+ own2 + " are attacking...");
+        } else {
+            client.putResultText("ERROR: Weapons already used");
+        }
+
     }
+
+    public void attackExtraWeapon(String own, String weapon1, String weapon2, String riv) {
+        DuelStateMessage dm = new DuelStateMessage(riv);
+        AttackMessage am1 = new AttackMessage();
+        AttackMessage am2 = new AttackMessage();
+        dm.setWarriors(warriors);
+
+        am1.setAttacked(riv);
+        am1.setWeapon(weapon1);
+
+        am2.setAttacked(riv);
+        am2.setWeapon(weapon2);
+
+        ExtendedDefaultWeapon ew1 = null;
+        ExtendedDefaultWeapon ew2 = null;
+        for (DuelStateMessage.WarriorCoreInfo warrior : dm.getWarriors()) {
+            if (warrior.getName().equals(own)) {
+                am1.setAttacker(warrior);
+                am2.setAttacker(warrior);
+                for (int i = 0; i < warrior.getWeapons().size(); i++) {
+                    if (warrior.getWeapons().get(i).getName().equals(weapon1)) {
+                        ew1 = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
+                    }
+                    if (warrior.getWeapons().get(i).getName().equals(weapon2)) {
+                        ew2 = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
+                    }
+                }
+            }
+        }
+        if (ew1.isAvailable() && ew2.isAvailable()) {
+            ew1.setAvailable(false);
+            ew2.setAvailable(false);
+
+            publisher.publish(am1);
+            publisher.publish(am2);
+
+            client.setEnableCmd(false);
+            client.putResultText(am1.getAttacker().getName()+" is attacking...");
+        } else {
+            client.putResultText("ERROR: Weapons already used");
+        }
+    }
+
+    public void attack(String own, String weapon, String riv) {
+        AttackMessage am = new AttackMessage();
+        DuelStateMessage dm = new DuelStateMessage(own);
+        dm.setWarriors(warriors);
+
+        am.setAttacked(riv);
+        am.setWeapon(weapon);
+
+        ExtendedDefaultWeapon ew;
+
+        for (DuelStateMessage.WarriorCoreInfo warrior : dm.getWarriors()) {
+            if (warrior.getName().equals(own)) {
+                am.setAttacker(warrior);
+                for (int i = 0; i < warrior.getWeapons().size(); i++) {
+                    if (warrior.getWeapons().get(i).getName().equals(weapon)) {
+                        ew = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
+                        if (ew.isAvailable()) {
+                            ew.setAvailable(false);
+                            client.setEnableCmd(false);
+                            client.putResultText(am.getAttacker().getName() + " is attacking...");
+                            publisher.publish(am);
+                        } else {
+                            this.client.putResultText(weapon + " already used");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void publish(AMessage message) {
+        this.publisher.publish(message);
+    }
+
     public void takeAttack(AttackMessage am) {
         ExtendedDefaultCharacter ec = null;
         ExtendedDefaultWeapon ew;
-        String info = "Attacked by\n"+am.getAttacker().getName()+"\n";
-        info+="["+am.getAttacker().getType().toString()+"]";
-        int actualAttack=0;
+        String info = "Attacked by\n" + am.getAttacker().getName() + "\n";
+        info += "[" + am.getAttacker().getType().toString() + "]";
+        int actualAttack = 0;
         for (ExtendedDefaultCharacter c : this.getWarriors()) {
             if (c.getName().equals(am.getAttacked())) {
                 ec = c;
@@ -133,33 +228,35 @@ public class Player {
             ew = (ExtendedDefaultWeapon) w;
             if (ew.getName().equals(am.getWeapon())) {
                 ew.use(ec);
-                info+="weapon: "+am.getWeapon()+"\n";
-                info+="damage: "+ew.getActualAttack()+"%\n";
-                actualAttack =ew.getActualAttack();
+                info += "weapon: " + am.getWeapon() + "\n";
+                info += "damage: " + ew.getActualAttack() + "%\n";
+                actualAttack = ew.getActualAttack();
             }
         }
-        info+="\nAffected\n"+am.getAttacked();
+        info += "\nAffected\n" + am.getAttacked();
         client.takeAttack(info, am.getAttacker().getAppearances().
                 get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
 
         this.publishState(true);
-      
+
         RequestMessage rm = new RequestMessage();
-        String info2 ="You attacked with\n"+am.getAttacker().getName()+
-                     "\n["+am.getAttacker().getType().toString()+"]\nweapon:"+
-                      am.getWeapon()+"\ndamage: "+actualAttack+"%";
-        info2+="\nAffected\n"+am.getAttacked();                           
+        String info2 = "You attacked with\n" + am.getAttacker().getName()
+                + "\n[" + am.getAttacker().getType().toString() + "]\nweapon:"
+                + am.getWeapon() + "\ndamage: " + actualAttack + "%";
+        info2 += "\nAffected\n" + am.getAttacked();
         rm.setRequestId(52);
         rm.setRequestString(info2);
         rm.setTopic(am.getAttacker().getAppearances().
                 get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
         this.publisher.publish(rm);
-        client.putResultText(am.getAttacked()+" was attacked...");
+        client.putResultText(am.getAttacked() + " was attacked...");
         client.setEnableCmd(true);
     }
-    public String getTopic(){
+
+    public String getTopic() {
         return this.publisher.getTopic();
     }
+
     public void surrender() {
         this.client.setEnableSearchPlayers(true);
         RequestMessage rm = new RequestMessage();
@@ -167,21 +264,23 @@ public class Player {
         rm.setRequestString("Winner!");
         this.client.putRivalData("AGAINST");
         this.publisher.publish(rm);
-        for(int i=0;i<this.subscriber.getSubscriptions().size();i++){
+        for (int i = 0; i < this.subscriber.getSubscriptions().size(); i++) {
             this.subscriber.unsubscribe(this.subscriber.getSubscriptions().get(i));
-        }      
+        }
         client.setEnableCmd(false);
     }
-    public void win(String text){
-        for(int i=0;i<this.subscriber.getSubscriptions().size();i++){
+
+    public void win(String text) {
+        for (int i = 0; i < this.subscriber.getSubscriptions().size(); i++) {
             this.subscriber.unsubscribe(this.subscriber.getSubscriptions().get(i));
         }
         this.client.putRivalData("AGAINST");
-        this.client.setEnableSearchPlayers(true); 
-       this.client.putResultText(text);
-       client.setEnableCmd(false);
-       
+        this.client.setEnableSearchPlayers(true);
+        this.client.putResultText(text);
+        client.setEnableCmd(false);
+
     }
+
     public void mutualSurrender() {
 
     }

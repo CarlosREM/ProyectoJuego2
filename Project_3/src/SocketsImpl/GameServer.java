@@ -24,11 +24,13 @@ import java.util.logging.Logger;
  * @author Diego Murillo
  */
 public class GameServer extends AContentServer {
-
+    private boolean availableAttackPlus = false;
+    
     public GameServer() throws IOException {
         super();
         System.out.println("SERVER running");
         System.out.println(InetAddress.getLocalHost());
+        
     }
 
     @Override

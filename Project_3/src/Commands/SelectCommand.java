@@ -19,7 +19,7 @@ public class SelectCommand implements ICommand {
         try{
             player.getClient().selectChar(text[1]);
         } catch (IndexOutOfBoundsException e) {
-            player.getClient().putResultText("Error in command");
+            player.getClient().putResultText("ERROR: in command");
         }
     }
 

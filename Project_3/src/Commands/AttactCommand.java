@@ -6,6 +6,7 @@
 package Commands;
 
 import Abstraction.ICommand;
+import SocketsImpl.Messages.AttackMessage;
 import SocketsImpl.Player;
 
 /**
@@ -17,9 +18,9 @@ public class AttactCommand implements ICommand{
     @Override
     public void execute(String[] text,Player player) {
         try{
-            player.attack(text[1], text[2], text[3]);
+           player.attack(text[1], text[2], text[3]);
         } catch (IndexOutOfBoundsException e) {
-            player.getClient().putResultText("Error in command");
+            player.getClient().putResultText("ERROR: in command");
         }
     }
     

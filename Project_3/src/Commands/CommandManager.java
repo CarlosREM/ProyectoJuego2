@@ -25,7 +25,7 @@ public class CommandManager {
             case "Pass":
                 return new PassCommand();                
             case "AttackPlus":
-                return new ExtraCharCommand();
+                return new AttackPlusCommand();
             case "Draw":
                 return new MutaulSurrenderCommand();
             case "Giveup":
