@@ -19,6 +19,7 @@ import commsapi.Message.AMessage;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,14 +29,17 @@ import java.util.logging.Logger;
  */
 public class GameServer extends AContentServer {
 
-    public boolean availableAttackPlus = true;
+   
     private HashMap<String, Statistics> statisticsMap;
+    private TimedEventTrigger plusTrigger;
 
     public GameServer() throws IOException {
         super();
         System.out.println("SERVER running");
         System.out.println(InetAddress.getLocalHost());
         this.statisticsMap = new HashMap<>();
+        this.plusTrigger = new TimedEventTrigger(this);
+        this.plusTrigger.start();
     }
 
     @Override
@@ -123,13 +127,7 @@ public class GameServer extends AContentServer {
 
                     try {
                         this.broadcastMessageSub(rm, handler.getTopic());
-                        this.availableAttackPlus = true;
-                        RequestMessage rm2 = new RequestMessage();
-                        rm2.setRequestId(10);
-                        rm2.setRequestString("true");
-                        for (PublisherHandler p : publishers) {
-                            p.sendMessage(rm2);
-                        }
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -151,13 +149,6 @@ public class GameServer extends AContentServer {
             try {
                 this.broadcastMessageSub(apm.getAttackMsg1(), handler.getTopic());
                 this.broadcastMessageSub(apm.getAttackMsg2(), handler.getTopic());
-                this.availableAttackPlus = false;
-                RequestMessage rm = new RequestMessage();
-                rm.setRequestId(10);
-                rm.setRequestString("false");
-                for (PublisherHandler p : publishers) {
-                    p.sendMessage(rm);
-                }
 
             } catch (IOException ex) {
                 Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -235,6 +226,29 @@ public class GameServer extends AContentServer {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void chooseWinner(){
+        Random r = new Random();
+        RequestMessage rm2 = new RequestMessage();
+        rm2.setRequestId(10);
+        rm2.setRequestString("true");
+        
+        for (String key : this.subscriptions.keySet()) {
+            if (!this.subscriptions.get(key).isEmpty()) {
+                if(r.nextBoolean())
+                {
+                    try {
+                        PublisherHandler lucky = this.publishers.stream().filter(pub -> pub.getTopic().equals(key)).findAny().orElse(null);
+                        lucky.sendMessage(rm2);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    return;
+                }
+            }
+        }
+        
     }
 
     public static void main(String[] args) throws InterruptedException {
