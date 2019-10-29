@@ -139,6 +139,7 @@ public class GameServer extends AContentServer {
         }
         if (message instanceof AttackMessage) {
             AttackMessage am = (AttackMessage) message;
+            this.statisticsMap.get(handler.getTopic()).addAttack();
             try {
                 this.broadcastMessageSub(am, handler.getTopic());
             } catch (IOException ex) {

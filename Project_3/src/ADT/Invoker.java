@@ -16,7 +16,7 @@ import SocketsImpl.Player;
 public class Invoker {
     public void execute(String text,Player player){
         String[] tokens = text.split(" -");
-        ICommand c = new CommandManager().getCommand(tokens[0]);
+        ICommand c = CommandManager.getInstance().getCommand(tokens[0]);
         c.execute(tokens,player);
     }
 }

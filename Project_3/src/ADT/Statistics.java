@@ -16,6 +16,7 @@ public class Statistics {
     private int success;
     private int failed;
     private int giveup;
+    private int draws;
 
     public Statistics() {
         this.wins=0;
@@ -24,6 +25,15 @@ public class Statistics {
         this.success=0;
         this.failed=0;
         this.giveup=0;
+        this.draws=0;
+    }
+
+    public int getDraws() {
+        return draws;
+    }
+
+    public void addDraw() {
+        this.draws++;
     }
 
     public int getWins() {
@@ -81,7 +91,8 @@ public class Statistics {
                 "\nAttacks:\t" + attacks + 
                 "\nSuccess:\t" + success + 
                 "\nFailed:\t" + failed + 
-                "\nGiveup:\t" + giveup +"\n";
+                "\nGiveup:\t" + giveup +
+                "\nDraws:\t" + draws +"\n";
     }
     
     
