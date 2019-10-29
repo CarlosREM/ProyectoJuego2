@@ -23,10 +23,19 @@ public class DuelStateMessage extends AMessage{
     
     private boolean start = false;
     private List<WarriorCoreInfo> warriors;
+    private String rivalInfo;
     
     public DuelStateMessage(String oponent){
         super(oponent);
         warriors = new ArrayList();
+    }
+
+    public String getRivalInfo() {
+        return rivalInfo;
+    }
+
+    public void setRivalInfo(String rivalInfo) {
+        this.rivalInfo = rivalInfo;
     }
 
     public boolean isStart() {

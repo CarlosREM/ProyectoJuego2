@@ -221,8 +221,8 @@ public class Player {
     public void takeAttack(AttackMessage am) {
         ExtendedDefaultCharacter ec = null;
         ExtendedDefaultWeapon ew;
-        String info = "Attacked by\n" + am.getAttacker().getName() + "\n";
-        info += "[" + am.getAttacker().getType().toString() + "]";
+        String info = "Attacked by\n" + am.getAttacker().getName() + " ";
+        info += "[" + am.getAttacker().getType().toString() + "]\n";
         int actualAttack = 0;
         for (ExtendedDefaultCharacter c : this.getWarriors()) {
             if (c.getName().equals(am.getAttacked())) {
@@ -246,7 +246,7 @@ public class Player {
 
         RequestMessage rm = new RequestMessage();
         String info2 = "You attacked with\n" + am.getAttacker().getName()
-                + "\n[" + am.getAttacker().getType().toString() + "]\nweapon:"
+                + " [" + am.getAttacker().getType().toString() + "]\nweapon:"
                 + am.getWeapon() + "\ndamage: " + actualAttack + "%";
         info2 += "\nAffected\n" + am.getAttacked();
         rm.setRequestId(52);
@@ -321,7 +321,8 @@ public class Player {
     public void setRivalState(DuelStateMessage dsm) {
         this.client.setEnableSearchPlayers(false);
         String strMessage = "";
-        strMessage += "AGAINST" + "\n" + dsm.getTopic() + "\n\n";
+        strMessage += "AGAINST" + " [" + dsm.getTopic() + "]\n"+
+                    dsm.getRivalInfo()+"\n\n";
         for (DuelStateMessage.WarriorCoreInfo e : dsm.getWarriors()) {
             strMessage += e.getName() + "\n[" + e.getType().toString() + "]\n";
             strMessage += "HP: " + e.getCurrentHealthPoints() + "%\n\n";

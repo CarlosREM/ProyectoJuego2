@@ -96,7 +96,6 @@ public class ActionWindow extends javax.swing.JFrame {
         this.txaRivalAttackInfo.setText("");
         this.txaResults.setText("");
         this.txaRivalInfo.setText("AGAINST");
-        this.fillMyStatus();
         for (int i = 0; i < player.getWarriors().size(); i++) {
             JButton button = new JButton(player.getWarriors().get(i).getName()) {
                 public JToolTip createToolTip() {
@@ -186,17 +185,12 @@ public class ActionWindow extends javax.swing.JFrame {
         lblRivalChar.setIcon(new ImageIcon(newimg));
         lblRivalChar.repaint();
         txaRivalAttackInfo.setText(info);
-        fillMyStatus();
         
         
     }
-    public void fillMyStatus(){
-    String strStatus = ("MYSTATUS\n"+player.getTopic()+"\n\n");    
-    for (int i = 0; i < player.getWarriors().size(); i++) {
-         strStatus += player.getWarriors().get(i).getName()+"\n["+
-                                player.getWarriors().get(i).getType().toString()+"]\nHP: "+
-                                player.getWarriors().get(i).getCurrentHealthPoints()+"\n\n";  
-    }
+    public void fillMyStatus(String statistics){
+    String strStatus = ("MYSTATUS ["+player.getTopic()+"]\n");    
+    strStatus += statistics+"\n";
     txaOwnInfo.setText(strStatus);
     }
     public void putResultText(String text) {

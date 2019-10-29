@@ -5,6 +5,7 @@
  */
 package SocketsImpl;
 
+import ADT.Statistics;
 import SocketsImpl.Messages.AttackMessage;
 import SocketsImpl.Messages.AttackPlusMessage;
 import SocketsImpl.Messages.ConMessage;
@@ -17,6 +18,7 @@ import commsapi.ContentServer.SubscriberHandler;
 import commsapi.Message.AMessage;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,12 +29,13 @@ import java.util.logging.Logger;
 public class GameServer extends AContentServer {
 
     public boolean availableAttackPlus = true;
+    private HashMap<String, Statistics> statisticsMap;
 
     public GameServer() throws IOException {
         super();
         System.out.println("SERVER running");
         System.out.println(InetAddress.getLocalHost());
-
+        this.statisticsMap = new HashMap<>();
     }
 
     @Override
@@ -79,8 +82,10 @@ public class GameServer extends AContentServer {
     @Override
     public void processPubMessage(AMessage message, PublisherHandler handler) {
         if (message instanceof DuelStateMessage) {
+            DuelStateMessage dm = (DuelStateMessage) message;
             try {
-                this.broadcastMessageSub(message, handler.getTopic());
+                dm.setRivalInfo(statisticsMap.get(dm.getTopic()).toString());
+                this.broadcastMessageSub(dm, handler.getTopic());
             } catch (IOException ex) {
                 Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -179,9 +184,15 @@ public class GameServer extends AContentServer {
     public void acceptPubConnection(PublisherHandler handler) {
         ConMessage m = new ConMessage(true);
         m.setConnMessage("Conection Successful as Publisher");
-
+        RequestMessage rm = new RequestMessage();
+        if (!statisticsMap.containsKey(handler.getTopic())) {
+            statisticsMap.put(handler.getTopic(), new Statistics());
+        }
+        rm.setRequestString(statisticsMap.get(handler.getTopic()).toString());
+        rm.setRequestId(20);
         try {
             handler.sendMessage(m);
+            handler.sendMessage(rm);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
