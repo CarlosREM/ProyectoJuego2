@@ -7,7 +7,15 @@ package Commands;
 
 import Abstraction.ICommand;
 import Commands.Proxy.AProxyCommand;
+import Commands.Proxy.AttackPlusProxyCommand;
+import Commands.Proxy.AttackProxyCommand;
 import Commands.Proxy.ChatProxyCommand;
+import Commands.Proxy.MutualSurrenderProxyCommand;
+import Commands.Proxy.OptionProxyCommand;
+import Commands.Proxy.PassProxyCommand;
+import Commands.Proxy.ReloadProxyCommand;
+import Commands.Proxy.SelectProxyCommand;
+import Commands.Proxy.SurrenderProxyCommand;
 import java.util.HashMap;
 
 /**
@@ -20,16 +28,16 @@ public class CommandManager {
     private static CommandManager commandManager;
 
     private CommandManager() {
-        commands.put("Attack", new AttactCommand());
+        commands.put("Attack", new AttackProxyCommand(new AttactCommand()));
         commands.put("Chat", new ChatProxyCommand(new ChatCommand()));
-        commands.put("Pass", new PassCommand());
-        commands.put("AttackPlus", new AttackPlusCommand());
-        commands.put("Draw", new MutualSurrenderCommand());
-        commands.put("Giveup", new SurrenderCommand());
-        commands.put("Select", new SelectCommand());
-        commands.put("Reload", new ReloadCommand());
-        commands.put("Y", new OptionCommand());
-        commands.put("N", new OptionCommand());
+        commands.put("Pass", new PassProxyCommand(new PassCommand()));
+        commands.put("AttackPlus", new AttackPlusProxyCommand(new AttackPlusCommand()));
+        commands.put("Draw", new MutualSurrenderProxyCommand(new MutualSurrenderCommand()));
+        commands.put("Giveup", new SurrenderProxyCommand(new SurrenderCommand()));
+        commands.put("Select", new SelectProxyCommand(new SelectCommand()));
+        commands.put("Reload", new ReloadProxyCommand(new ReloadCommand()));
+        commands.put("Y", new OptionProxyCommand(new OptionCommand()));
+        commands.put("N", new OptionProxyCommand(new OptionCommand()));
     }
 
     public ICommand getCommand(String c) {

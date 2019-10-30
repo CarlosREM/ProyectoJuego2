@@ -12,20 +12,20 @@ import SocketsImpl.Player;
  *
  * @author Diego Murillo
  */
-public class PassProxyCommand extends AProxyCommand{
-    public PassProxyCommand(ICommand command){
+public class OptionProxyCommand extends AProxyCommand{
+    public OptionProxyCommand(ICommand command){
         super(command);
-        
     }
+    
     @Override
     public void execute(String[] text, Player player) {
         String timeStamp = java.time.LocalDateTime.now().toString();
         
         this.command.execute(text, player);
         
-        String log = timeStamp + "\nComando: Option to Draw, Answer: " + text[0]; 
+        String log = timeStamp + "\nComando: " + text[0]; 
         if (text.length >= 1){
-            log = log + " Parametros: ninguno" + "\nResultado: Mensaje de respuesta a empate enviado a servidor para redirección";
+            log = log + " Parametros: ninguno" + "\nResultado: Mensaje de pass enviado al servidor para cambiar de turno";
         }  
         
         log = log + "\n\n";
