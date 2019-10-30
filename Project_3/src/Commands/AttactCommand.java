@@ -5,6 +5,7 @@
  */
 package Commands;
 
+import ADT.ExtendedDefaultCharacter;
 import Abstraction.ICommand;
 import SocketsImpl.Messages.AttackMessage;
 import SocketsImpl.Player;
@@ -13,15 +14,20 @@ import SocketsImpl.Player;
  *
  * @author Marco Gamboa
  */
-public class AttactCommand implements ICommand{
+public class AttactCommand implements ICommand {
 
     @Override
-    public void execute(String[] text,Player player) {
-        try{
-           player.attack(text[1], text[2], text[3]);
+    public void execute(String[] text, Player player) {
+        try {
+            ExtendedDefaultCharacter edc = player.getWarriors().stream().filter(warr -> warr.getName().equals(text[1])).findAny().orElse(null);
+            if (edc.getCurrentHealthPoints() > 0) {
+                player.attack(text[1], text[2], text[3]);
+            } else {
+                player.getClient().putResultText("The character is dead");
+            }
         } catch (IndexOutOfBoundsException e) {
             player.getClient().putResultText("ERROR: in command");
         }
     }
-    
+
 }
