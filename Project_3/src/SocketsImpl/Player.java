@@ -99,10 +99,8 @@ public class Player {
         AttackMessage am2 = new AttackMessage();
         dm.setWarriors(warriors);
 
-        am1.setAttacked(riv);
         am1.setWeapon(weapon1);
 
-        am2.setAttacked(riv);
         am2.setWeapon(weapon2);
 
         ExtendedDefaultWeapon ew1 = null;
@@ -148,10 +146,9 @@ public class Player {
         AttackMessage am2 = new AttackMessage();
         dm.setWarriors(warriors);
 
-        am1.setAttacked(riv);
+        
         am1.setWeapon(weapon1);
 
-        am2.setAttacked(riv);
         am2.setWeapon(weapon2);
 
         ExtendedDefaultWeapon ew1 = null;
@@ -191,35 +188,27 @@ public class Player {
         }
     }
 
-    public void attack(String own, String weapon, String riv) {
+    public void attack(String own, String weapon) {
         AttackMessage am = new AttackMessage();
         DuelStateMessage dm = new DuelStateMessage(own);
         dm.setWarriors(warriors);
 
-        am.setAttacked(riv);
         am.setWeapon(weapon);
-        am.setTopic(this.getTopic());
+        am.setTopic(this.publisher.getTopic());
 
-        ExtendedDefaultWeapon ew;
-
-        for (DuelStateMessage.WarriorCoreInfo warrior : dm.getWarriors()) {
-            if (warrior.getName().equals(own)) {
-                am.setAttacker(warrior);
-                for (int i = 0; i < warrior.getWeapons().size(); i++) {
-                    if (warrior.getWeapons().get(i).getName().equals(weapon)) {
-                        ew = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
-                        if (ew.isAvailable()) {
-                            ew.setAvailable(false);
-                            client.setEnableCmd(false);
-                            client.putResultText(am.getAttacker().getName() + " is attacking...");
-                            publisher.publish(am);
-                        } else {
-                            this.client.putResultText(weapon + " already used");
-                        }
-                    }
-                }
-            }
+        DuelStateMessage.WarriorCoreInfo warrior = dm.getWarriors().stream().filter(wea -> wea.getName().equals(own)).findAny().orElse(null);    
+        am.setAttacker(warrior);
+        
+        ExtendedDefaultWeapon ew = (ExtendedDefaultWeapon) warrior.getWeapons().stream().filter(warr -> warr.getName().equals(weapon)).findAny().orElse(null);
+        if (ew.isAvailable()) {
+            ew.setAvailable(false);
+            client.setEnableCmd(false);
+            client.putResultText(am.getAttacker().getName() + " is attacking...");
+            publisher.publish(am);
+        } else {
+            this.client.putResultText(weapon + " already used");
         }
+                   
     }
 
     public void publish(AMessage message) {
@@ -228,21 +217,18 @@ public class Player {
 
     public void takeAttack(AttackMessage am) {
        
-        ExtendedDefaultWeapon ew = null;
         int accumDamage = 0;
         String info = "Attacked by\n" + am.getAttacker().getName() + " ";
         info += "[" + am.getAttacker().getType().toString() + "]\n";
         info += "\nweapon: "+am.getWeapon();
-        for (AWeapon w : am.getAttacker().getWeapons()) {
-            if (w.getName().equals(am.getWeapon())) {
-                ew = (ExtendedDefaultWeapon) w;
-                break;
-            }
-        }
+        
+        ExtendedDefaultWeapon ew = (ExtendedDefaultWeapon) am.getAttacker().getWeapons().stream().filter(wea -> wea.getName().equals(am.getWeapon())).findAny().orElse(null);
+       
         for (ExtendedDefaultCharacter c : this.getWarriors()) {
             ew.use(c);
             accumDamage+=ew.getActualAttack();
         }
+        
         info += "\ndamage: "+accumDamage+"%";
         client.takeAttack(info, am.getAttacker().getAppearances().
                 get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
@@ -260,7 +246,7 @@ public class Player {
 
         RequestMessage rm = new RequestMessage();
         String info2 = "You attacked with\n" + am.getAttacker().getName()
-                + " [" + am.getAttacker().getType().toString() + "]\nweapon:"
+                + " [" + am.getAttacker().getType().toString() + "]\n\nweapon:"
                 + am.getWeapon() + "\ndamage: " + accumDamage + "%\n";
         info2 += ";" + am.getAttacker().getAppearances().
                 get(1).getLook(DefaultCharacterAppearance.codes.ATTACK);
@@ -269,58 +255,7 @@ public class Player {
         rm.setRequestString(info2);
         this.publisher.publish(rm);
 
-        client.putResultText(am.getAttacked() + " was attacked...");
-        client.setEnableCmd(true);
-        this.publishState(false);
-    }
-
-    public void takeAllAttack(AttackMessage am) {
-        ExtendedDefaultCharacter ec = null;
-        ExtendedDefaultWeapon ew;
-        String info = "Attacked by\n" + am.getAttacker().getName() + " ";
-        info += "[" + am.getAttacker().getType().toString() + "]\n";
-        int actualAttack = 0;
-        for (ExtendedDefaultCharacter c : this.getWarriors()) {
-            if (c.getName().equals(am.getAttacked())) {
-                ec = c;
-            }
-        }
-        for (AWeapon w : am.getAttacker().getWeapons()) {
-            ew = (ExtendedDefaultWeapon) w;
-            if (ew.getName().equals(am.getWeapon())) {
-                ew.use(ec);
-                info += "damage: " + ew.getActualAttack() + "%\n";
-                actualAttack = ew.getActualAttack();
-            }
-        }
-        info += "\nAffected\n" + am.getAttacked();
-        client.takeAttack(info, am.getAttacker().getAppearances().
-                get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
-
-        RequestMessage succesMessage = new RequestMessage();
-        succesMessage.setRequestId(53);
-        succesMessage.setTopic(am.getTopic());
-        if (ec.getCurrentHealthPoints() < 3) {
-            succesMessage.setRequestString("succes");
-        } else {
-            succesMessage.setRequestString("fail");
-        }
-
-        this.publisher.publish(succesMessage);
-
-        RequestMessage rm = new RequestMessage();
-        String info2 = "You attacked with\n" + am.getAttacker().getName()
-                + " [" + am.getAttacker().getType().toString() + "]\nweapon:"
-                + am.getWeapon() + "\ndamage: " + actualAttack + "%\n";
-        info2 += "\nAffected\n" + am.getAttacked();
-        info2 += ";" + am.getAttacker().getAppearances().
-                get(1).getLook(DefaultCharacterAppearance.codes.ATTACK);
-
-        rm.setRequestId(52);
-        rm.setRequestString(info2);
-        this.publisher.publish(rm);
-
-        client.putResultText(am.getAttacked() + " was attacked...");
+        client.putResultText("You were attacked!!");
         client.setEnableCmd(true);
         this.publishState(false);
     }

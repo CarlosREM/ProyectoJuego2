@@ -21,7 +21,7 @@ public class AttactCommand implements ICommand {
         try {
             ExtendedDefaultCharacter edc = player.getWarriors().stream().filter(warr -> warr.getName().equals(text[1])).findAny().orElse(null);
             if (edc.getCurrentHealthPoints() > 0) {
-                player.attack(text[1], text[2], text[3]);
+                player.attack(text[1], text[2]);
             } else {
                 player.getClient().putResultText("The character is dead");
             }

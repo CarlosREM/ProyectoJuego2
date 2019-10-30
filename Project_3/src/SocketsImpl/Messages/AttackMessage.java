@@ -16,7 +16,6 @@ public class AttackMessage extends AMessage{
     private int RequestId;
     private String RequestString;
     private String weapon;
-    private String attacked;
     private DuelStateMessage.WarriorCoreInfo attacker;
 
     public String getWeapon() {
@@ -25,14 +24,6 @@ public class AttackMessage extends AMessage{
 
     public void setWeapon(String weapon) {
         this.weapon = weapon;
-    }
-
-    public String getAttacked() {
-        return attacked;
-    }
-
-    public void setAttacked(String attacked) {
-        this.attacked = attacked;
     }
 
     public DuelStateMessage.WarriorCoreInfo getAttacker() {
@@ -61,7 +52,5 @@ public class AttackMessage extends AMessage{
 
     public void setRequestString(String RequestString) {
         this.RequestString = RequestString;
-    }
-    
-    
+    }    
 }
