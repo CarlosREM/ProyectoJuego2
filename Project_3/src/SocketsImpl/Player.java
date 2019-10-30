@@ -32,6 +32,8 @@ public class Player {
 
     private List<ExtendedDefaultCharacter> warriors;
     private ActionWindow client;
+    
+    public String matchStart;
 
     public Player(String id, List<ExtendedDefaultCharacter> warriors, ActionWindow client) throws IOException {
         publisher = new PlayerPublisher(id, this);
@@ -349,8 +351,16 @@ public class Player {
         }
         this.client.putRivalData(strMessage);
     }
-
-    public void disconnect() {
+    
+    public void addToMatchLog(String info){
+        RequestMessage rm = new RequestMessage();
+        rm.setRequestId(77);
+        rm.setRequestString(info);
+        rm.setTopic(this.matchStart);
+        publisher.publish(rm);
+    }
+    
+    public void disconnect(){
         this.publisher.disconnect();
         this.subscriber.disconnect();
 

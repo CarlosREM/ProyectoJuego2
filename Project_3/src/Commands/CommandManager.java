@@ -6,6 +6,8 @@
 package Commands;
 
 import Abstraction.ICommand;
+import Commands.Proxy.AProxyCommand;
+import Commands.Proxy.ChatProxyCommand;
 import java.util.HashMap;
 
 /**
@@ -14,15 +16,15 @@ import java.util.HashMap;
  */
 public class CommandManager {
 
-    private static final HashMap<String, ICommand> commands = new HashMap<>();
+    private final HashMap<String, AProxyCommand> commands = new HashMap<>();
     private static CommandManager commandManager;
 
     private CommandManager() {
         commands.put("Attack", new AttactCommand());
-        commands.put("Chat", new ChatCommand());
+        commands.put("Chat", new ChatProxyCommand(new ChatCommand()));
         commands.put("Pass", new PassCommand());
         commands.put("AttackPlus", new AttackPlusCommand());
-        commands.put("Draw", new MutaulSurrenderCommand());
+        commands.put("Draw", new MutualSurrenderCommand());
         commands.put("Giveup", new SurrenderCommand());
         commands.put("Select", new SelectCommand());
         commands.put("Reload", new ReloadCommand());
@@ -38,7 +40,7 @@ public class CommandManager {
         }
     }
 
-    public void registCommand(String name, ICommand command) {
+    public void registCommand(String name, AProxyCommand command) {
         commands.put(name, command);
     }
 
@@ -48,4 +50,12 @@ public class CommandManager {
         }
         return commandManager;
     }
+    
+    public void setProxyState(boolean state){
+        for(String key : commands.keySet()){
+            this.commands.get(key).setOn(state);
+        }
+    }
+    
+   
 }

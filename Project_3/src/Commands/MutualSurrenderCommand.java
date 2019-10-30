@@ -12,7 +12,7 @@ import SocketsImpl.Player;
  *
  * @author Marco Gamboa
  */
-public class MutaulSurrenderCommand implements ICommand{
+public class MutualSurrenderCommand implements ICommand{
 
     @Override
     public void execute(String[] text,Player player) {
