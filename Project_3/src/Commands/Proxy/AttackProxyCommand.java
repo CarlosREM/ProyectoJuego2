@@ -34,7 +34,7 @@ public class AttackProxyCommand extends AProxyCommand{
         else{
             log = log + "\nResultado: Error de parámetros, mensaje no enviado al servidor";
         }
-        
+        System.out.println("");
         log = log + "\n\n";
         player.addToMatchLog(log);
     }
