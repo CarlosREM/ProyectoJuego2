@@ -131,7 +131,7 @@ public class Player {
             apm.setAttackMsg1(am1);
             apm.setAttackMsg2(am2);
             publish(apm);
-
+            client.lblAttackPlus.setVisible(false);
             client.setEnableCmd(false);
             client.putResultText(own1 + " and "+ own2 + " are attacking...");
         } else {
@@ -176,7 +176,8 @@ public class Player {
             apm.setAttackMsg1(am1);
             apm.setAttackMsg2(am2);
             publish(apm);
-
+            
+            client.lblAttackPlus.setVisible(false);
             client.setEnableCmd(false);
             client.putResultText(am1.getAttacker().getName()+" is attacking...");
         } else {

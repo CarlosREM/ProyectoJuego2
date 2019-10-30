@@ -109,6 +109,8 @@ public class GameServer extends AContentServer {
                 }
                 case 51: {//surrender
                     try {
+                        this.statisticsMap.get(handler.getTopic()).addDefeat();
+                        this.statisticsMap.get(handler.getTopic()).addGiveup();
                         this.broadcastMessageSub(rm, handler.getTopic());
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,6 +259,8 @@ public class GameServer extends AContentServer {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        
+        
     }
 
 }
