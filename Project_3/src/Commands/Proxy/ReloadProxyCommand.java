@@ -6,34 +6,37 @@
 package Commands.Proxy;
 
 import Abstraction.ICommand;
+import Commands.ReloadCommand;
 import SocketsImpl.Player;
 
 /**
  *
  * @author Diego Murillo
  */
-public class ChatProxyCommand extends AProxyCommand{
-
-    public ChatProxyCommand(ICommand command){
+public class ReloadProxyCommand extends AProxyCommand{
+    public ReloadProxyCommand(ICommand command){
         super(command);
-        
     }
+    
     @Override
     public void execute(String[] text, Player player) {
         String timeStamp = java.time.LocalDateTime.now().toString();
         
         this.command.execute(text, player);
         
+        ReloadCommand r = (ReloadCommand) this.command;
         String log = timeStamp + "\nComando: " + text[0]; 
         if (text.length >= 1){
-            log = log + " Parametros: " + text[1] + "\nResultado: Mensaje de chat enviado al servidor para redirección";
+            if(!r.hasWeapons(player)){
+                log = log + " Parametros: ninguno" + "\nResultado: Armas recargadas";
+            }
+            else{
+                log = log + " Parametros: ninguno" + "\nResultado: Todavia quedan armas disponibles, no se hizo recarga";
+            }
+            
         }  
-        else{
-            log = log + "\nResultado: Error de parámetros, mensaje no enviado al servidor";
-        }
         
         log = log + "\n\n";
         player.addToMatchLog(log);
     }
-    
 }

@@ -12,9 +12,8 @@ import SocketsImpl.Player;
  *
  * @author Diego Murillo
  */
-public class ChatProxyCommand extends AProxyCommand{
-
-    public ChatProxyCommand(ICommand command){
+public class MutualSurrenderProxyCommand extends AProxyCommand{
+    public MutualSurrenderProxyCommand(ICommand command){
         super(command);
         
     }
@@ -26,11 +25,8 @@ public class ChatProxyCommand extends AProxyCommand{
         
         String log = timeStamp + "\nComando: " + text[0]; 
         if (text.length >= 1){
-            log = log + " Parametros: " + text[1] + "\nResultado: Mensaje de chat enviado al servidor para redirección";
+            log = log + " Parametros: ninguno" + "\nResultado: Mensaje de mutual surrender enviado al servidor para terminar la partida";
         }  
-        else{
-            log = log + "\nResultado: Error de parámetros, mensaje no enviado al servidor";
-        }
         
         log = log + "\n\n";
         player.addToMatchLog(log);

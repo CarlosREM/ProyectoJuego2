@@ -12,12 +12,11 @@ import SocketsImpl.Player;
  *
  * @author Diego Murillo
  */
-public class ChatProxyCommand extends AProxyCommand{
-
-    public ChatProxyCommand(ICommand command){
+public class SelectProxyCommand extends AProxyCommand{
+    public SelectProxyCommand(ICommand command){
         super(command);
-        
     }
+    
     @Override
     public void execute(String[] text, Player player) {
         String timeStamp = java.time.LocalDateTime.now().toString();
@@ -26,7 +25,7 @@ public class ChatProxyCommand extends AProxyCommand{
         
         String log = timeStamp + "\nComando: " + text[0]; 
         if (text.length >= 1){
-            log = log + " Parametros: " + text[1] + "\nResultado: Mensaje de chat enviado al servidor para redirección";
+            log = log + " Parametros: " + text[1] + "\nResultado: Warrior seleccionado en pantalla";
         }  
         else{
             log = log + "\nResultado: Error de parámetros, mensaje no enviado al servidor";
@@ -35,5 +34,4 @@ public class ChatProxyCommand extends AProxyCommand{
         log = log + "\n\n";
         player.addToMatchLog(log);
     }
-    
 }

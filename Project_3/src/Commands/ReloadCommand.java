@@ -32,7 +32,7 @@ public class ReloadCommand implements ICommand{
         }
     }
     
-    private boolean hasWeapons(Player player){
+    public boolean hasWeapons(Player player){
         for(ExtendedDefaultCharacter edc : player.getWarriors()){
             for(AWeapon aw :edc.getWeapons()){
                 ExtendedDefaultWeapon edw = (ExtendedDefaultWeapon) aw;
