@@ -109,7 +109,7 @@
     "appearances" : {
       "1" : {
         "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/ejemplo2.jpg", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png" ]
+        "looks" : [ "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel2.jpg", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png" ]
       }
     },
     "currentHealthPoints" : 100,

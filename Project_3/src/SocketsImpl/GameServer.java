@@ -90,6 +90,7 @@ public class GameServer extends AContentServer {
             try {
                 dm.setRivalInfo(statisticsMap.get(dm.getTopic()).toString());
                 this.broadcastMessageSub(dm, handler.getTopic());
+                
             } catch (IOException ex) {
                 Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -119,12 +120,24 @@ public class GameServer extends AContentServer {
                 }
                 case 52: {//attack result
                     try {
+                        String scores = this.statisticsMap.get(subscriptions.
+                                get(handler.getTopic()).get(0).getId()).toString();
+                        rm.setRequestString(rm.getRequestString()+";"+scores);
                         this.broadcastMessageSub(rm, handler.getTopic());
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
                 }
+                case 53: {//succes or fail attack
+                
+                       if(rm.getRequestString().equals("succes")){
+                           statisticsMap.get(rm.getTopic()).addSuccess();
+                       }else{
+                           statisticsMap.get(rm.getTopic()).addFailed();
+                       }               
+                    break;
+                }                
                 case 60: {//pass
 
                     try {
@@ -135,6 +148,32 @@ public class GameServer extends AContentServer {
                     }
                     break;
                 }
+                case 100: {//asking for draw
+                    
+                    try {
+                        this.broadcastMessageSub(rm, handler.getTopic());
+                        
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                }
+               case 101: {//answering
+                    
+                    if(rm.getRequestString().equals("Y")){
+                        statisticsMap.get(rm.getTopic()).addDraw();
+                        statisticsMap.get(subscriptions.
+                                get(handler.getTopic()).get(0).getId()).addDraw();                        
+                    }
+                    try {
+
+                        this.broadcastMessageSub(rm, handler.getTopic());
+                        
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+               }                
                 case -666: {//disconnect
                     PublisherHandler pubD = this.publishers.stream().filter(pub -> pub.getTopic().equals(handler.getTopic())).findAny().orElse(null);
                     SubscriberHandler subD = this.subscribers.stream().filter(sub -> sub.getId().equals(handler.getTopic())).findAny().orElse(null);
@@ -159,6 +198,7 @@ public class GameServer extends AContentServer {
         }
         if (message instanceof AttackPlusMessage) {
             AttackPlusMessage apm = (AttackPlusMessage) message;
+             this.statisticsMap.get(handler.getTopic()).addAttack();
             try {
                 this.broadcastMessageSub(apm.getAttackMsg1(), handler.getTopic());
                 this.broadcastMessageSub(apm.getAttackMsg2(), handler.getTopic());

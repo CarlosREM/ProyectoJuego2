@@ -25,6 +25,9 @@ public class CommandManager {
         commands.put("Draw", new MutaulSurrenderCommand());
         commands.put("Giveup", new SurrenderCommand());
         commands.put("Select", new SelectCommand());
+        commands.put("Reload", new ReloadCommand());
+        commands.put("Y", new OptionCommand());
+        commands.put("N", new OptionCommand());
     }
 
     public ICommand getCommand(String c) {

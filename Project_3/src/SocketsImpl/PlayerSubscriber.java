@@ -109,16 +109,29 @@ public class PlayerSubscriber extends ASubscriber {
                 case 50:
                     this.player.reciveChat(m.getRequestString());
                     break;
-                case 51:
+                case 51://put win massage
                     this.player.win(m.getRequestString());
-                    break; 
-                case 52:
-                    this.player.getClient().attack(m.getRequestString(),m.getTopic());
-                    break; 
-                case 60:
-                    this.player.getClient().putResultText(m.getRequestString()+" pass!");
+                    break;
+                case 52://fill status and own activity and publish state
+                    this.player.getClient().attack(m.getRequestString());
+                    this.player.publishState(false);
+                    break;
+                case 60: //opponent pass
+                    this.player.getClient().putResultText(m.getRequestString() + " pass!");
                     this.player.getClient().setEnableCmd(true);
-                    break;                     
+                    break;
+                case 100: //asking for draw
+                    this.player.getClient().putResultText(m.getRequestString() + " is asking for draw?");
+                    this.player.getClient().setEnableCmd(true);
+                    break;
+                case 101: //answer
+                    if (m.getRequestString().equals("N")) {
+                        player.getClient().putResultText("Rejected!");
+                    } else {
+                        player.win("");
+                        this.unsubscribe(m.getTopic());
+                    }
+                    break;
             }
         }
         if (message instanceof AttackMessage) {
@@ -126,7 +139,7 @@ public class PlayerSubscriber extends ASubscriber {
             this.player.takeAttack(am);
         }
     }
-    
+
     @Override
     public void disconnect() {
         this.intermediate.closeConn();

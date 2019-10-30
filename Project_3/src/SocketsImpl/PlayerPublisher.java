@@ -55,9 +55,11 @@ public class PlayerPublisher extends APublisher {
                     this.player.getClient().lblAttackPlus.
                             setVisible(rm.getRequestString().equals("true"));
                     break;
-                case 20:
+                case 20: //fill status
+                    System.out.println("entro");
                     this.player.getClient().fillMyStatus(rm.getRequestString());
                     break;
+                    
             }
         }
     }

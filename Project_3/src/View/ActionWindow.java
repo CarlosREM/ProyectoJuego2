@@ -158,13 +158,15 @@ public class ActionWindow extends javax.swing.JFrame {
             }
         }
     }
-    public void attack(String info,String filePath){
-        ImageIcon imageIcon = new ImageIcon("src" + filePath);
+    public void attack(String info){
+        String[] arrInfo = info.split(";");
+        ImageIcon imageIcon = new ImageIcon("src" + arrInfo[1]);
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(lblOwnChar.getWidth(), lblOwnChar.getHeight(), java.awt.Image.SCALE_SMOOTH);
         lblOwnChar.setIcon(new ImageIcon(newimg));
         lblOwnChar.repaint();  
-        txaOwnAttackInfo.setText(info);
+        txaOwnAttackInfo.setText(arrInfo[0]);
+        fillMyStatus(arrInfo[2]);
     }
     public void setWeapons(ArrayList<AWeapon> weapons) {
         String text = "";
@@ -188,9 +190,9 @@ public class ActionWindow extends javax.swing.JFrame {
         
         
     }
-    public void fillMyStatus(String statistics){
-    String strStatus = ("MYSTATUS ["+player.getTopic()+"]\n");    
-    strStatus += statistics+"\n";
+    public void fillMyStatus(String scores){
+    String strStatus = ("MY STATUS ["+player.getTopic()+"]\n");    
+    strStatus += scores+"\n";
     txaOwnInfo.setText(strStatus);
     }
     public void putResultText(String text) {

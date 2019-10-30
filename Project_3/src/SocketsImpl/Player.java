@@ -133,7 +133,7 @@ public class Player {
             publish(apm);
             client.lblAttackPlus.setVisible(false);
             client.setEnableCmd(false);
-            client.putResultText(own1 + " and "+ own2 + " are attacking...");
+            client.putResultText(own1 + " and " + own2 + " are attacking...");
         } else {
             client.putResultText("ERROR: Weapons already used");
         }
@@ -171,17 +171,21 @@ public class Player {
         if (ew1.isAvailable() && ew2.isAvailable() && (!weapon1.equals(weapon2))) {
             ew1.setAvailable(false);
             ew2.setAvailable(false);
-            
+
             AttackPlusMessage apm = new AttackPlusMessage();
             apm.setAttackMsg1(am1);
             apm.setAttackMsg2(am2);
             publish(apm);
-            
+
             client.lblAttackPlus.setVisible(false);
             client.setEnableCmd(false);
-            client.putResultText(am1.getAttacker().getName()+" is attacking...");
+            client.putResultText(am1.getAttacker().getName() + " is attacking...");
         } else {
-            client.putResultText("ERROR: Weapons already used");
+            if (weapon1.equals(weapon2)) {
+                client.putResultText("ERROR: Same weapon");
+            } else {
+                client.putResultText("ERROR: Weapons already used");
+            }
         }
     }
 
@@ -192,7 +196,8 @@ public class Player {
 
         am.setAttacked(riv);
         am.setWeapon(weapon);
-
+        am.setTopic(this.getTopic());
+        
         ExtendedDefaultWeapon ew;
 
         for (DuelStateMessage.WarriorCoreInfo warrior : dm.getWarriors()) {
@@ -243,20 +248,32 @@ public class Player {
         client.takeAttack(info, am.getAttacker().getAppearances().
                 get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
 
-        this.publishState(true);
+        RequestMessage succesMessage = new RequestMessage();
+        succesMessage.setRequestId(53);
+        succesMessage.setTopic(am.getTopic());
+        if(ec.getCurrentHealthPoints()<3)
+            succesMessage.setRequestString("succes");
+        else
+            succesMessage.setRequestString("fail");
+        
+        this.publisher.publish(succesMessage);
+        
 
         RequestMessage rm = new RequestMessage();
         String info2 = "You attacked with\n" + am.getAttacker().getName()
                 + " [" + am.getAttacker().getType().toString() + "]\nweapon:"
-                + am.getWeapon() + "\ndamage: " + actualAttack + "%";
+                + am.getWeapon() + "\ndamage: " + actualAttack + "%\n";
         info2 += "\nAffected\n" + am.getAttacked();
+        info2 +=";"+am.getAttacker().getAppearances().
+                get(1).getLook(DefaultCharacterAppearance.codes.ATTACK);
+      
         rm.setRequestId(52);
         rm.setRequestString(info2);
-        rm.setTopic(am.getAttacker().getAppearances().
-                get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
         this.publisher.publish(rm);
+        
         client.putResultText(am.getAttacked() + " was attacked...");
         client.setEnableCmd(true);
+        this.publishState(false);
     }
 
     public String getTopic() {
@@ -277,18 +294,19 @@ public class Player {
     }
 
     public void win(String text) {
-        for (int i = 0; i < this.subscriber.getSubscriptions().size(); i++) {
-            this.subscriber.unsubscribe(this.subscriber.getSubscriptions().get(i));
-        }
         this.client.putRivalData("AGAINST");
         this.client.setEnableSearchPlayers(true);
         this.client.putResultText(text);
         client.setEnableCmd(false);
+        this.subscriber.unsubscribe(text);
 
     }
 
     public void mutualSurrender() {
-
+        RequestMessage rm = new RequestMessage();
+        rm.setRequestId(100);
+        rm.setRequestString(publisher.getTopic());
+        publish(rm);
     }
 
     public void pass() {
@@ -316,24 +334,25 @@ public class Player {
         DuelStateMessage m = new DuelStateMessage(this.publisher.getTopic());
         m.setStart(initialState);
         m.setWarriors(this.getWarriors());
+        m.setTopic(this.getTopic());
         this.publisher.publish(m);
     }
 
     public void setRivalState(DuelStateMessage dsm) {
         this.client.setEnableSearchPlayers(false);
         String strMessage = "";
-        strMessage += "AGAINST" + " [" + dsm.getTopic() + "]\n"+
-                    dsm.getRivalInfo()+"\n\n";
+        strMessage += "AGAINST" + " [" + dsm.getTopic() + "]\n"
+                + dsm.getRivalInfo() + "\n\n";
         for (DuelStateMessage.WarriorCoreInfo e : dsm.getWarriors()) {
             strMessage += e.getName() + "\n[" + e.getType().toString() + "]\n";
             strMessage += "HP: " + e.getCurrentHealthPoints() + "%\n\n";
         }
         this.client.putRivalData(strMessage);
     }
-    
-    public void disconnect(){
+
+    public void disconnect() {
         this.publisher.disconnect();
         this.subscriber.disconnect();
-        
+
     }
 }
