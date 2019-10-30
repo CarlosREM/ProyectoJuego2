@@ -126,5 +126,10 @@ public class PlayerSubscriber extends ASubscriber {
             this.player.takeAttack(am);
         }
     }
+    
+    @Override
+    public void disconnect() {
+        this.intermediate.closeConn();
+    }
 
 }

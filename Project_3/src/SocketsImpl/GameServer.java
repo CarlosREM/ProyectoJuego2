@@ -135,6 +135,17 @@ public class GameServer extends AContentServer {
                     }
                     break;
                 }
+                case -666: {//disconnect
+                    PublisherHandler pubD = this.publishers.stream().filter(pub -> pub.getTopic().equals(handler.getTopic())).findAny().orElse(null);
+                    SubscriberHandler subD = this.subscribers.stream().filter(sub -> sub.getId().equals(handler.getTopic())).findAny().orElse(null);
+
+                    removePublisher(pubD);
+                    removeSubscriber(subD);
+                    pubD.closeConn();
+                    subD.closeConn();
+                    
+                    break;
+                }
             }
         }
         if (message instanceof AttackMessage) {

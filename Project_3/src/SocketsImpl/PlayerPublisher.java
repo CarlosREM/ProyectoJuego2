@@ -62,4 +62,13 @@ public class PlayerPublisher extends APublisher {
         }
     }
 
+    @Override
+    public void disconnect() {
+        RequestMessage rm = new RequestMessage();
+        rm.setRequestId(-666);
+        rm.setRequestString(this.getTopic());
+        this.publish(rm);
+        this.intermediate.closeConn();
+    }
+
 }
