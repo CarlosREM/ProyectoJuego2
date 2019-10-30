@@ -39,6 +39,7 @@ public class GameServer extends AContentServer {
         System.out.println("SERVER running");
         System.out.println(InetAddress.getLocalHost());
         this.statisticsMap = new HashMap<>();
+        this.logsMap = new HashMap();
         this.plusTrigger = new TimedEventTrigger(this);
         this.plusTrigger.start();
     }
@@ -205,6 +206,7 @@ public class GameServer extends AContentServer {
         if (message instanceof AttackMessage) {
             AttackMessage am = (AttackMessage) message;
             this.statisticsMap.get(handler.getTopic()).addAttack();
+            System.out.println("flaggggggg");
             try {
                 this.broadcastMessageSub(am, handler.getTopic());
             } catch (IOException ex) {
