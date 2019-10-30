@@ -27,8 +27,8 @@ public class AttackProxyCommand extends AProxyCommand{
         this.command.execute(text, player);
         
         String log = timeStamp + "\nComando: " + text[0]; 
-        if (text.length >= 4){
-            log = log + " Parametros:\nAtaca: " + text[1] + " Arma: " + text[2] + " Objetivo: " + text[3] + 
+        if (text.length >= 3){
+            log = log + " Parametros:\nAtaca: " + text[1] + " Arma: " + text[2] + 
                     "\nResultado: " + checkCorrectness(player, text);
         }  
         else{
