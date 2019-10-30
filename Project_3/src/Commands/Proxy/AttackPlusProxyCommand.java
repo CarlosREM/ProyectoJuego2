@@ -29,14 +29,14 @@ public class AttackPlusProxyCommand extends AProxyCommand{
         
         String log = timeStamp + "\nComando: " + text[0]; 
         if (text.length >= 5){
-            if(text.length == 5){
+            if(text.length == 4){
                 log = log + " Parametros:\nAtaca: " + text[1] + " Arma 1: " + text[2] + " Arma 2: " + text[3] + 
-                        " Objetivo: " + text[4] + 
+                         
                     "\nResultado: " + checkCorrectness1(player, text);
             }
-            if(text.length >= 6){
+            if(text.length >= 5){
                 log = log + " Parametros:\nAtaca 1: " + text[1] + " Arma : " + text[2] + " Ataca 2: " + text[3] + 
-                        " Arma: " + text[4] + " Objetivo: " + text[5] + 
+                        " Arma: " + text[4]  + 
                     "\nResultado: " + checkCorrectness2(player, text);
             }
         }  
