@@ -31,6 +31,7 @@ public class GameServer extends AContentServer {
 
    
     private HashMap<String, Statistics> statisticsMap;
+    private HashMap<String, StringBuilder> logsMap;
     private TimedEventTrigger plusTrigger;
 
     public GameServer() throws IOException {
@@ -58,12 +59,21 @@ public class GameServer extends AContentServer {
 
                         this.registerSubscription(topic, handler);
                         this.registerSubscription(handler.getId(), oponent);
+                        
+                        String matchStart = java.time.LocalDateTime.now().toString();
 
                         RequestMessage m2 = new RequestMessage();
                         m2.setRequestId(777);
                         m2.setRequestString("Duel Start! " + handler.getId() + " vs " + topic);
+                        m2.setTopic(matchStart);
                         oponent.sendMessage(m2);
                         handler.sendMessage(m2);
+                        
+                        StringBuilder newMatchLog = new StringBuilder();
+                        newMatchLog.append("Match started at " + matchStart);
+                        newMatchLog.append("Oponents: " + topic + ", " + handler.getId());
+                        
+                        this.logsMap.put(matchStart, newMatchLog);
 
                         break;
                     case 2://unsubscribe
@@ -174,6 +184,11 @@ public class GameServer extends AContentServer {
                     }
                     break;
                }                
+                case 77: {//add to log
+                    this.logsMap.get(rm.getTopic()).append(rm.getRequestString());
+                    System.out.println("Added to log: " + rm.getTopic() + "\n" + rm.getRequestString());
+                    break;
+                }
                 case -666: {//disconnect
                     PublisherHandler pubD = this.publishers.stream().filter(pub -> pub.getTopic().equals(handler.getTopic())).findAny().orElse(null);
                     SubscriberHandler subD = this.subscribers.stream().filter(sub -> sub.getId().equals(handler.getTopic())).findAny().orElse(null);

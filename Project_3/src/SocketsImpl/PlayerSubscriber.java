@@ -104,6 +104,7 @@ public class PlayerSubscriber extends ASubscriber {
             switch (m.getRequestId()) {
                 case 777:
                     System.out.println(m.getRequestString());
+                    this.player.matchStart = m.getTopic();
                     this.player.publishState(true);
                     break;
                 case 50:
