@@ -6,8 +6,8 @@
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/PassCommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ADT/Statistics.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/CommandManager.java</file>
-            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/resourcesImp/ExtendedCharacters.json</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/AttactCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/ReloadCommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/utils/Elements.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/Messages/AttackMessage.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/GameServer.java</file>
@@ -22,6 +22,7 @@
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ResourcesImplementations/ExtendedJsonLoader.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/resourcesImp/ExtendedWeapons.json</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/SelectCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/Commands/OptionCommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ResourcesImplementations/ExtendedPrototypeController.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ADT/Invoker.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/PlayerPublisher.java</file>
@@ -33,6 +34,7 @@
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/ADT/ExtendedDefaultCharacter.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/View/ActionWindow.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/PlayerSubscriber.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego2/Project_3/src/SocketsImpl/TimedEventTrigger.java</file>
         </group>
     </open-files>
 </project-private>

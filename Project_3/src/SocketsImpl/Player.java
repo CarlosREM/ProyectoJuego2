@@ -197,7 +197,7 @@ public class Player {
         am.setAttacked(riv);
         am.setWeapon(weapon);
         am.setTopic(this.getTopic());
-        
+
         ExtendedDefaultWeapon ew;
 
         for (DuelStateMessage.WarriorCoreInfo warrior : dm.getWarriors()) {
@@ -225,6 +225,54 @@ public class Player {
     }
 
     public void takeAttack(AttackMessage am) {
+       
+        ExtendedDefaultWeapon ew = null;
+        int accumDamage = 0;
+        String info = "Attacked by\n" + am.getAttacker().getName() + " ";
+        info += "[" + am.getAttacker().getType().toString() + "]\n";
+        info += "\nweapon: "+am.getWeapon();
+        for (AWeapon w : am.getAttacker().getWeapons()) {
+            if (w.getName().equals(am.getWeapon())) {
+                ew = (ExtendedDefaultWeapon) w;
+                break;
+            }
+        }
+        for (ExtendedDefaultCharacter c : this.getWarriors()) {
+            ew.use(c);
+            accumDamage+=ew.getActualAttack();
+        }
+        info += "\ndamage: "+accumDamage+"%";
+        client.takeAttack(info, am.getAttacker().getAppearances().
+                get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
+
+        RequestMessage succesMessage = new RequestMessage();
+        succesMessage.setRequestId(53);
+        succesMessage.setTopic(am.getTopic());
+        if (accumDamage > 100) {
+            succesMessage.setRequestString("succes");
+        } else {
+            succesMessage.setRequestString("fail");
+        }
+
+        this.publisher.publish(succesMessage);
+
+        RequestMessage rm = new RequestMessage();
+        String info2 = "You attacked with\n" + am.getAttacker().getName()
+                + " [" + am.getAttacker().getType().toString() + "]\nweapon:"
+                + am.getWeapon() + "\ndamage: " + accumDamage + "%\n";
+        info2 += ";" + am.getAttacker().getAppearances().
+                get(1).getLook(DefaultCharacterAppearance.codes.ATTACK);
+
+        rm.setRequestId(52);
+        rm.setRequestString(info2);
+        this.publisher.publish(rm);
+
+        client.putResultText(am.getAttacked() + " was attacked...");
+        client.setEnableCmd(true);
+        this.publishState(false);
+    }
+
+    public void takeAllAttack(AttackMessage am) {
         ExtendedDefaultCharacter ec = null;
         ExtendedDefaultWeapon ew;
         String info = "Attacked by\n" + am.getAttacker().getName() + " ";
@@ -239,7 +287,6 @@ public class Player {
             ew = (ExtendedDefaultWeapon) w;
             if (ew.getName().equals(am.getWeapon())) {
                 ew.use(ec);
-                info += "weapon: " + am.getWeapon() + "\n";
                 info += "damage: " + ew.getActualAttack() + "%\n";
                 actualAttack = ew.getActualAttack();
             }
@@ -251,26 +298,26 @@ public class Player {
         RequestMessage succesMessage = new RequestMessage();
         succesMessage.setRequestId(53);
         succesMessage.setTopic(am.getTopic());
-        if(ec.getCurrentHealthPoints()<3)
+        if (ec.getCurrentHealthPoints() < 3) {
             succesMessage.setRequestString("succes");
-        else
+        } else {
             succesMessage.setRequestString("fail");
-        
+        }
+
         this.publisher.publish(succesMessage);
-        
 
         RequestMessage rm = new RequestMessage();
         String info2 = "You attacked with\n" + am.getAttacker().getName()
                 + " [" + am.getAttacker().getType().toString() + "]\nweapon:"
                 + am.getWeapon() + "\ndamage: " + actualAttack + "%\n";
         info2 += "\nAffected\n" + am.getAttacked();
-        info2 +=";"+am.getAttacker().getAppearances().
+        info2 += ";" + am.getAttacker().getAppearances().
                 get(1).getLook(DefaultCharacterAppearance.codes.ATTACK);
-      
+
         rm.setRequestId(52);
         rm.setRequestString(info2);
         this.publisher.publish(rm);
-        
+
         client.putResultText(am.getAttacked() + " was attacked...");
         client.setEnableCmd(true);
         this.publishState(false);
