@@ -252,6 +252,11 @@ public class ActionWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 102));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -544,6 +549,10 @@ public class ActionWindow extends javax.swing.JFrame {
         player.askForTopics();
         player.restoreDefaults();
     }//GEN-LAST:event_btnSelectActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        player.disconnect();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

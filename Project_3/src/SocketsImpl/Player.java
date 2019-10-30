@@ -329,4 +329,10 @@ public class Player {
         }
         this.client.putRivalData(strMessage);
     }
+    
+    public void disconnect(){
+        this.publisher.disconnect();
+        this.subscriber.disconnect();
+        
+    }
 }
