@@ -58,6 +58,9 @@ public class ExtendedDefaultWeapon extends DefaultWeapon{
       int pos = eCharacter.getType().ordinal();
       character.takeDamage(elements.getPercentages()[pos]);
       actualAttack= elements.getPercentages()[pos];
+      if(character.getCurrentHealthPoints()<0){
+          character.setCurrentHealthPoints(0);
+      }
     } 
     
     @Override

@@ -18,7 +18,6 @@ public class AttackPlusCommand implements ICommand {
     @Override
     public void execute(String[] text, Player player) {
         if (player.getClient().lblAttackPlus.isVisible()) {
-
             try {
                 if (text.length == 6) {
                     ExtendedDefaultCharacter edc = player.getWarriors().stream().filter(warr -> warr.getName().equals(text[1])).findAny().orElse(null);
