@@ -1,279 +1,399 @@
 {
-  "@class" : "resourcesImp.JSONExtendedCharacterHolder",
-  "characters" : [ {
-    "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "BENKI",
-    "appearances" : {
-      "1" : {
-        "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_benki.png", "/resourcesImp/images/spr_benki2.jpg","/resourcesImp/images/spr_benki.png","/resourcesImp/images/spr_benki.png","/resourcesImp/images/spr_benki.png","/resourcesImp/images/spr_benki.png" ]
-      }
-    },
-    "currentHealthPoints" : 100,
-    "maxHealthPoints" : 100,
-    "hitsPerUnit" : 5,
-    "level" : 1,
-    "tiles" : 1,
-    "unlockLevel" : 1,
-    "cost" : 1,
-    "weapons" : [ {
-        "@class" : "ADT.ExtendedDefaultWeapon",
-        "name" : "Melee",
-        "range" : 1,
-        "damage" : 1,
-        "level" : 1,
-        "areaOfEffect" : 1,
-        "hitPerUnit" : 1,
-        "appearances" : { },
-        "unlockLevel" : 1,
-        "elements" : {
-          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
-        },
-        "available" : true
-      } ],
-    "coordinateX" : 0,
-    "coordinateY" : 0,
-    "type" : "FIRE"
-  }, {
-    "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "SAIRAN",
-    "appearances" : {
-      "1" : {
-        "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_sairan.png", "/resourcesImp/images/spr_sairan2.jpg", "/resourcesImp/images/spr_sairan.png", "/resourcesImp/images/spr_sairan.png", "/resourcesImp/images/spr_sairan.png", "/resourcesImp/images/spr_sairan.png" ]
-
-      }
-    },
-    "currentHealthPoints" : 100,
-    "maxHealthPoints" : 100,
-    "hitsPerUnit" : 5,
-    "level" : 1,
-    "tiles" : 1,
-    "unlockLevel" : 1,
-    "cost" : 1,
-    "weapons" : [ {
-        "@class" : "ADT.ExtendedDefaultWeapon",
-        "name" : "Melee",
-        "range" : 1,
-        "damage" : 1,
-        "level" : 1,
-        "areaOfEffect" : 1,
-        "hitPerUnit" : 1,
-        "appearances" : { },
-        "unlockLevel" : 1,
-        "elements" : {
-          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
-        },
-        "available" : true
-      } ],
-    "coordinateX" : 0,
-    "coordinateY" : 0,
-    "type" : "WATER"
-  }, {
-    "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "MYRMIDON",
-    "appearances" : {
-      "1" : {
-        "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_myrmidon.png", "/resourcesImp/images/spr_myrmidon2.jpg", "/resourcesImp/images/spr_myrmidon.png", "/resourcesImp/images/spr_myrmidon.png", "/resourcesImp/images/spr_myrmidon.png", "/resourcesImp/images/spr_myrmidon.png" ]
-      }
-    },
-    "currentHealthPoints" : 100,
-    "maxHealthPoints" : 100,
-    "hitsPerUnit" : 5,
-    "level" : 1,
-    "tiles" : 1,
-    "unlockLevel" : 6,
-    "cost" : 25,
-    "weapons" : [ {
-        "@class" : "ADT.ExtendedDefaultWeapon",
-        "name" : "Melee",
-        "range" : 1,
-        "damage" : 1,
-        "level" : 1,
-        "areaOfEffect" : 1,
-        "hitPerUnit" : 1,
-        "appearances" : { },
-        "unlockLevel" : 1,
-        "elements" : {
-          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
-        },
-        "available" : true
-      } ],
-    "coordinateX" : 0,
-    "coordinateY" : 0,
-    "type" : "AIR"
-  },{
-    "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "UKHEL",
-    "appearances" : {
-      "1" : {
-        "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel2.jpg", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png" ]
-      }
-    },
-    "currentHealthPoints" : 100,
-    "maxHealthPoints" : 100,
-    "hitsPerUnit" : 5,
-    "level" : 1,
-    "tiles" : 1,
-    "unlockLevel" : 6,
-    "cost" : 25,
-    "weapons" : [ {
-        "@class" : "ADT.ExtendedDefaultWeapon",
-        "name" : "Melee",
-        "range" : 1,
-        "damage" : 1,
-        "level" : 1,
-        "areaOfEffect" : 1,
-        "hitPerUnit" : 1,
-        "appearances" : { },
-        "unlockLevel" : 1,
-        "elements" : {
-          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
-        },
-        "available" : true
-      } ],
-    "coordinateX" : 0,
-    "coordinateY" : 0,
-    "type" : "BLACK_MAGIC"
-  },{
-    "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "BUCKBEAK",
-    "appearances" : {
-      "1" : {
-        "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_buckbeak.png", "/resourcesImp/images/spr_buckbeak2.jpg","/resourcesImp/images/spr_buckbeak.png","/resourcesImp/images/spr_buckbeak.png","/resourcesImp/images/spr_buckbeak.png","/resourcesImp/images/spr_buckbeak.png" ]
-      }
-    },
-    "currentHealthPoints" : 100,
-    "maxHealthPoints" : 100,
-    "hitsPerUnit" : 5,
-    "level" : 1,
-    "tiles" : 1,
-    "unlockLevel" : 1,
-    "cost" : 1,
-    "weapons" : [ {
-        "@class" : "ADT.ExtendedDefaultWeapon",
-        "name" : "Melee",
-        "range" : 1,
-        "damage" : 1,
-        "level" : 1,
-        "areaOfEffect" : 1,
-        "hitPerUnit" : 1,
-        "appearances" : { },
-        "unlockLevel" : 1,
-        "elements" : {
-          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
-        },
-        "available" : true
-      } ],
-    "coordinateX" : 0,
-    "coordinateY" : 0,
-    "type" : "AIR"
-  }, {
-    "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "DEATHCLAW",
-    "appearances" : {
-      "1" : {
-        "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_deathclaw.png", "/resourcesImp/images/spr_deathclaw2.png", "/resourcesImp/images/spr_deathclaw.png", "/resourcesImp/images/spr_deathclaw.png", "/resourcesImp/images/spr_deathclaw.png", "/resourcesImp/images/spr_deathclaw.png" ]
-
-      }
-    },
-    "currentHealthPoints" : 100,
-    "maxHealthPoints" : 100,
-    "hitsPerUnit" : 5,
-    "level" : 1,
-    "tiles" : 1,
-    "unlockLevel" : 1,
-    "cost" : 1,
-    "weapons" : [ {
-        "@class" : "ADT.ExtendedDefaultWeapon",
-        "name" : "Melee",
-        "range" : 1,
-        "damage" : 1,
-        "level" : 1,
-        "areaOfEffect" : 1,
-        "hitPerUnit" : 1,
-        "appearances" : { },
-        "unlockLevel" : 1,
-        "elements" : {
-          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
-        },
-        "available" : true
-      } ],
-    "coordinateX" : 0,
-    "coordinateY" : 0,
-    "type" : "IRON"
-  }, {
-    "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "IRATUS",
-    "appearances" : {
-      "1" : {
-        "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus2.jpg", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png" ]
-
-      }
-    },
-    "currentHealthPoints" : 100,
-    "maxHealthPoints" : 100,
-    "hitsPerUnit" : 5,
-    "level" : 1,
-    "tiles" : 1,
-    "unlockLevel" : 6,
-    "cost" : 25,
-    "weapons" : [ {
-        "@class" : "ADT.ExtendedDefaultWeapon",
-        "name" : "Melee",
-        "range" : 1,
-        "damage" : 1,
-        "level" : 1,
-        "areaOfEffect" : 1,
-        "hitPerUnit" : 1,
-        "appearances" : { },
-        "unlockLevel" : 1,
-        "elements" : {
-          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
-        },
-        "available" : true
-      } ],
-    "coordinateX" : 0,
-    "coordinateY" : 0,
-    "type" : "SPIRITUAL"
-  },{
-    "@class" : "ADT.ExtendedDefaultCharacter",
-    "name" : "SKULL LORD",
-    "appearances" : {
-      "1" : {
-        "@class" : "ADT.DefaultCharacterAppearance",
-        "looks" : [ "/resourcesImp/images/spr_skull_lord.png", "/resourcesImp/images/spr_skull_lord2.jpg", "/resourcesImp/images/spr_skull_lord.png", "/resourcesImp/images/spr_skull_lord.png", "/resourcesImp/images/spr_skull_lord.png", "/resourcesImp/images/spr_skull_lord.png" ]
-      }
-    },
-    "currentHealthPoints" : 100,
-    "maxHealthPoints" : 100,
-    "hitsPerUnit" : 5,
-    "level" : 1,
-    "tiles" : 1,
-    "unlockLevel" : 6,
-    "cost" : 25,
-    "weapons" : [ {
-        "@class" : "ADT.ExtendedDefaultWeapon",
-        "name" : "Melee",
-        "range" : 1,
-        "damage" : 1,
-        "level" : 1,
-        "areaOfEffect" : 1,
-        "hitPerUnit" : 1,
-        "appearances" : { },
-        "unlockLevel" : 1,
-        "elements" : {
-          "percentages" : [ 25, 100, 82, 82, 95, 68, 36, 33, 48, 32 ]
-        },
-        "available" : true
-      } ],
-    "coordinateX" : 0,
-    "coordinateY" : 0,
-    "type" : "BLACK_MAGIC"
-  } ]
+    "@class": "resourcesImp.JSONExtendedCharacterHolder",
+    "characters": [{
+            "@class": "ADT.ExtendedDefaultCharacter",
+            "name": "BENKI",
+            "appearances": {
+                "1": {
+                    "@class": "ADT.DefaultCharacterAppearance",
+                    "looks": ["/resourcesImp/images/spr_benki.png", "/resourcesImp/images/spr_benki2.jpg", "/resourcesImp/images/spr_benki.png", "/resourcesImp/images/spr_benki.png", "/resourcesImp/images/spr_benki.png", "/resourcesImp/images/spr_benki.png"]
+                }
+            },
+            "currentHealthPoints": 100,
+            "maxHealthPoints": 100,
+            "hitsPerUnit": 5,
+            "level": 1,
+            "tiles": 1,
+            "unlockLevel": 1,
+            "cost": 1,
+            "weapons": [{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },
+                {
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Fireball",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },
+                {
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Firestorm",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },
+                {
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Knife",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },
+                {
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Punch",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                }                   
+                
+            ],
+            "coordinateX": 0,
+            "coordinateY": 0,
+            "type": "FIRE"
+        }, {
+            "@class": "ADT.ExtendedDefaultCharacter",
+            "name": "SAIRAN",
+            "appearances": {
+                "1": {
+                    "@class": "ADT.DefaultCharacterAppearance",
+                    "looks": ["/resourcesImp/images/spr_sairan.png", "/resourcesImp/images/spr_sairan2.jpg", "/resourcesImp/images/spr_sairan.png", "/resourcesImp/images/spr_sairan.png", "/resourcesImp/images/spr_sairan.png", "/resourcesImp/images/spr_sairan.png"]
+                }
+            },
+            "currentHealthPoints": 100,
+            "maxHealthPoints": 100,
+            "hitsPerUnit": 5,
+            "level": 1,
+            "tiles": 1,
+            "unlockLevel": 1,
+            "cost": 1,
+            "weapons": [{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },
+                {
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Punch",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },
+                {
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Seaquake",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },
+{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Waterball",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },
+{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Trident",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                }                
+            ],
+            "coordinateX": 0,
+            "coordinateY": 0,
+            "type": "WATER"
+        }, {
+            "@class": "ADT.ExtendedDefaultCharacter",
+            "name": "MYRMIDON",
+            "appearances": {
+                "1": {
+                    "@class": "ADT.DefaultCharacterAppearance",
+                    "looks": ["/resourcesImp/images/spr_myrmidon.png", "/resourcesImp/images/spr_myrmidon2.jpg", "/resourcesImp/images/spr_myrmidon.png", "/resourcesImp/images/spr_myrmidon.png", "/resourcesImp/images/spr_myrmidon.png", "/resourcesImp/images/spr_myrmidon.png"]
+                }
+            },
+            "currentHealthPoints": 100,
+            "maxHealthPoints": 100,
+            "hitsPerUnit": 5,
+            "level": 1,
+            "tiles": 1,
+            "unlockLevel": 6,
+            "cost": 25,
+            "weapons": [{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                }],
+            "coordinateX": 0,
+            "coordinateY": 0,
+            "type": "AIR"
+        }, {
+            "@class": "ADT.ExtendedDefaultCharacter",
+            "name": "UKHEL",
+            "appearances": {
+                "1": {
+                    "@class": "ADT.DefaultCharacterAppearance",
+                    "looks": ["/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel2.jpg", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png", "/resourcesImp/images/spr_ukhel.png"]
+                }
+            },
+            "currentHealthPoints": 100,
+            "maxHealthPoints": 100,
+            "hitsPerUnit": 5,
+            "level": 1,
+            "tiles": 1,
+            "unlockLevel": 6,
+            "cost": 25,
+            "weapons": [{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                }],
+            "coordinateX": 0,
+            "coordinateY": 0,
+            "type": "BLACK_MAGIC"
+        }, {
+            "@class": "ADT.ExtendedDefaultCharacter",
+            "name": "BUCKBEAK",
+            "appearances": {
+                "1": {
+                    "@class": "ADT.DefaultCharacterAppearance",
+                    "looks": ["/resourcesImp/images/spr_buckbeak.png", "/resourcesImp/images/spr_buckbeak2.jpg", "/resourcesImp/images/spr_buckbeak.png", "/resourcesImp/images/spr_buckbeak.png", "/resourcesImp/images/spr_buckbeak.png", "/resourcesImp/images/spr_buckbeak.png"]
+                }
+            },
+            "currentHealthPoints": 100,
+            "maxHealthPoints": 100,
+            "hitsPerUnit": 5,
+            "level": 1,
+            "tiles": 1,
+            "unlockLevel": 1,
+            "cost": 1,
+            "weapons": [{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                }],
+            "coordinateX": 0,
+            "coordinateY": 0,
+            "type": "AIR"
+        }, {
+            "@class": "ADT.ExtendedDefaultCharacter",
+            "name": "DEATHCLAW",
+            "appearances": {
+                "1": {
+                    "@class": "ADT.DefaultCharacterAppearance",
+                    "looks": ["/resourcesImp/images/spr_deathclaw.png", "/resourcesImp/images/spr_deathclaw2.png", "/resourcesImp/images/spr_deathclaw.png", "/resourcesImp/images/spr_deathclaw.png", "/resourcesImp/images/spr_deathclaw.png", "/resourcesImp/images/spr_deathclaw.png"]
+                }
+            },
+            "currentHealthPoints": 100,
+            "maxHealthPoints": 100,
+            "hitsPerUnit": 5,
+            "level": 1,
+            "tiles": 1,
+            "unlockLevel": 1,
+            "cost": 1,
+            "weapons": [{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                }],
+            "coordinateX": 0,
+            "coordinateY": 0,
+            "type": "IRON"
+        }, {
+            "@class": "ADT.ExtendedDefaultCharacter",
+            "name": "IRATUS",
+            "appearances": {
+                "1": {
+                    "@class": "ADT.DefaultCharacterAppearance",
+                    "looks": ["/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus2.jpg", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png", "/resourcesImp/images/spr_iratus.png"]
+                }
+            },
+            "currentHealthPoints": 100,
+            "maxHealthPoints": 100,
+            "hitsPerUnit": 5,
+            "level": 1,
+            "tiles": 1,
+            "unlockLevel": 6,
+            "cost": 25,
+            "weapons": [{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                }],
+            "coordinateX": 0,
+            "coordinateY": 0,
+            "type": "SPIRITUAL"
+        }, {
+            "@class": "ADT.ExtendedDefaultCharacter",
+            "name": "SKULL LORD",
+            "appearances": {
+                "1": {
+                    "@class": "ADT.DefaultCharacterAppearance",
+                    "looks": ["/resourcesImp/images/spr_skull_lord.png", "/resourcesImp/images/spr_skull_lord2.jpg", "/resourcesImp/images/spr_skull_lord.png", "/resourcesImp/images/spr_skull_lord.png", "/resourcesImp/images/spr_skull_lord.png", "/resourcesImp/images/spr_skull_lord.png"]
+                }
+            },
+            "currentHealthPoints": 100,
+            "maxHealthPoints": 100,
+            "hitsPerUnit": 5,
+            "level": 1,
+            "tiles": 1,
+            "unlockLevel": 6,
+            "cost": 25,
+            "weapons": [{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                }],
+            "coordinateX": 0,
+            "coordinateY": 0,
+            "type": "BLACK_MAGIC"
+        }]
 }

@@ -118,11 +118,11 @@ public class PlayerSubscriber extends ASubscriber {
                 case 51://put endGame massage
                     this.player.endGame(m.getRequestString());
                     this.unsubscribe(m.getTopic());
-                    this.player.publishState(false);
                     RequestMessage rm2 = new RequestMessage();
                     rm2.setRequestId(500);
                     rm2.setRequestString(this.player.getTopic());
                     rm2.setRequestString(this.player.matchStart);
+                    this.player.getClient().setEnableSearchPlayers(true);
                     this.player.publish(rm2);                    
                     break;
                 case 52://fill status and own activity and publish state
@@ -148,7 +148,11 @@ public class PlayerSubscriber extends ASubscriber {
                 case 900: //match log recieved
                     try{
                         String userHomeFolder = System.getProperty("user.home");
-                        File textFile = new File(userHomeFolder, "MatchLog" + m.getTopic() + ".txt");
+                        String separator = System.getProperty("file.separator");
+                        String strTopic = m.getTopic();
+                        strTopic = strTopic.replace(":", "-");
+                        System.out.println(userHomeFolder +separator+ "MatchLog" + strTopic + ".txt");
+                        File textFile = new File(userHomeFolder +separator+ "MatchLog" + strTopic + ".txt");
                         textFile.createNewFile();
                         BufferedWriter out = new BufferedWriter(new FileWriter(textFile));
                         try {
