@@ -23,7 +23,7 @@ public class AttackPlusCommand implements ICommand {
                     ExtendedDefaultCharacter edc = player.getWarriors().stream().filter(warr -> warr.getName().equals(text[1])).findAny().orElse(null);
                     ExtendedDefaultCharacter edc2 = player.getWarriors().stream().filter(warr -> warr.getName().equals(text[3])).findAny().orElse(null);
                     if (edc.getCurrentHealthPoints() > 0 && edc2.getCurrentHealthPoints() > 0) {
-                        //player.attackExtraChar(text[1], text[2], text[3], text[4]);
+                        player.attackExtraChar(text[1], text[2], text[3], text[4]);
                     } else {
                         player.getClient().putResultText("ERROR: Some character is dead");
                     }
@@ -31,7 +31,7 @@ public class AttackPlusCommand implements ICommand {
 
                     ExtendedDefaultCharacter edc = player.getWarriors().stream().filter(warr -> warr.getName().equals(text[1])).findAny().orElse(null);
                     if (edc.getCurrentHealthPoints() > 0) {
-                        //player.attackExtraWeapon(text[1], text[2]);
+                        player.attackExtraWeapon(text[1], text[2], text[3]);
                     } else {
                         player.getClient().putResultText("ERROR: Character is dead");
                     }

@@ -32,7 +32,7 @@ public class Player {
 
     private List<ExtendedDefaultCharacter> warriors;
     private ActionWindow client;
-    
+
     public String matchStart;
 
     public Player(String id, List<ExtendedDefaultCharacter> warriors, ActionWindow client) throws IOException {
@@ -93,36 +93,28 @@ public class Player {
         pw.setVisible(true);
     }
 
-    public void attackExtraChar(String own1, String weapon1, String own2, String weapon2, String riv) {
-        DuelStateMessage dm = new DuelStateMessage(riv);
+    public void attackExtraChar(String own1, String weapon1, String own2, String weapon2) {
+        DuelStateMessage dm = new DuelStateMessage(own1);
         AttackMessage am1 = new AttackMessage();
         AttackMessage am2 = new AttackMessage();
         dm.setWarriors(warriors);
+        
+        
+        am1.setTopic(this.publisher.getTopic());
+        am2.setTopic(this.publisher.getTopic());
 
         am1.setWeapon(weapon1);
-
         am2.setWeapon(weapon2);
-
-        ExtendedDefaultWeapon ew1 = null;
-        ExtendedDefaultWeapon ew2 = null;
-        for (DuelStateMessage.WarriorCoreInfo warrior : dm.getWarriors()) {
-            if (warrior.getName().equals(own1)) {
-                am1.setAttacker(warrior);
-                for (int i = 0; i < warrior.getWeapons().size(); i++) {
-                    if (warrior.getWeapons().get(i).getName().equals(weapon1)) {
-                        ew1 = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
-                    }
-                }
-            }
-            if (warrior.getName().equals(own2)) {
-                am2.setAttacker(warrior);
-                for (int i = 0; i < warrior.getWeapons().size(); i++) {
-                    if (warrior.getWeapons().get(i).getName().equals(weapon2)) {
-                        ew2 = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
-                    }
-                }
-            }
-        }
+        
+        DuelStateMessage.WarriorCoreInfo warrior1 = dm.getWarriors().stream().filter(warr -> warr.getName().equals(own1)).findAny().orElse(null);
+        DuelStateMessage.WarriorCoreInfo warrior2 = dm.getWarriors().stream().filter(warr -> warr.getName().equals(own2)).findAny().orElse(null);
+        
+        am1.setAttacker(warrior1);
+        am2.setAttacker(warrior2);
+        
+        ExtendedDefaultWeapon ew1 = (ExtendedDefaultWeapon) warrior1.getWeapons().stream().filter(warr -> warr.getName().equals(weapon1)).findAny().orElse(null);
+        ExtendedDefaultWeapon ew2 = (ExtendedDefaultWeapon) warrior2.getWeapons().stream().filter(warr -> warr.getName().equals(weapon2)).findAny().orElse(null);
+          
         if (ew1.isAvailable() && ew2.isAvailable()) {
             ew1.setAvailable(false);
             ew2.setAvailable(false);
@@ -131,6 +123,7 @@ public class Player {
             apm.setAttackMsg1(am1);
             apm.setAttackMsg2(am2);
             publish(apm);
+            
             client.lblAttackPlus.setVisible(false);
             client.setEnableCmd(false);
             client.putResultText(own1 + " and " + own2 + " are attacking...");
@@ -140,33 +133,26 @@ public class Player {
 
     }
 
-    public void attackExtraWeapon(String own, String weapon1, String weapon2, String riv) {
-        DuelStateMessage dm = new DuelStateMessage(riv);
+    public void attackExtraWeapon(String own, String weapon1, String weapon2) {
+        DuelStateMessage dm = new DuelStateMessage(own);
         AttackMessage am1 = new AttackMessage();
         AttackMessage am2 = new AttackMessage();
         dm.setWarriors(warriors);
 
         
+        am1.setTopic(this.publisher.getTopic());
+        am2.setTopic(this.publisher.getTopic());
+        
         am1.setWeapon(weapon1);
-
         am2.setWeapon(weapon2);
 
-        ExtendedDefaultWeapon ew1 = null;
-        ExtendedDefaultWeapon ew2 = null;
-        for (DuelStateMessage.WarriorCoreInfo warrior : dm.getWarriors()) {
-            if (warrior.getName().equals(own)) {
-                am1.setAttacker(warrior);
-                am2.setAttacker(warrior);
-                for (int i = 0; i < warrior.getWeapons().size(); i++) {
-                    if (warrior.getWeapons().get(i).getName().equals(weapon1)) {
-                        ew1 = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
-                    }
-                    if (warrior.getWeapons().get(i).getName().equals(weapon2)) {
-                        ew2 = (ExtendedDefaultWeapon) warrior.getWeapons().get(i);
-                    }
-                }
-            }
-        }
+        DuelStateMessage.WarriorCoreInfo warrior = dm.getWarriors().stream().filter(warr -> warr.getName().equals(own)).findAny().orElse(null);
+        am1.setAttacker(warrior);
+        am2.setAttacker(warrior);
+
+        ExtendedDefaultWeapon ew1 = (ExtendedDefaultWeapon) warrior.getWeapons().stream().filter(warr -> warr.getName().equals(weapon1)).findAny().orElse(null);
+        ExtendedDefaultWeapon ew2 = (ExtendedDefaultWeapon) warrior.getWeapons().stream().filter(warr -> warr.getName().equals(weapon2)).findAny().orElse(null);
+
         if (ew1.isAvailable() && ew2.isAvailable() && (!weapon1.equals(weapon2))) {
             ew1.setAvailable(false);
             ew2.setAvailable(false);
@@ -196,9 +182,9 @@ public class Player {
         am.setWeapon(weapon);
         am.setTopic(this.publisher.getTopic());
 
-        DuelStateMessage.WarriorCoreInfo warrior = dm.getWarriors().stream().filter(wea -> wea.getName().equals(own)).findAny().orElse(null);    
+        DuelStateMessage.WarriorCoreInfo warrior = dm.getWarriors().stream().filter(wea -> wea.getName().equals(own)).findAny().orElse(null);
         am.setAttacker(warrior);
-        
+
         ExtendedDefaultWeapon ew = (ExtendedDefaultWeapon) warrior.getWeapons().stream().filter(warr -> warr.getName().equals(weapon)).findAny().orElse(null);
         if (ew.isAvailable()) {
             ew.setAvailable(false);
@@ -208,7 +194,7 @@ public class Player {
         } else {
             this.client.putResultText(weapon + " already used");
         }
-                   
+
     }
 
     public void publish(AMessage message) {
@@ -216,20 +202,20 @@ public class Player {
     }
 
     public void takeAttack(AttackMessage am) {
-       
+
         int accumDamage = 0;
         String info = "Attacked by\n" + am.getAttacker().getName() + " ";
         info += "[" + am.getAttacker().getType().toString() + "]\n";
-        info += "\nweapon: "+am.getWeapon();
-        
+        info += "\nweapon: " + am.getWeapon();
+
         ExtendedDefaultWeapon ew = (ExtendedDefaultWeapon) am.getAttacker().getWeapons().stream().filter(wea -> wea.getName().equals(am.getWeapon())).findAny().orElse(null);
-       
+
         for (ExtendedDefaultCharacter c : this.getWarriors()) {
             ew.use(c);
-            accumDamage+=ew.getActualAttack();
+            accumDamage += ew.getActualAttack();
         }
-        
-        info += "\ndamage: "+accumDamage+"%";
+
+        info += "\ndamage: " + accumDamage + "%";
         client.takeAttack(info, am.getAttacker().getAppearances().
                 get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
 
@@ -333,16 +319,16 @@ public class Player {
         }
         this.client.putRivalData(strMessage);
     }
-    
-    public void addToMatchLog(String info){
+
+    public void addToMatchLog(String info) {
         RequestMessage rm = new RequestMessage();
         rm.setRequestId(77);
         rm.setRequestString(info);
         rm.setTopic(this.matchStart);
         publisher.publish(rm);
     }
-    
-    public void disconnect(){
+
+    public void disconnect() {
         this.publisher.disconnect();
         this.subscriber.disconnect();
 

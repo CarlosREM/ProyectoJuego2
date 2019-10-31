@@ -23,7 +23,7 @@ public class AttactCommand implements ICommand {
             if (edc.getCurrentHealthPoints() > 0) {
                 player.attack(text[1], text[2]);
             } else {
-                player.getClient().putResultText("The character is dead");
+                player.getClient().putResultText("ERROR: The character is dead");
             }
         } catch (IndexOutOfBoundsException e) {
             player.getClient().putResultText("ERROR: in command");

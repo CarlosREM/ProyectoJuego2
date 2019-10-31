@@ -141,8 +141,8 @@ public class GameServer extends AContentServer {
                     break;
                 }
                 case 53: {//succes or fail attack
-                
                        if(rm.getRequestString().equals("succes")){
+                           System.out.println(rm.getTopic());
                            statisticsMap.get(rm.getTopic()).addSuccess();
                        }else{
                            statisticsMap.get(rm.getTopic()).addFailed();
@@ -206,7 +206,6 @@ public class GameServer extends AContentServer {
         if (message instanceof AttackMessage) {
             AttackMessage am = (AttackMessage) message;
             this.statisticsMap.get(handler.getTopic()).addAttack();
-            System.out.println("flaggggggg");
             try {
                 this.broadcastMessageSub(am, handler.getTopic());
             } catch (IOException ex) {
