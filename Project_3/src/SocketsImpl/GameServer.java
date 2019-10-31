@@ -147,10 +147,15 @@ public class GameServer extends AContentServer {
                         
                         getRanking();
                         this.broadcastMessageSub(rm, handler.getTopic());
-
+                        
+                        ///this.sendLog(handler.getTopic(), opp);
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    break;
+                }
+                case 500:{
+                    
                     break;
                 }
                 case 52: {//attack result

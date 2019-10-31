@@ -273,7 +273,14 @@ public class Player {
         rm.setRequestId(51);
         rm.setTopic(this.getTopic());
         rm.setRequestString("Winner!");
+        
         this.publisher.publish(rm);
+        
+        RequestMessage rm2 = new RequestMessage();
+        rm2.setRequestId(500);
+        rm2.setTopic(this.getTopic());
+        rm2.setRequestString(this.matchStart);
+        this.publish(rm2);
         endGame(text);
     }
 
