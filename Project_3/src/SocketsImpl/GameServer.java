@@ -382,12 +382,12 @@ public class GameServer extends AContentServer {
         }
 
     }
-
-    public void sendLog(String topic, String logId) {
+    
+    public void sendLog(String topic1, String topic2, String logId){
         try {
-            SubscriberHandler sub1 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic)).findAny().orElse(null);
-            SubscriberHandler sub2 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic)).findAny().orElse(null);
-
+            SubscriberHandler sub1 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic1)).findAny().orElse(null);
+            SubscriberHandler sub2 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic2)).findAny().orElse(null);
+            
             RequestMessage rm = new RequestMessage();
             rm.setRequestId(900);
             rm.setTopic(logId);
