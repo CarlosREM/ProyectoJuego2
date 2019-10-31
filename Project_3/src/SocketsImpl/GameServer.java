@@ -320,6 +320,24 @@ public class GameServer extends AContentServer {
         }
         
     }
+    
+    public void sendLog(String topic, String logId){
+        try {
+            SubscriberHandler sub1 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic)).findAny().orElse(null);
+            SubscriberHandler sub2 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic)).findAny().orElse(null);
+            
+            RequestMessage rm = new RequestMessage();
+            rm.setRequestId(900);
+            rm.setTopic(logId);
+            rm.setRequestString(this.logsMap.get(logId).toString());
+            
+            sub1.sendMessage(rm);
+            sub2.sendMessage(rm);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public static void main(String[] args) throws InterruptedException {
         try {
