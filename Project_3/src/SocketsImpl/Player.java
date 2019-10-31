@@ -58,6 +58,7 @@ public class Player {
                 ew.setAvailable(true);
             }
         }
+        System.out.println("");
         this.client.setPlayer(this);
         client.setEnableCmd(true);
         client.restoreDefaults();
