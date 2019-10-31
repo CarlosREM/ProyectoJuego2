@@ -149,6 +149,7 @@ public class PlayerSubscriber extends ASubscriber {
                     try{
                         String userHomeFolder = System.getProperty("user.home");
                         File textFile = new File(userHomeFolder, "MatchLog" + m.getTopic() + ".txt");
+                        textFile.createNewFile();
                         BufferedWriter out = new BufferedWriter(new FileWriter(textFile));
                         try {
                             out.write(m.getRequestString());
