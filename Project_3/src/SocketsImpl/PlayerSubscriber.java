@@ -95,13 +95,13 @@ public class PlayerSubscriber extends ASubscriber {
         }
         if (message instanceof TopicsMessage) {
             TopicsMessage m = (TopicsMessage) message;
-            this.player.showTopics(m.getTopics());            
+            this.player.showTopics(m.getTopics());
         }
         if (message instanceof DuelStateMessage) {
             DuelStateMessage m = (DuelStateMessage) message;
             this.player.setRivalState(m);
             this.player.getClient().setEnableSearchPlayers(false);
-            
+
         }
         if (message instanceof RequestMessage) {
             RequestMessage m = (RequestMessage) message;
@@ -111,6 +111,7 @@ public class PlayerSubscriber extends ASubscriber {
                     System.out.println(m.getRequestString());
                     this.player.matchStart = m.getTopic();
                     this.player.publishState(true);
+                    this.player.restoreDefaults();
                     break;
                 case 50:
                     this.player.reciveChat(m.getRequestString());
@@ -123,7 +124,7 @@ public class PlayerSubscriber extends ASubscriber {
                     rm2.setRequestString(this.player.getTopic());
                     rm2.setRequestString(this.player.matchStart);
                     this.player.getClient().setEnableSearchPlayers(true);
-                    this.player.publish(rm2);                    
+                    this.player.publish(rm2);
                     break;
                 case 52://fill status and own activity and publish state
                     this.player.getClient().attack(m.getRequestString());
@@ -142,17 +143,23 @@ public class PlayerSubscriber extends ASubscriber {
                         player.getClient().putResultText("Rejected!");
                     } else {
                         player.endGame("");
+                        RequestMessage rm4 = new RequestMessage();
+                        rm4.setRequestId(500);
+                        rm4.setRequestString(this.player.getTopic());
+                        rm4.setRequestString(this.player.matchStart);
+                        this.player.getClient().setEnableSearchPlayers(true);
+                        this.player.publish(rm4);
                         this.unsubscribe(m.getTopic());
                     }
                     break;
                 case 900: //match log recieved
-                    try{
+                    try {
                         String userHomeFolder = System.getProperty("user.home");
                         String separator = System.getProperty("file.separator");
                         String strTopic = m.getTopic();
                         strTopic = strTopic.replace(":", "-");
-                        System.out.println(userHomeFolder +separator+ "MatchLog" + strTopic + ".txt");
-                        File textFile = new File(userHomeFolder +separator+ "MatchLog" + strTopic + ".txt");
+                        System.out.println(userHomeFolder + separator + "MatchLog" + strTopic + ".txt");
+                        File textFile = new File(userHomeFolder + separator + "MatchLog" + strTopic + ".txt");
                         textFile.createNewFile();
                         BufferedWriter out = new BufferedWriter(new FileWriter(textFile));
                         try {
@@ -163,7 +170,7 @@ public class PlayerSubscriber extends ASubscriber {
                     } catch (IOException ex) {
                         Logger.getLogger(PlayerSubscriber.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                     break;
 
             }

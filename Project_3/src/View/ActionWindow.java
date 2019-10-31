@@ -74,7 +74,6 @@ public class ActionWindow extends javax.swing.JFrame {
         this.txaCommands.setEditable(option);
     }
     public void setPlayer(Player pPlayer) {
-        
         this.player = pPlayer;
         this.lblOwnChar.setIcon(null);
         this.lblRivalChar.setIcon(null);
@@ -82,6 +81,7 @@ public class ActionWindow extends javax.swing.JFrame {
         this.txaRivalAttackInfo.setText("");
         this.txaResults.setText("");
         this.txaRivalInfo.setText("AGAINST");
+        this.TeamPane.removeAll();
         for (int i = 0; i < player.getWarriors().size(); i++) {
             JButton button = new JButton(player.getWarriors().get(i).getName()) {
                 public JToolTip createToolTip() {

@@ -35,7 +35,7 @@ public class ReloadCommand implements ICommand{
         for(ExtendedDefaultCharacter edc : player.getWarriors()){
             for(AWeapon aw :edc.getWeapons()){
                 ExtendedDefaultWeapon edw = (ExtendedDefaultWeapon) aw;
-                if(edw.isAvailable()){
+                if(edw.isAvailable() && (edc.getCurrentHealthPoints()>0)){
                     return true;
                 }
             }

@@ -60,6 +60,7 @@ public class Player {
         }
         this.client.setPlayer(this);
         client.setEnableCmd(true);
+        client.restoreDefaults();
     }
 
     public List<ExtendedDefaultCharacter> getWarriors() {
@@ -290,7 +291,7 @@ public class Player {
         this.client.putResultText(text);
         client.setEnableCmd(true);
         client.setEnableSearchPlayers(true);
-        client.restoreDefaults();
+
     }
 
     public void mutualSurrender() {
