@@ -119,6 +119,11 @@ public class PlayerSubscriber extends ASubscriber {
                     this.player.endGame(m.getRequestString());
                     this.unsubscribe(m.getTopic());
                     this.player.publishState(false);
+                    RequestMessage rm2 = new RequestMessage();
+                    rm2.setRequestId(500);
+                    rm2.setRequestString(this.player.getTopic());
+                    rm2.setRequestString(this.player.matchStart);
+                    this.player.publish(rm2);                    
                     break;
                 case 52://fill status and own activity and publish state
                     this.player.getClient().attack(m.getRequestString());

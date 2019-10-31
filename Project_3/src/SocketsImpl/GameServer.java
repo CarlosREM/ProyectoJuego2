@@ -141,9 +141,9 @@ public class GameServer extends AContentServer {
                         handler.sendMessage(rm2);
                         
                         RequestMessage rm3 = new RequestMessage();
-                        rm2.setRequestId(20);
+                        rm3.setRequestId(20);
                         rm3.setRequestString(statisticsMap.get(opp).toString());
-                        oponent.sendMessage(rm2);
+                        oponent.sendMessage(rm3);
                         
                         getRanking();
                         this.broadcastMessageSub(rm, handler.getTopic());
@@ -155,7 +155,7 @@ public class GameServer extends AContentServer {
                     break;
                 }
                 case 500:{
-                    
+                    this.sendLog(handler.getTopic(), rm.getRequestString());
                     break;
                 }
                 case 52: {//attack result
@@ -383,10 +383,9 @@ public class GameServer extends AContentServer {
 
     }
     
-    public void sendLog(String topic1, String topic2, String logId){
+    public void sendLog(String topic1, String logId){
         try {
             SubscriberHandler sub1 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic1)).findAny().orElse(null);
-            SubscriberHandler sub2 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic2)).findAny().orElse(null);
             
             RequestMessage rm = new RequestMessage();
             rm.setRequestId(900);
@@ -394,8 +393,7 @@ public class GameServer extends AContentServer {
             rm.setRequestString(this.logsMap.get(logId).toString());
 
             sub1.sendMessage(rm);
-            sub2.sendMessage(rm);
-
+           
         } catch (IOException ex) {
             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
         }

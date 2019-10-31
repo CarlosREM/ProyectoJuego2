@@ -276,6 +276,7 @@ public class Player {
         
         this.publisher.publish(rm);
         
+        
         RequestMessage rm2 = new RequestMessage();
         rm2.setRequestId(500);
         rm2.setTopic(this.getTopic());
