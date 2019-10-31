@@ -12,6 +12,9 @@ import SocketsImpl.Messages.RequestMessage;
 import SocketsImpl.Messages.TopicsMessage;
 import commsapi.Message.AMessage;
 import commsapi.Subscriber.ASubscriber;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -133,6 +136,22 @@ public class PlayerSubscriber extends ASubscriber {
                         this.unsubscribe(m.getTopic());
                     }
                     break;
+                case 900: //match log recieved
+                    try{
+                        String userHomeFolder = System.getProperty("user.home");
+                        File textFile = new File(userHomeFolder, "MatchLog" + m.getTopic() + ".txt");
+                        BufferedWriter out = new BufferedWriter(new FileWriter(textFile));
+                        try {
+                            out.write(m.getRequestString());
+                        } finally {
+                            out.close();
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(PlayerSubscriber.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    break;
+
             }
         }
         if (message instanceof AttackMessage) {
