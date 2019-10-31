@@ -95,12 +95,13 @@ public class PlayerSubscriber extends ASubscriber {
         }
         if (message instanceof TopicsMessage) {
             TopicsMessage m = (TopicsMessage) message;
-            this.player.showTopics(m.getTopics());
-            this.player.getClient().setEnableSearchPlayers(false);
+            this.player.showTopics(m.getTopics());            
         }
         if (message instanceof DuelStateMessage) {
             DuelStateMessage m = (DuelStateMessage) message;
             this.player.setRivalState(m);
+            this.player.getClient().setEnableSearchPlayers(false);
+            
         }
         if (message instanceof RequestMessage) {
             RequestMessage m = (RequestMessage) message;

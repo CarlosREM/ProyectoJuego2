@@ -204,14 +204,16 @@ public class Player {
         String info = "Attacked by\n" + am.getAttacker().getName() + " ";
         info += "[" + am.getAttacker().getType().toString() + "]\n";
         info += "\nweapon: " + am.getWeapon();
-
+        int deaths = 0;
         ExtendedDefaultWeapon ew = (ExtendedDefaultWeapon) am.getAttacker().getWeapons().stream().filter(wea -> wea.getName().equals(am.getWeapon())).findAny().orElse(null);
 
         for (ExtendedDefaultCharacter c : this.getWarriors()) {
             ew.use(c);
             accumDamage += ew.getActualAttack();
+            if (ew.isIsKilled()) {
+                deaths++;
+            }
         }
-
         info += "\ndamage: " + accumDamage + "%";
         client.takeAttack(info, am.getAttacker().getAppearances().
                 get(1).getLook(DefaultCharacterAppearance.codes.ATTACK));
@@ -225,8 +227,14 @@ public class Player {
             succesMessage.setRequestString("fail");
         }
 
-        this.publisher.publish(succesMessage);
+        RequestMessage deathsMessage = new RequestMessage();
+        deathsMessage.setRequestId(54);
+        deathsMessage.setTopic(am.getTopic());
+        deathsMessage.setRequestString(String.valueOf(deaths));
 
+        this.publisher.publish(succesMessage);
+        this.publisher.publish(deathsMessage);
+        
         RequestMessage rm = new RequestMessage();
         String info2 = "You attacked with\n" + am.getAttacker().getName()
                 + " [" + am.getAttacker().getType().toString() + "]\n\nweapon:"
@@ -267,15 +275,14 @@ public class Player {
         rm.setRequestString("Winner!");
         this.publisher.publish(rm);
         endGame(text);
-        publishState(false);
     }
 
     public void endGame(String text) {
         this.client.putRivalData("AGAINST");
         this.client.putResultText(text);
         client.setEnableCmd(true);
-        restoreDefaults();
         client.setEnableSearchPlayers(true);
+        client.restoreDefaults();
     }
 
     public void mutualSurrender() {
@@ -315,7 +322,7 @@ public class Player {
     }
 
     public void setRivalState(DuelStateMessage dsm) {
-        
+
         String strMessage = "";
         strMessage += "AGAINST" + " [" + dsm.getTopic() + "]\n"
                 + dsm.getRivalInfo() + "\n\n";

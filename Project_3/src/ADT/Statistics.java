@@ -17,6 +17,7 @@ public class Statistics {
     private int failed;
     private int giveup;
     private int draws;
+    private int kills;
 
     public Statistics() {
         this.wins=0;
@@ -26,6 +27,7 @@ public class Statistics {
         this.failed=0;
         this.giveup=0;
         this.draws=0;
+        this.kills=0;
     }
 
     public int getDraws() {
@@ -61,7 +63,7 @@ public class Statistics {
     }
 
     public void addWin() {
-        this.wins = wins;
+        this.wins++;
     }
 
     public void addDefeat() {
@@ -83,7 +85,9 @@ public class Statistics {
     public void addGiveup() {
         this.giveup++;
     }
-
+    public void addKills(int num){
+        this.kills = kills + num;
+    }
     @Override
     public String toString() {
         return "Wins:\t" + wins + 
@@ -91,6 +95,7 @@ public class Statistics {
                 "\nAttacks:\t" + attacks + 
                 "\nSuccess:\t" + success + 
                 "\nFailed:\t" + failed + 
+                "\nKills:\t" + kills +
                 "\nGiveup:\t" + giveup +
                 "\nDraws:\t" + draws +"\n";
     }

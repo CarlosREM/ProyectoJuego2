@@ -31,7 +31,7 @@ public class TimedEventTrigger extends Thread{
         
             while (true) {               
                 try {
-                    sleep(10000);
+                    sleep(30000);
                     
                     if(random.nextBoolean())
                         this.server.chooseWinner();

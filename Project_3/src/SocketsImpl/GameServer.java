@@ -6,6 +6,7 @@
 package SocketsImpl;
 
 import ADT.Ranking;
+import ADT.SortByAverage;
 import ADT.Statistics;
 import SocketsImpl.Messages.AttackMessage;
 import SocketsImpl.Messages.AttackPlusMessage;
@@ -128,9 +129,25 @@ public class GameServer extends AContentServer {
                     try {
                         this.statisticsMap.get(handler.getTopic()).addDefeat();
                         this.statisticsMap.get(handler.getTopic()).addGiveup();
-                        statisticsMap.get(subscriptions.get(handler.getTopic()).
-                                get(0).getId()).addWin();
+
+                        String opp = subscriptions.get(handler.getTopic()).get(0).getId();
+                        this.statisticsMap.get(opp).addWin();
+                        PublisherHandler oponent = this.publishers.stream().filter(sub -> sub.getTopic().equals(opp)).findAny().orElse(null);
+                        getRanking();
+                        
+                        RequestMessage rm2 = new RequestMessage();
+                        rm2.setRequestString(statisticsMap.get(handler.getTopic()).toString());
+                        rm2.setRequestId(20);
+                        handler.sendMessage(rm2);
+                        
+                        RequestMessage rm3 = new RequestMessage();
+                        rm2.setRequestId(20);
+                        rm3.setRequestString(statisticsMap.get(opp).toString());
+                        oponent.sendMessage(rm2);
+                        
+                        getRanking();
                         this.broadcastMessageSub(rm, handler.getTopic());
+
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -149,11 +166,15 @@ public class GameServer extends AContentServer {
                 }
                 case 53: {//succes or fail attack
                     if (rm.getRequestString().equals("succes")) {
-                        System.out.println(rm.getTopic());
                         statisticsMap.get(rm.getTopic()).addSuccess();
                     } else {
                         statisticsMap.get(rm.getTopic()).addFailed();
                     }
+                    break;
+                }
+                case 54: {//number of kills
+                    int deaths = Integer.valueOf(rm.getRequestString());
+                    statisticsMap.get(rm.getTopic()).addKills(deaths);
                     break;
                 }
                 case 60: {//pass
@@ -253,20 +274,16 @@ public class GameServer extends AContentServer {
         ConMessage m = new ConMessage(true);
         m.setConnMessage("Conection Successful as Publisher");
         RequestMessage rm = new RequestMessage();
-        RequestMessage rm2 = new RequestMessage();
+
         if (!statisticsMap.containsKey(handler.getTopic())) {
             statisticsMap.put(handler.getTopic(), new Statistics());
             ranking.add(new Ranking(handler.getTopic()));
         }
-        getRanking();
+
         rm.setRequestString(statisticsMap.get(handler.getTopic()).toString());
         rm.setRequestId(20);
-        rm2.setRequestString(getRanking());
-        rm2.setRequestId(30);
+        getRanking();
         try {
-            for (PublisherHandler ph : publishers) {
-                ph.sendMessage(rm2);
-            }
             handler.sendMessage(m);
             handler.sendMessage(rm);
         } catch (IOException ex) {
@@ -274,20 +291,31 @@ public class GameServer extends AContentServer {
         }
     }
 
-    private String getRanking() {
-        for(Ranking r:ranking){
+    private void getRanking() {
+        RequestMessage rm2 = new RequestMessage();
+        for (Ranking r : ranking) {
             r.setWins(statisticsMap.get(r.getTopic()).getWins());
             r.setLosses(statisticsMap.get(r.getTopic()).getDefeats());
         }
-        Collections.sort(ranking, Comparator.comparing(Ranking::calculate));
-        String strRankig = "";
+
+        ranking.sort(new SortByAverage());
+        String strRanking = "";
         for (int i = 0; i < ranking.size(); i++) {
-            strRankig += (" "+(i + 1)+ ". "
+            strRanking += (" " + (i + 1) + ". "
                     + ranking.get(i).getTopic() + "  ["
-                    + ranking.get(i).getWins()+"/"
-                    + ranking.get(i).getWins()+"]\n" );
+                    + ranking.get(i).getWins() + "/"
+                    + ranking.get(i).getLosses() + "]\n");
         }
-        return strRankig;
+        rm2.setRequestString(strRanking);
+        rm2.setRequestId(30);
+        try {
+            for (PublisherHandler ph : publishers) {
+                ph.sendMessage(rm2);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override
