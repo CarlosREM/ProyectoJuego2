@@ -14,9 +14,9 @@ import javax.swing.DefaultComboBoxModel;
  * @author Marco Gamboa
  */
 public class PlayersWindow extends javax.swing.JFrame {
+
     private ActionWindow actionWindow;
-    
-    
+
     /**
      * Creates new form PlayersWindow
      */
@@ -27,9 +27,11 @@ public class PlayersWindow extends javax.swing.JFrame {
     public void setActionWindos(ActionWindow player) {
         this.actionWindow = player;
     }
-    public void fillPlayers(List<String> topics){
+
+    public void fillPlayers(List<String> topics) {
         this.cbxOpponents.setModel(new DefaultComboBoxModel(topics.toArray()));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,8 +112,13 @@ public class PlayersWindow extends javax.swing.JFrame {
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         String idRival = (String) cbxOpponents.getSelectedItem();
-        this.actionWindow.getPlayer().askForDuel(idRival);
-        this.setVisible(false);
+        if (idRival==null) {
+            this.setVisible(false);
+            this.actionWindow.setEnableSearchPlayers(true);
+        } else {
+            this.actionWindow.getPlayer().askForDuel(idRival);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnPlayActionPerformed
 
     /**

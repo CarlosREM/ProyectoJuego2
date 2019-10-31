@@ -5,7 +5,7 @@
  */
 package ADT;
 
-import Abstraction.ICommand;
+import Commands.ICommand;
 import Commands.CommandManager;
 import SocketsImpl.Player;
 

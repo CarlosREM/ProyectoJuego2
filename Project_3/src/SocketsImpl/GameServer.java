@@ -5,6 +5,7 @@
  */
 package SocketsImpl;
 
+import ADT.Ranking;
 import ADT.Statistics;
 import SocketsImpl.Messages.AttackMessage;
 import SocketsImpl.Messages.AttackPlusMessage;
@@ -18,7 +19,11 @@ import commsapi.ContentServer.SubscriberHandler;
 import commsapi.Message.AMessage;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,10 +34,10 @@ import java.util.logging.Logger;
  */
 public class GameServer extends AContentServer {
 
-   
     private HashMap<String, Statistics> statisticsMap;
     private HashMap<String, StringBuilder> logsMap;
     private TimedEventTrigger plusTrigger;
+    private List<Ranking> ranking;
 
     public GameServer() throws IOException {
         super();
@@ -42,6 +47,7 @@ public class GameServer extends AContentServer {
         this.logsMap = new HashMap();
         this.plusTrigger = new TimedEventTrigger(this);
         this.plusTrigger.start();
+        this.ranking = new ArrayList<>();
     }
 
     @Override
@@ -60,7 +66,7 @@ public class GameServer extends AContentServer {
 
                         this.registerSubscription(topic, handler);
                         this.registerSubscription(handler.getId(), oponent);
-                        
+
                         String matchStart = java.time.LocalDateTime.now().toString();
 
                         RequestMessage m2 = new RequestMessage();
@@ -69,18 +75,17 @@ public class GameServer extends AContentServer {
                         m2.setTopic(matchStart);
                         oponent.sendMessage(m2);
                         handler.sendMessage(m2);
-                        
+
                         StringBuilder newMatchLog = new StringBuilder();
                         newMatchLog.append("Match started at " + matchStart);
                         newMatchLog.append("Oponents: " + topic + ", " + handler.getId());
-                        
+
                         this.logsMap.put(matchStart, newMatchLog);
 
                         break;
                     case 2://unsubscribe
                         String topic2 = m.getRequestString();
                         SubscriberHandler oponent2 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic2)).findAny().orElse(null);
-
                         this.removeSubscription(topic2, handler);
                         this.removeSubscription(handler.getId(), oponent2);
                         break;
@@ -101,7 +106,7 @@ public class GameServer extends AContentServer {
             try {
                 dm.setRivalInfo(statisticsMap.get(dm.getTopic()).toString());
                 this.broadcastMessageSub(dm, handler.getTopic());
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -119,10 +124,12 @@ public class GameServer extends AContentServer {
                     }
                     break;
                 }
-                case 51: {//surrender
+                case 51: {//surrender or defeat
                     try {
                         this.statisticsMap.get(handler.getTopic()).addDefeat();
                         this.statisticsMap.get(handler.getTopic()).addGiveup();
+                        statisticsMap.get(subscriptions.get(handler.getTopic()).
+                                get(0).getId()).addWin();
                         this.broadcastMessageSub(rm, handler.getTopic());
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,7 +140,7 @@ public class GameServer extends AContentServer {
                     try {
                         String scores = this.statisticsMap.get(subscriptions.
                                 get(handler.getTopic()).get(0).getId()).toString();
-                        rm.setRequestString(rm.getRequestString()+";"+scores);
+                        rm.setRequestString(rm.getRequestString() + ";" + scores);
                         this.broadcastMessageSub(rm, handler.getTopic());
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -141,50 +148,50 @@ public class GameServer extends AContentServer {
                     break;
                 }
                 case 53: {//succes or fail attack
-                       if(rm.getRequestString().equals("succes")){
-                           System.out.println(rm.getTopic());
-                           statisticsMap.get(rm.getTopic()).addSuccess();
-                       }else{
-                           statisticsMap.get(rm.getTopic()).addFailed();
-                       }               
+                    if (rm.getRequestString().equals("succes")) {
+                        System.out.println(rm.getTopic());
+                        statisticsMap.get(rm.getTopic()).addSuccess();
+                    } else {
+                        statisticsMap.get(rm.getTopic()).addFailed();
+                    }
                     break;
-                }                
+                }
                 case 60: {//pass
 
                     try {
                         this.broadcastMessageSub(rm, handler.getTopic());
-                        
+
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
                 }
                 case 100: {//asking for draw
-                    
+
                     try {
                         this.broadcastMessageSub(rm, handler.getTopic());
-                        
+
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
                 }
-               case 101: {//answering
-                    
-                    if(rm.getRequestString().equals("Y")){
+                case 101: {//answering
+
+                    if (rm.getRequestString().equals("Y")) {
                         statisticsMap.get(rm.getTopic()).addDraw();
                         statisticsMap.get(subscriptions.
-                                get(handler.getTopic()).get(0).getId()).addDraw();                        
+                                get(handler.getTopic()).get(0).getId()).addDraw();
                     }
                     try {
 
                         this.broadcastMessageSub(rm, handler.getTopic());
-                        
+
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-               }                
+                }
                 case 77: {//add to log
                     this.logsMap.get(rm.getTopic()).append(rm.getRequestString());
                     System.out.println("Added to log: " + rm.getTopic() + "\n" + rm.getRequestString());
@@ -198,7 +205,7 @@ public class GameServer extends AContentServer {
                     removeSubscriber(subD);
                     pubD.closeConn();
                     subD.closeConn();
-                    
+
                     break;
                 }
             }
@@ -214,7 +221,7 @@ public class GameServer extends AContentServer {
         }
         if (message instanceof AttackPlusMessage) {
             AttackPlusMessage apm = (AttackPlusMessage) message;
-             this.statisticsMap.get(handler.getTopic()).addAttack();
+            this.statisticsMap.get(handler.getTopic()).addAttack();
             try {
                 this.broadcastMessageSub(apm.getAttackMsg1(), handler.getTopic());
                 this.broadcastMessageSub(apm.getAttackMsg2(), handler.getTopic());
@@ -246,17 +253,41 @@ public class GameServer extends AContentServer {
         ConMessage m = new ConMessage(true);
         m.setConnMessage("Conection Successful as Publisher");
         RequestMessage rm = new RequestMessage();
+        RequestMessage rm2 = new RequestMessage();
         if (!statisticsMap.containsKey(handler.getTopic())) {
             statisticsMap.put(handler.getTopic(), new Statistics());
+            ranking.add(new Ranking(handler.getTopic()));
         }
+        getRanking();
         rm.setRequestString(statisticsMap.get(handler.getTopic()).toString());
         rm.setRequestId(20);
+        rm2.setRequestString(getRanking());
+        rm2.setRequestId(30);
         try {
+            for (PublisherHandler ph : publishers) {
+                ph.sendMessage(rm2);
+            }
             handler.sendMessage(m);
             handler.sendMessage(rm);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private String getRanking() {
+        for(Ranking r:ranking){
+            r.setWins(statisticsMap.get(r.getTopic()).getWins());
+            r.setLosses(statisticsMap.get(r.getTopic()).getDefeats());
+        }
+        Collections.sort(ranking, Comparator.comparing(Ranking::calculate));
+        String strRankig = "";
+        for (int i = 0; i < ranking.size(); i++) {
+            strRankig += (" "+(i + 1)+ ". "
+                    + ranking.get(i).getTopic() + "  ["
+                    + ranking.get(i).getWins()+"/"
+                    + ranking.get(i).getWins()+"]\n" );
+        }
+        return strRankig;
     }
 
     @Override
@@ -296,17 +327,16 @@ public class GameServer extends AContentServer {
             ex.printStackTrace();
         }
     }
-    
-    public void chooseWinner(){
+
+    public void chooseWinner() {
         Random r = new Random();
         RequestMessage rm2 = new RequestMessage();
         rm2.setRequestId(10);
         rm2.setRequestString("true");
-        
+
         for (String key : this.subscriptions.keySet()) {
             if (!this.subscriptions.get(key).isEmpty()) {
-                if(r.nextBoolean())
-                {
+                if (r.nextBoolean()) {
                     try {
                         PublisherHandler lucky = this.publishers.stream().filter(pub -> pub.getTopic().equals(key)).findAny().orElse(null);
                         lucky.sendMessage(rm2);
@@ -317,22 +347,22 @@ public class GameServer extends AContentServer {
                 }
             }
         }
-        
+
     }
-    
-    public void sendLog(String topic, String logId){
+
+    public void sendLog(String topic, String logId) {
         try {
             SubscriberHandler sub1 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic)).findAny().orElse(null);
             SubscriberHandler sub2 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic)).findAny().orElse(null);
-            
+
             RequestMessage rm = new RequestMessage();
             rm.setRequestId(900);
             rm.setTopic(logId);
             rm.setRequestString(this.logsMap.get(logId).toString());
-            
+
             sub1.sendMessage(rm);
             sub2.sendMessage(rm);
-            
+
         } catch (IOException ex) {
             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -344,8 +374,7 @@ public class GameServer extends AContentServer {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
-        
+
     }
 
 }

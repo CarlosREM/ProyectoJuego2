@@ -96,6 +96,7 @@ public class PlayerSubscriber extends ASubscriber {
         if (message instanceof TopicsMessage) {
             TopicsMessage m = (TopicsMessage) message;
             this.player.showTopics(m.getTopics());
+            this.player.getClient().setEnableSearchPlayers(false);
         }
         if (message instanceof DuelStateMessage) {
             DuelStateMessage m = (DuelStateMessage) message;
@@ -113,8 +114,10 @@ public class PlayerSubscriber extends ASubscriber {
                 case 50:
                     this.player.reciveChat(m.getRequestString());
                     break;
-                case 51://put win massage
-                    this.player.win(m.getRequestString());
+                case 51://put endGame massage
+                    this.player.endGame(m.getRequestString());
+                    this.unsubscribe(m.getTopic());
+                    this.player.publishState(false);
                     break;
                 case 52://fill status and own activity and publish state
                     this.player.getClient().attack(m.getRequestString());
@@ -132,7 +135,7 @@ public class PlayerSubscriber extends ASubscriber {
                     if (m.getRequestString().equals("N")) {
                         player.getClient().putResultText("Rejected!");
                     } else {
-                        player.win("");
+                        player.endGame("");
                         this.unsubscribe(m.getTopic());
                     }
                     break;

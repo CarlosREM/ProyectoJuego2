@@ -5,7 +5,6 @@
  */
 package Commands;
 
-import Abstraction.ICommand;
 import Commands.Proxy.AProxyCommand;
 import Commands.Proxy.AttackPlusProxyCommand;
 import Commands.Proxy.AttackProxyCommand;

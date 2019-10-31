@@ -56,9 +56,11 @@ public class PlayerPublisher extends APublisher {
                             setVisible(rm.getRequestString().equals("true"));
                     break;
                 case 20: //fill status
-                    System.out.println("entro");
                     this.player.getClient().fillMyStatus(rm.getRequestString());
                     break;
+                case 30: //fill ranking
+                    this.player.getClient().fillRanking(rm.getRequestString());
+                    break;                    
                     
             }
         }

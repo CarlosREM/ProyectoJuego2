@@ -14,7 +14,6 @@ import SocketsImpl.Messages.DuelStateMessage;
 import SocketsImpl.Messages.RequestMessage;
 import View.ActionWindow;
 import View.PlayersWindow;
-import abstraction.ACharacter;
 import abstraction.AWeapon;
 import commsapi.Message.AMessage;
 import commsapi.Utils.PropertiesUtil;
@@ -98,23 +97,22 @@ public class Player {
         AttackMessage am1 = new AttackMessage();
         AttackMessage am2 = new AttackMessage();
         dm.setWarriors(warriors);
-        
-        
+
         am1.setTopic(this.publisher.getTopic());
         am2.setTopic(this.publisher.getTopic());
 
         am1.setWeapon(weapon1);
         am2.setWeapon(weapon2);
-        
+
         DuelStateMessage.WarriorCoreInfo warrior1 = dm.getWarriors().stream().filter(warr -> warr.getName().equals(own1)).findAny().orElse(null);
         DuelStateMessage.WarriorCoreInfo warrior2 = dm.getWarriors().stream().filter(warr -> warr.getName().equals(own2)).findAny().orElse(null);
-        
+
         am1.setAttacker(warrior1);
         am2.setAttacker(warrior2);
-        
+
         ExtendedDefaultWeapon ew1 = (ExtendedDefaultWeapon) warrior1.getWeapons().stream().filter(warr -> warr.getName().equals(weapon1)).findAny().orElse(null);
         ExtendedDefaultWeapon ew2 = (ExtendedDefaultWeapon) warrior2.getWeapons().stream().filter(warr -> warr.getName().equals(weapon2)).findAny().orElse(null);
-          
+
         if (ew1.isAvailable() && ew2.isAvailable()) {
             ew1.setAvailable(false);
             ew2.setAvailable(false);
@@ -123,7 +121,7 @@ public class Player {
             apm.setAttackMsg1(am1);
             apm.setAttackMsg2(am2);
             publish(apm);
-            
+
             client.lblAttackPlus.setVisible(false);
             client.setEnableCmd(false);
             client.putResultText(own1 + " and " + own2 + " are attacking...");
@@ -139,10 +137,9 @@ public class Player {
         AttackMessage am2 = new AttackMessage();
         dm.setWarriors(warriors);
 
-        
         am1.setTopic(this.publisher.getTopic());
         am2.setTopic(this.publisher.getTopic());
-        
+
         am1.setWeapon(weapon1);
         am2.setWeapon(weapon2);
 
@@ -244,32 +241,41 @@ public class Player {
         client.putResultText("You were attacked!!");
         client.setEnableCmd(true);
         this.publishState(false);
+
+        if (imDead()) {
+            surrender("You're defeated");
+        }
+    }
+
+    private boolean imDead() {
+        for (ExtendedDefaultCharacter edc : getWarriors()) {
+            if (edc.getCurrentHealthPoints() > 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public String getTopic() {
         return this.publisher.getTopic();
     }
 
-    public void surrender() {
-        this.client.setEnableSearchPlayers(true);
+    public void surrender(String text) {
         RequestMessage rm = new RequestMessage();
         rm.setRequestId(51);
+        rm.setTopic(this.getTopic());
         rm.setRequestString("Winner!");
-        this.client.putRivalData("AGAINST");
         this.publisher.publish(rm);
-        for (int i = 0; i < this.subscriber.getSubscriptions().size(); i++) {
-            this.subscriber.unsubscribe(this.subscriber.getSubscriptions().get(i));
-        }
-        client.setEnableCmd(false);
+        endGame(text);
+        publishState(false);
     }
 
-    public void win(String text) {
+    public void endGame(String text) {
         this.client.putRivalData("AGAINST");
-        this.client.setEnableSearchPlayers(true);
         this.client.putResultText(text);
-        client.setEnableCmd(false);
-        this.subscriber.unsubscribe(text);
-
+        client.setEnableCmd(true);
+        restoreDefaults();
+        client.setEnableSearchPlayers(true);
     }
 
     public void mutualSurrender() {
@@ -309,7 +315,7 @@ public class Player {
     }
 
     public void setRivalState(DuelStateMessage dsm) {
-        this.client.setEnableSearchPlayers(false);
+        
         String strMessage = "";
         strMessage += "AGAINST" + " [" + dsm.getTopic() + "]\n"
                 + dsm.getRivalInfo() + "\n\n";

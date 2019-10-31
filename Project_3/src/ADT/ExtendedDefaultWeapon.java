@@ -29,6 +29,7 @@ public class ExtendedDefaultWeapon extends DefaultWeapon{
         elements = new Elements(); 
         available= true;
         actualAttack = 0;
+        
     }
 
 

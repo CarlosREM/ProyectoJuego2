@@ -7,7 +7,7 @@ package Commands.Proxy;
 
 import ADT.ExtendedDefaultCharacter;
 import ADT.ExtendedDefaultWeapon;
-import Abstraction.ICommand;
+import Commands.ICommand;
 import SocketsImpl.Player;
 
 /**

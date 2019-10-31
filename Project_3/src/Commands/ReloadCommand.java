@@ -7,7 +7,6 @@ package Commands;
 
 import ADT.ExtendedDefaultCharacter;
 import ADT.ExtendedDefaultWeapon;
-import Abstraction.ICommand;
 import SocketsImpl.Player;
 import abstraction.AWeapon;
 

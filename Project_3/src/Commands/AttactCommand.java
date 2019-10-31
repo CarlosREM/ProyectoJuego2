@@ -6,7 +6,6 @@
 package Commands;
 
 import ADT.ExtendedDefaultCharacter;
-import Abstraction.ICommand;
 import SocketsImpl.Messages.AttackMessage;
 import SocketsImpl.Player;
 

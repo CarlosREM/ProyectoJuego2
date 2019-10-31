@@ -5,7 +5,6 @@
  */
 package Commands;
 
-import Abstraction.ICommand;
 import SocketsImpl.Messages.RequestMessage;
 import SocketsImpl.Player;
 
@@ -23,7 +22,7 @@ public class OptionCommand implements ICommand{
             rm.setRequestId(101);
             player.publish(rm);
             if(text[0].equals("Y")){
-               player.win("");
+               player.endGame("");
             }else{
                 player.getClient().setEnableCmd(false);
             }

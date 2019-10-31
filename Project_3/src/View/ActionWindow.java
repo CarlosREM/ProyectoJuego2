@@ -9,18 +9,12 @@ import ADT.DefaultCharacterAppearance;
 import ADT.ExtendedDefaultCharacter;
 import ADT.ExtendedDefaultWeapon;
 import ADT.Invoker;
-import SocketsImpl.Messages.DuelStateMessage;
 import SocketsImpl.Player;
 import abstraction.AWeapon;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -28,23 +22,12 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JToolTip;
-import javax.swing.SwingConstants;
-import static javax.swing.SwingConstants.BOTTOM;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Element;
-import javax.swing.text.Utilities;
 
 /**
  *
@@ -67,7 +50,6 @@ public class ActionWindow extends javax.swing.JFrame {
         lstCharacters = new HashMap<>();
         btnCharacters = new ArrayList<>();
         this.lblAttackPlus.setVisible(false);
-        txaScores.setText(" RANKING\n 1. \n 2. \n 3. \n 4.\n 5. \n 6.");
         txaCommands.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -78,12 +60,16 @@ public class ActionWindow extends javax.swing.JFrame {
                     txaCommands.setText("");
                 }
             }
-        });
-        
-      
-        
-        
+        });      
     } 
+    public void restoreDefaults(){
+        this.txaResults.setText("");
+        this.lblAttackPlus.setVisible(false);
+        
+    }
+    public void fillRanking(String text){
+        this.txaScores.setText(" RANKING\n"+text);
+    }
     public void setEnableCmd(boolean option){
         this.txaCommands.setEditable(option);
     }

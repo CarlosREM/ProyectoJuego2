@@ -5,7 +5,7 @@
  */
 package Commands.Proxy;
 
-import Abstraction.ICommand;
+import Commands.ICommand;
 
 /**
  *

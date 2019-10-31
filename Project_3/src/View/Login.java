@@ -201,7 +201,7 @@ public class Login extends javax.swing.JFrame {
         txfHost.setBackground(new java.awt.Color(0, 0, 0));
         txfHost.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         txfHost.setForeground(new java.awt.Color(0, 153, 0));
-        txfHost.setText("172.18.75.94");
+        txfHost.setText("192.168.100.121");
         txfHost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfHostActionPerformed(evt);
