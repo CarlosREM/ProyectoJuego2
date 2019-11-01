@@ -206,9 +206,25 @@ public class GameServer extends AContentServer {
                 case 101: {//answering
 
                     if (rm.getRequestString().equals("Y")) {
-                        statisticsMap.get(rm.getTopic()).addDraw();
-                        statisticsMap.get(subscriptions.
-                                get(handler.getTopic()).get(0).getId()).addDraw();
+                            statisticsMap.get(rm.getTopic()).addDraw();
+                            statisticsMap.get(subscriptions.
+                                    get(handler.getTopic()).get(0).getId()).addDraw();
+                       String opp = subscriptions.get(handler.getTopic()).get(0).getId();     
+                       PublisherHandler oponent = this.publishers.stream().filter(sub -> sub.getTopic().equals(opp)).findAny().orElse(null);
+                        
+                       try {     
+                            RequestMessage rm6 = new RequestMessage();
+                            rm6.setRequestId(20);
+                            rm6.setRequestString(statisticsMap.get(rm.getTopic()).toString());
+                            handler.sendMessage(rm6);
+
+                            RequestMessage rm7 = new RequestMessage();
+                            rm7.setRequestId(20);
+                            rm7.setRequestString(statisticsMap.get(opp).toString());
+                            oponent.sendMessage(rm7);                            
+                        } catch (IOException ex) {
+                            Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     try {
 

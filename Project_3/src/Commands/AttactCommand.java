@@ -22,7 +22,7 @@ public class AttactCommand implements ICommand {
             ExtendedDefaultCharacter edc = player.getWarriors().stream().filter(warr -> warr.getName().equals(text[1])).findAny().orElse(null);
             ExtendedDefaultWeapon weapon = (ExtendedDefaultWeapon) edc.getWeapons().stream().filter(weap -> weap.getName().equals(text[2])).findAny().orElse(null);
 
-            if (weapon == null ) {
+            if (weapon == null) {
                 player.getClient().putResultText("ERROR: Weapon not found");
             } else {
                 if (edc.getCurrentHealthPoints() > 0) {
