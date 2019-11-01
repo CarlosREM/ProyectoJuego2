@@ -100,8 +100,6 @@ public class PlayerSubscriber extends ASubscriber {
         if (message instanceof DuelStateMessage) {
             DuelStateMessage m = (DuelStateMessage) message;
             this.player.setRivalState(m);
-            this.player.getClient().setEnableSearchPlayers(false);
-
         }
         if (message instanceof RequestMessage) {
             RequestMessage m = (RequestMessage) message;
@@ -112,6 +110,7 @@ public class PlayerSubscriber extends ASubscriber {
                     this.player.matchStart = m.getTopic();
                     this.player.publishState(true);
                     this.player.restoreDefaults();
+                    this.player.getClient().setEnableSearchPlayers(false);
                     break;
                 case 50:
                     this.player.reciveChat(m.getRequestString());
