@@ -25,7 +25,7 @@ public class OptionProxyCommand extends AProxyCommand{
         
         String log = timeStamp + "\nComando: " + text[0]; 
         if (text.length >= 1){
-            log = log + " Parametros: ninguno" + "\nResultado: Mensaje de pass enviado al servidor para cambiar de turno";
+            log = log + " Parametros: ninguno" + "\nResultado: Respuesta a petición de mutual surrender";
         }  
         
         log = log + "\n\n";
