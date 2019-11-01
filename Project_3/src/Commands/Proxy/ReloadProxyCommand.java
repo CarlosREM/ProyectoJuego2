@@ -22,7 +22,7 @@ public class ReloadProxyCommand extends AProxyCommand{
     public void execute(String[] text, Player player) {
         String timeStamp = java.time.LocalDateTime.now().toString();
         
-        this.command.execute(text, player);
+        
         
         ReloadCommand r = (ReloadCommand) this.command;
         String log = timeStamp + "\nComando: " + text[0]; 
@@ -38,5 +38,6 @@ public class ReloadProxyCommand extends AProxyCommand{
         
         log = log + "\n\n";
         player.addToMatchLog(log);
+        this.command.execute(text, player);
     }
 }
