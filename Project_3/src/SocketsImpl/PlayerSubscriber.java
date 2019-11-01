@@ -134,7 +134,7 @@ public class PlayerSubscriber extends ASubscriber {
                     this.player.getClient().setEnableCmd(true);
                     break;
                 case 100: //asking for draw
-                    this.player.getClient().putResultText(m.getRequestString() + " is asking for draw?");
+                    this.player.getClient().putResultText(m.getRequestString() + " is asking for draw? [Y/N]");
                     this.player.getClient().setEnableCmd(true);
                     break;
                 case 101: //answer
