@@ -159,7 +159,7 @@
                 },
 {
                     "@class": "ADT.ExtendedDefaultWeapon",
-                    "name": "Waterball",
+                    "name": "Arrow",
                     "range": 1,
                     "damage": 1,
                     "level": 1,
@@ -221,6 +221,62 @@
                         "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
                     },
                     "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Windblow",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Knife",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Tornado",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Punch",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
                 }],
             "coordinateX": 0,
             "coordinateY": 0,
@@ -244,6 +300,62 @@
             "weapons": [{
                     "@class": "ADT.ExtendedDefaultWeapon",
                     "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Knife",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Scythe",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Burial",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Punch",
                     "range": 1,
                     "damage": 1,
                     "level": 1,
@@ -289,6 +401,62 @@
                         "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
                     },
                     "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Kick",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Tornado",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Silverwing",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Roaring",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
                 }],
             "coordinateX": 0,
             "coordinateY": 0,
@@ -312,6 +480,62 @@
             "weapons": [{
                     "@class": "ADT.ExtendedDefaultWeapon",
                     "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Punch",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Quake",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Horn",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Grapples",
                     "range": 1,
                     "damage": 1,
                     "level": 1,
@@ -357,6 +581,62 @@
                         "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
                     },
                     "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Invocate",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Sacrifice",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Prayer",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Lamp",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
                 }],
             "coordinateX": 0,
             "coordinateY": 0,
@@ -380,6 +660,62 @@
             "weapons": [{
                     "@class": "ADT.ExtendedDefaultWeapon",
                     "name": "Melee",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Punch",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Knife",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Puppet",
+                    "range": 1,
+                    "damage": 1,
+                    "level": 1,
+                    "areaOfEffect": 1,
+                    "hitPerUnit": 1,
+                    "appearances": {},
+                    "unlockLevel": 1,
+                    "elements": {
+                        "percentages": [25, 100, 82, 82, 95, 68, 36, 33, 48, 32]
+                    },
+                    "available": true
+                },{
+                    "@class": "ADT.ExtendedDefaultWeapon",
+                    "name": "Invocate",
                     "range": 1,
                     "damage": 1,
                     "level": 1,

@@ -35,12 +35,13 @@ import javax.swing.border.TitledBorder;
  */
 public class ActionWindow extends javax.swing.JFrame {
 
-    
     private Player player;
     private HashMap<String, ExtendedDefaultCharacter> lstCharacters;
     private List<JButton> btnCharacters;
+    public String selectedChar;
 
     private static Font tipFont = new Font("Arial", Font.BOLD, 14);
+
     /**
      * Creates new form ActionWindow
      */
@@ -60,19 +61,23 @@ public class ActionWindow extends javax.swing.JFrame {
                     txaCommands.setText("");
                 }
             }
-        });      
-    } 
-    public void restoreDefaults(){
+        });
+    }
+
+    public void restoreDefaults() {
         this.txaResults.setText("");
         this.lblAttackPlus.setVisible(false);
         
     }
-    public void fillRanking(String text){
-        this.txaScores.setText(" RANKING\n"+text);
+
+    public void fillRanking(String text) {
+        this.txaScores.setText(" RANKING\n" + text);
     }
-    public void setEnableCmd(boolean option){
+
+    public void setEnableCmd(boolean option) {
         this.txaCommands.setEditable(option);
     }
+
     public void setPlayer(Player pPlayer) {
         this.player = pPlayer;
         this.lblOwnChar.setIcon(null);
@@ -93,9 +98,9 @@ public class ActionWindow extends javax.swing.JFrame {
                     tip.setFont(tipFont);
                     return tip;
                 }
-            };                    
+            };
             button.setName(player.getWarriors().get(i).getName());
-            button.setToolTipText("["+player.getWarriors().get(i).getType().toString()+"}");
+            button.setToolTipText("[" + player.getWarriors().get(i).getType().toString() + "}");
             button.setBorder(new EtchedBorder());
             button.setPreferredSize(new Dimension(120, 200));
             button.setForeground(Color.GREEN);
@@ -122,75 +127,87 @@ public class ActionWindow extends javax.swing.JFrame {
             button.addActionListener(actionListener);
 
             TeamPane.add(button);
-            
+
         }
         selectChar(btnCharacters.get(0).getActionCommand());
-        
+
         TeamPane.revalidate();
         TeamPane.repaint();
     }
 
     public void selectChar(String name) {
+        selectedChar = name;
         TitledBorder border = new TitledBorder("SELECTED");
         border.setTitleColor(Color.WHITE);
         for (JButton button : btnCharacters) {
             button.setBorder(new EtchedBorder());
             if (button.getName().equals(name)) {
                 button.setBorder(border);
-                setWeapons(lstCharacters.get(name).getWeapons());                
-                lblTeamPaneHealth.setText(lstCharacters.get(name).getCurrentHealthPoints()+"%");
-                lblType.setText("["+lstCharacters.get(name).getType().toString()+"]");
+                setWeapons(lstCharacters.get(name).getWeapons());
+                lblTeamPaneHealth.setText(lstCharacters.get(name).getCurrentHealthPoints() + "%");
+                lblType.setText("[" + lstCharacters.get(name).getType().toString() + "]");
                 lblTeamPaneCharName.setText(name);
             }
         }
     }
-    public void attack(String info){
+
+    public void attack(String info) {
         String[] arrInfo = info.split(";");
         ImageIcon imageIcon = new ImageIcon("src" + arrInfo[1]);
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(lblOwnChar.getWidth(), lblOwnChar.getHeight(), java.awt.Image.SCALE_SMOOTH);
         lblOwnChar.setIcon(new ImageIcon(newimg));
-        lblOwnChar.repaint();  
+        lblOwnChar.repaint();
         txaOwnAttackInfo.setText(arrInfo[0]);
         fillMyStatus(arrInfo[2]);
     }
+
     public void setWeapons(ArrayList<AWeapon> weapons) {
-        String text = "";
+        String text = "Weapon   FI AI WA WM BM EL IC AC SP IR\n";
+        text +=       "*******************************************************";
         for (AWeapon weapon : weapons) {
             ExtendedDefaultWeapon eWeapon = (ExtendedDefaultWeapon) weapon;
-            text += "\n " + eWeapon.getName();
+            text += "\n" + eWeapon.getName()+"  ";
             for (int pors : eWeapon.getElements().getPercentages()) {
-                text += "  " + pors;
+                text += " " + pors;
+            }
+            if (eWeapon.isAvailable()) {
+                text += " Available";
+            } else {
+                text += " Not available";
             }
         }
         txaWeapons.setText(text);
 
     }
-    public void takeAttack(String info,String filePath){
-        ImageIcon imageIcon = new ImageIcon("src"+filePath);
+
+    public void takeAttack(String info, String filePath) {
+        ImageIcon imageIcon = new ImageIcon("src" + filePath);
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(lblRivalChar.getWidth(), lblRivalChar.getHeight(), java.awt.Image.SCALE_SMOOTH);
         lblRivalChar.setIcon(new ImageIcon(newimg));
         lblRivalChar.repaint();
         txaRivalAttackInfo.setText(info);
-        
-        
-    }
-    public void fillMyStatus(String scores){
-    String strStatus = ("MY STATUS ["+player.getTopic()+"]\n");    
-    strStatus += scores+"\n";
-    txaOwnInfo.setText(strStatus);
-    }
-    public void putResultText(String text) {
-        this.txaResults.append(text+"\n");
-    }
-    public void putRivalData(String text){
-        this.txaRivalInfo.setText(text);
-    }
-    public void setEnableSearchPlayers(boolean option){
-        this.btnSelect.setEnabled(option);
+
     }
 
+    public void fillMyStatus(String scores) {
+        String strStatus = ("MY STATUS [" + player.getTopic() + "]\n");
+        strStatus += scores + "\n";
+        txaOwnInfo.setText(strStatus);
+    }
+
+    public void putResultText(String text) {
+        this.txaResults.append(text + "\n");
+    }
+
+    public void putRivalData(String text) {
+        this.txaRivalInfo.setText(text);
+    }
+
+    public void setEnableSearchPlayers(boolean option) {
+        this.btnSelect.setEnabled(option);
+    }
 
     public Player getPlayer() {
         return this.player;

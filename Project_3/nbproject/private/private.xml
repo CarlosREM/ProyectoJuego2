@@ -4,14 +4,32 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/ADT/SortByAverage.java</file>
-            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/SocketsImpl/Player.java</file>
-            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/ADT/ExtendedDefaultWeapon.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/SocketsImpl/PlayerSubscriber.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/SocketsImpl/GameServer.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/resourcesImp/ExtendedCharacters.json</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/SocketsImpl/TimedEventTrigger.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/Proxy/ChatProxyCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/MutualSurrenderCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/ADT/ExtendedDefaultWeapon.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/AttactCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/SurrenderCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/View/ActionWindow.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Main/Main.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/View/Login.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/ReloadCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/Proxy/AttackProxyCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/Proxy/AttackPlusProxyCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/AttackPlusCommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/SocketsImpl/PlayerPublisher.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/Proxy/PassProxyCommand.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/ADT/Statistics.java</file>
             <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/ADT/Ranking.java</file>
-            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/SocketsImpl/TimedEventTrigger.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/SocketsImpl/Player.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/SocketsImpl/Messages/RequestMessage.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/Proxy/MutualSurrenderProxyCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/Proxy/SurrenderProxyCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/Proxy/ReloadProxyCommand.java</file>
+            <file>file:/C:/Users/Marco%20Gamboa/Documents/GitHub/ProyectoJuego22/Project_3/src/Commands/OptionCommand.java</file>
         </group>
     </open-files>
 </project-private>

@@ -133,7 +133,7 @@ public class Player {
         } else {
             client.putResultText("ERROR: Weapons already used");
         }
-
+        getClient().selectChar(this.getClient().selectedChar);
     }
 
     public void attackExtraWeapon(String own, String weapon1, String weapon2) {
@@ -176,6 +176,7 @@ public class Player {
                 client.putResultText("ERROR: Weapons already used");
             }
         }
+        getClient().selectChar(this.getClient().selectedChar);
     }
 
     public void attack(String own, String weapon) {
@@ -200,6 +201,7 @@ public class Player {
         } else {
             this.client.putResultText(weapon + " already used");
         }
+        getClient().selectChar(this.getClient().selectedChar);
 
     }
 
@@ -263,6 +265,7 @@ public class Player {
                 die("You're defeated",1);
             }
         }
+      getClient().selectChar(this.getClient().selectedChar);  
     }
 
     private boolean imDead() {
