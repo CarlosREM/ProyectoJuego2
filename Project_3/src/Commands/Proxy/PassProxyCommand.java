@@ -23,9 +23,9 @@ public class PassProxyCommand extends AProxyCommand{
         
         this.command.execute(text, player);
         
-        String log = timeStamp + "\nComando: Option to Draw, Answer: " + text[0]; 
+        String log = timeStamp + "\nComando: " + text[0]; 
         if (text.length >= 1){
-            log = log + " Parametros: ninguno" + "\nResultado: Mensaje de respuesta a empate enviado a servidor para redirección";
+            log = log + " Parametros: ninguno" + "\nResultado: Mensaje Pass para pasar de turno";
         }  
         
         log = log + "\n\n";

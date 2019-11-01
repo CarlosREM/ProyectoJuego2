@@ -280,7 +280,7 @@ public class Player {
 
     public void die(String text,int tipo) {
         RequestMessage rm = new RequestMessage();
-        rm.setRequestId(tipo);
+        rm.setRequestId(51);
         rm.setTopic(this.getTopic());
         rm.setRequestString("Winner!");
         rm.setType(tipo);
