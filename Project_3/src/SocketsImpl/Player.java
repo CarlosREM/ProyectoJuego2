@@ -260,7 +260,7 @@ public class Player {
         this.publishState(false);
         if (am.getRequestId() == 1) {
             if (imDead()) {
-                surrender("You're defeated");
+                die("You're defeated",1);
             }
         }
     }
@@ -278,11 +278,12 @@ public class Player {
         return this.publisher.getTopic();
     }
 
-    public void surrender(String text) {
+    public void die(String text,int tipo) {
         RequestMessage rm = new RequestMessage();
-        rm.setRequestId(51);
+        rm.setRequestId(tipo);
         rm.setTopic(this.getTopic());
         rm.setRequestString("Winner!");
+        rm.setType(tipo);
 
         this.publisher.publish(rm);
 

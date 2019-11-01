@@ -14,9 +14,18 @@ import commsapi.Message.AMessage;
 public class RequestMessage extends AMessage{
     private int RequestId;
     private String RequestString;
+    private int type;
     
     public RequestMessage(){
         super("Request");
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getRequestId() {

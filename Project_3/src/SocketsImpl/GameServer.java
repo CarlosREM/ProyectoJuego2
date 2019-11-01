@@ -128,33 +128,34 @@ public class GameServer extends AContentServer {
                 case 51: {//surrender or defeat
                     try {
                         this.statisticsMap.get(handler.getTopic()).addDefeat();
-                        this.statisticsMap.get(handler.getTopic()).addGiveup();
-
+                        if (rm.getType() == 2) {
+                            this.statisticsMap.get(handler.getTopic()).addGiveup();
+                        }
                         String opp = subscriptions.get(handler.getTopic()).get(0).getId();
                         this.statisticsMap.get(opp).addWin();
                         PublisherHandler oponent = this.publishers.stream().filter(sub -> sub.getTopic().equals(opp)).findAny().orElse(null);
                         getRanking();
-                        
+
                         RequestMessage rm2 = new RequestMessage();
                         rm2.setRequestString(statisticsMap.get(handler.getTopic()).toString());
                         rm2.setRequestId(20);
                         handler.sendMessage(rm2);
-                        
+
                         RequestMessage rm3 = new RequestMessage();
                         rm3.setRequestId(20);
                         rm3.setRequestString(statisticsMap.get(opp).toString());
                         oponent.sendMessage(rm3);
-                        
+
                         getRanking();
                         this.broadcastMessageSub(rm, handler.getTopic());
-                        
+
                         ///this.sendLog(handler.getTopic(), opp);
                     } catch (IOException ex) {
                         Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
                 }
-                case 500:{
+                case 500: {
                     this.sendLog(handler.getTopic(), rm.getRequestString());
                     break;
                 }
@@ -383,18 +384,18 @@ public class GameServer extends AContentServer {
         }
 
     }
-    
-    public void sendLog(String topic1, String logId){
+
+    public void sendLog(String topic1, String logId) {
         try {
             SubscriberHandler sub1 = this.subscribers.stream().filter(sub -> sub.getId().equals(topic1)).findAny().orElse(null);
-            
+
             RequestMessage rm = new RequestMessage();
             rm.setRequestId(900);
             rm.setTopic(logId);
             rm.setRequestString(this.logsMap.get(logId).toString());
 
             sub1.sendMessage(rm);
-           
+
         } catch (IOException ex) {
             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
         }

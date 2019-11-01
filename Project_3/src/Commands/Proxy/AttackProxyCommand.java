@@ -24,7 +24,7 @@ public class AttackProxyCommand extends AProxyCommand{
     public void execute(String[] text, Player player) {
         String timeStamp = java.time.LocalDateTime.now().toString();
         
-        this.command.execute(text, player);
+        
         
         String log = timeStamp + "\nComando: " + text[0]; 
         if (text.length >= 3){
@@ -37,6 +37,7 @@ public class AttackProxyCommand extends AProxyCommand{
         System.out.println("");
         log = log + "\n\n";
         player.addToMatchLog(log);
+        this.command.execute(text, player);
     }
     
     private String checkCorrectness (Player player, String[] text){

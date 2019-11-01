@@ -25,10 +25,10 @@ public class AttackPlusProxyCommand extends AProxyCommand{
     public void execute(String[] text, Player player) {
         String timeStamp = java.time.LocalDateTime.now().toString();
         
-        this.command.execute(text, player);
+        
         
         String log = timeStamp + "\nComando: " + text[0]; 
-        if (text.length >= 5){
+        if (text.length >= 4){
             if(text.length == 4){
                 log = log + " Parametros:\nAtaca: " + text[1] + " Arma 1: " + text[2] + " Arma 2: " + text[3] + 
                          
@@ -46,6 +46,7 @@ public class AttackPlusProxyCommand extends AProxyCommand{
         
         log = log + "\n\n";
         player.addToMatchLog(log);
+        this.command.execute(text, player);
     }
     
     private String checkCorrectness1 (Player player, String[] text){
