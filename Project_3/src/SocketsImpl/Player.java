@@ -98,6 +98,9 @@ public class Player {
         DuelStateMessage dm = new DuelStateMessage(own1);
         AttackMessage am1 = new AttackMessage();
         AttackMessage am2 = new AttackMessage();
+        
+        am1.setRequestId(2);
+        am2.setRequestId(1);
         dm.setWarriors(warriors);
 
         am1.setTopic(this.publisher.getTopic());
@@ -141,7 +144,9 @@ public class Player {
 
         am1.setTopic(this.publisher.getTopic());
         am2.setTopic(this.publisher.getTopic());
-
+        am1.setRequestId(2);
+        am2.setRequestId(1);
+        
         am1.setWeapon(weapon1);
         am2.setWeapon(weapon2);
 
@@ -177,7 +182,9 @@ public class Player {
         AttackMessage am = new AttackMessage();
         DuelStateMessage dm = new DuelStateMessage(own);
         dm.setWarriors(warriors);
-
+       
+        am.setRequestId(1);
+        
         am.setWeapon(weapon);
         am.setTopic(this.publisher.getTopic());
 
@@ -236,7 +243,7 @@ public class Player {
 
         this.publisher.publish(succesMessage);
         this.publisher.publish(deathsMessage);
-        
+
         RequestMessage rm = new RequestMessage();
         String info2 = "You attacked with\n" + am.getAttacker().getName()
                 + " [" + am.getAttacker().getType().toString() + "]\n\nweapon:"
@@ -251,9 +258,10 @@ public class Player {
         client.putResultText("You were attacked!!");
         client.setEnableCmd(true);
         this.publishState(false);
-
-        if (imDead()) {
-            surrender("You're defeated");
+        if (am.getRequestId() == 1) {
+            if (imDead()) {
+                surrender("You're defeated");
+            }
         }
     }
 
@@ -275,10 +283,9 @@ public class Player {
         rm.setRequestId(51);
         rm.setTopic(this.getTopic());
         rm.setRequestString("Winner!");
-        
+
         this.publisher.publish(rm);
-        
-        
+
         RequestMessage rm2 = new RequestMessage();
         rm2.setRequestId(500);
         rm2.setTopic(this.getTopic());

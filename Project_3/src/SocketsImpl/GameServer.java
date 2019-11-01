@@ -248,6 +248,7 @@ public class GameServer extends AContentServer {
         if (message instanceof AttackPlusMessage) {
             AttackPlusMessage apm = (AttackPlusMessage) message;
             this.statisticsMap.get(handler.getTopic()).addAttack();
+            this.statisticsMap.get(handler.getTopic()).addAttack();
             try {
                 this.broadcastMessageSub(apm.getAttackMsg1(), handler.getTopic());
                 this.broadcastMessageSub(apm.getAttackMsg2(), handler.getTopic());
